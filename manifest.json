@@ -1,0 +1,25 @@
+{
+  "name": "HSS認定制度 養豚基礎理解度テスト",
+  "short_name": "HSS テスト",
+  "description": "HSS認定制度の筆記試験対策 養豚基礎用語テスト",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f0f4f8",
+  "theme_color": "#1a5276",
+  "lang": "ja",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
