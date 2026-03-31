@@ -1,7 +1,9 @@
-var CACHE_NAME = 'hss-quiz-v1';
+var CACHE_NAME = 'hss-quiz-v2';
 var urlsToCache = [
   './',
   './index.html',
+  './quiz30.html',
+  './quiz50.html',
   './manifest.json',
   './icon-192.png',
   './icon-512.png',

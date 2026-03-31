@@ -1,0 +1,2261 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="HSS 基礎30問">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#667eea">
+<meta name="format-detection" content="telephone=no">
+<link rel="manifest" href="data:application/json,{&quot;name&quot;:&quot;HSS 基礎用語テスト 30問&quot;,&quot;short_name&quot;:&quot;HSS 30問&quot;,&quot;start_url&quot;:&quot;.&quot;,&quot;display&quot;:&quot;standalone&quot;,&quot;background_color&quot;:&quot;%23667eea&quot;,&quot;theme_color&quot;:&quot;%23667eea&quot;}">
+<title>養豚基礎用語 理解度テスト｜HSS認定制度</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --primary: #1a5276;
+  --primary-light: #2980b9;
+  --primary-dark: #0e2f44;
+  --accent: #27ae60;
+  --accent-light: #2ecc71;
+  --danger: #c0392b;
+  --danger-light: #e74c3c;
+  --warning: #f39c12;
+  --warning-light: #f1c40f;
+  --bg: #f0f4f8;
+  --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --card: #ffffff;
+  --card-hover: #fafbfc;
+  --text: #2c3e50;
+  --text-light: #7f8c8d;
+  --text-muted: #95a5a6;
+  --border: #dce4ec;
+  --shadow: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --font: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif;
+  --cat-breeding: #e74c3c;
+  --cat-piglet: #3498db;
+  --cat-hygiene: #2ecc71;
+  --cat-feeding: #f39c12;
+  --cat-stage: #9b59b6;
+  --cat-class: #1abc9c;
+  --cat-facility: #e67e22;
+}
+
+[data-theme="dark"] {
+  --bg: #1a1a2e;
+  --bg-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  --card: #16213e;
+  --card-hover: #1a2742;
+  --text: #e0e0e0;
+  --text-light: #a0a0a0;
+  --text-muted: #707070;
+  --border: #2a3a5c;
+  --shadow: 0 4px 20px rgba(0,0,0,0.3);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.4);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.2);
+  --primary: #4a9eda;
+  --primary-light: #5dade2;
+  --primary-dark: #2e86c1;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.7;
+  transition: background var(--transition), color var(--transition);
+}
+
+.app-bg {
+  min-height: 100vh;
+  background: var(--bg-gradient);
+  padding-bottom: 40px;
+}
+
+[data-theme="dark"] .app-bg {
+  background: var(--bg-gradient);
+}
+
+.app { max-width: 720px; margin: 0 auto; padding: 16px; min-height: 100vh; }
+
+/* Language selector */
+.lang-selector {
+  position: fixed; top: 16px; right: 76px; z-index: 50;
+  background: var(--card); border: 2px solid var(--border);
+  border-radius: 24px; padding: 4px 12px;
+  font-size: 0.85rem; color: var(--text);
+  box-shadow: var(--shadow-sm); cursor: pointer;
+  font-family: inherit;
+  transition: all var(--transition);
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%237f8c8d' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  padding-right: 28px;
+}
+.lang-selector:hover { box-shadow: var(--shadow); }
+.lang-selector:focus-visible { outline: 3px solid var(--primary-light); outline-offset: 2px; }
+
+/* Dark mode toggle */
+.theme-toggle {
+  position: fixed; top: 16px; right: 16px; z-index: 50;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--card); border: 2px solid var(--border);
+  box-shadow: var(--shadow-sm); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; transition: all var(--transition);
+}
+.theme-toggle:hover { transform: scale(1.1); box-shadow: var(--shadow); }
+.theme-toggle:focus-visible { outline: 3px solid var(--primary-light); outline-offset: 2px; }
+
+.header { text-align: center; padding: 24px 0 16px; }
+.header h1 { font-size: 1.2rem; color: var(--primary); font-weight: 700; letter-spacing: 0.05em; }
+.header .company { font-size: 0.85rem; color: var(--text-light); margin-top: 4px; }
+.header .badge {
+  display: inline-block; background: var(--primary); color: #fff; font-size: 0.7rem;
+  padding: 3px 14px; border-radius: 20px; margin-top: 8px; letter-spacing: 0.08em;
+}
+
+.card {
+  background: var(--card); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 28px; margin-bottom: 16px;
+  transition: background var(--transition), box-shadow var(--transition);
+}
+.card:hover { box-shadow: var(--shadow-lg); }
+
+.name-screen-inner { text-align: center; max-width: 400px; margin: 0 auto; }
+.name-screen-inner h2 { font-size: 1.3rem; color: var(--primary); margin-bottom: 8px; }
+.name-screen-inner p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 24px; }
+
+.name-input-group { margin-bottom: 24px; text-align: left; }
+.name-label { display: block; font-size: 0.85rem; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.name-input {
+  width: 100%; padding: 14px 16px; border: 2px solid var(--border); border-radius: var(--radius-sm);
+  font-size: 1.1rem; font-family: inherit; color: var(--text); background: var(--card);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.name-input:focus { outline: none; border-color: var(--primary-light); box-shadow: 0 0 0 3px rgba(41,128,185,0.2); }
+.name-input.error { border-color: var(--danger); }
+.name-error { color: var(--danger); font-size: 0.8rem; margin-top: 4px; display: none; }
+.name-error.show { display: block; }
+
+.start-btn {
+  width: 100%; padding: 16px; background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: #fff; border: none; border-radius: var(--radius-sm); font-size: 1.1rem; font-weight: 700;
+  font-family: inherit; cursor: pointer; transition: all var(--transition);
+  box-shadow: 0 4px 15px rgba(26,82,118,0.3);
+}
+.start-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(26,82,118,0.4); }
+.start-btn:active { transform: translateY(0); }
+.start-btn:focus-visible { outline: 3px solid var(--primary-light); outline-offset: 2px; }
+
+.test-info {
+  background: var(--card-hover); border-radius: var(--radius-sm); padding: 16px 18px;
+  margin-bottom: 24px; font-size: 0.85rem; color: var(--text-light); text-align: left;
+  border: 1px solid var(--border);
+}
+.test-info div { margin-bottom: 4px; }
+.test-info strong { color: var(--text); }
+
+/* Circular Timer */
+.timer-section {
+  display: flex; align-items: center; gap: 16px; margin-bottom: 16px;
+  background: var(--card); border-radius: var(--radius); padding: 12px 20px;
+  box-shadow: var(--shadow-sm); transition: background var(--transition);
+}
+.timer-circle-wrap {
+  position: relative; width: 56px; height: 56px; flex-shrink: 0;
+}
+.timer-circle-wrap svg { transform: rotate(-90deg); width: 56px; height: 56px; }
+.timer-circle-bg { fill: none; stroke: var(--border); stroke-width: 4; }
+.timer-circle-fg {
+  fill: none; stroke: var(--accent); stroke-width: 4;
+  stroke-linecap: round; transition: stroke-dashoffset 1s linear, stroke 0.3s;
+}
+.timer-circle-fg.warning { stroke: var(--warning); }
+.timer-circle-fg.danger { stroke: var(--danger); animation: pulse 1s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+.timer-circle-text {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  font-size: 0.7rem; font-weight: 700; color: var(--text);
+}
+.timer-circle-text.warning { color: var(--warning); }
+.timer-circle-text.danger { color: var(--danger); }
+.timer-right { flex: 1; }
+.timer-label { font-size: 0.75rem; color: var(--text-light); margin-bottom: 2px; }
+.timer-display { font-size: 1.4rem; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; }
+.timer-display.warning { color: var(--warning); }
+.timer-display.danger { color: var(--danger); }
+
+/* Step indicator / Progress */
+.progress-section { margin-bottom: 20px; }
+.step-indicator {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 10px;
+}
+.step-info { font-size: 0.85rem; color: var(--text-light); font-weight: 600; }
+.step-current { color: var(--primary); font-size: 1.1rem; font-weight: 700; }
+.step-dots {
+  display: flex; gap: 4px; flex-wrap: wrap; justify-content: center; max-width: 400px;
+}
+.step-dot {
+  width: 10px; height: 10px; border-radius: 50%; background: var(--border);
+  transition: all var(--transition); flex-shrink: 0;
+}
+.step-dot.done { background: var(--accent); }
+.step-dot.current { background: var(--primary-light); transform: scale(1.3); box-shadow: 0 0 6px rgba(41,128,185,0.4); }
+.step-dot.wrong { background: var(--danger); }
+.progress-bar-wrap { margin-top: 8px; }
+.progress-bar { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+.progress-fill {
+  height: 100%; background: linear-gradient(90deg, var(--primary-light), var(--primary));
+  border-radius: 3px; transition: width 0.4s ease;
+}
+
+/* Category badges with colors */
+.category-badge {
+  display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 3px 12px;
+  border-radius: 20px; margin-bottom: 12px; letter-spacing: 0.03em;
+}
+.cat-breeding { background: rgba(231,76,60,0.12); color: var(--cat-breeding); }
+.cat-piglet { background: rgba(52,152,219,0.12); color: var(--cat-piglet); }
+.cat-hygiene { background: rgba(46,204,113,0.12); color: var(--cat-hygiene); }
+.cat-feeding { background: rgba(243,156,18,0.12); color: var(--cat-feeding); }
+.cat-stage { background: rgba(155,89,182,0.12); color: var(--cat-stage); }
+.cat-class { background: rgba(26,188,156,0.12); color: var(--cat-class); }
+.cat-facility { background: rgba(230,126,34,0.12); color: var(--cat-facility); }
+
+.question-section-title { font-size: 0.85rem; color: var(--primary-light); font-weight: 700; margin-bottom: 12px; }
+.question-label { font-weight: 700; font-size: 1.05rem; margin-bottom: 18px; color: var(--text); line-height: 1.8; }
+
+.options { display: flex; flex-direction: column; gap: 10px; }
+.option-btn {
+  display: flex; align-items: center; width: 100%; background: var(--card);
+  border: 2px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px;
+  font-size: 0.95rem; font-family: inherit; cursor: pointer; transition: all var(--transition);
+  text-align: left; color: var(--text); line-height: 1.5;
+}
+.option-btn:hover:not(:disabled) { border-color: var(--primary-light); background: var(--card-hover); transform: translateX(4px); }
+.option-btn:active:not(:disabled) { transform: scale(0.99); }
+.option-btn:focus-visible { outline: 3px solid var(--primary-light); outline-offset: 2px; }
+.option-btn .option-letter {
+  flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%; background: var(--bg);
+  display: flex; align-items: center; justify-content: center; font-weight: 700;
+  font-size: 0.85rem; margin-right: 14px; color: var(--primary);
+  transition: all var(--transition);
+}
+.option-btn.selected { border-color: var(--primary-light); background: rgba(41,128,185,0.08); }
+.option-btn.selected .option-letter { background: var(--primary-light); color: #fff; }
+.option-btn:disabled { cursor: default; opacity: 0.6; }
+
+/* Nav buttons */
+.nav-buttons { display: flex; gap: 10px; margin-top: 20px; }
+.nav-btn {
+  flex: 1; padding: 12px; border: 2px solid var(--border); border-radius: var(--radius-sm);
+  font-size: 0.9rem; font-weight: 600; font-family: inherit; cursor: pointer;
+  background: var(--card); color: var(--text); transition: all var(--transition);
+}
+.nav-btn:hover:not(:disabled) { border-color: var(--primary-light); background: var(--card-hover); }
+.nav-btn:disabled { opacity: 0.4; cursor: default; }
+.nav-btn.primary { background: var(--primary); color: #fff; border-color: var(--primary); }
+.nav-btn.primary:hover:not(:disabled) { background: var(--primary-dark); }
+.nav-btn:focus-visible { outline: 3px solid var(--primary-light); outline-offset: 2px; }
+
+.timeout-overlay {
+  display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7); z-index: 100; justify-content: center; align-items: center;
+}
+.timeout-overlay.show { display: flex; }
+.timeout-card {
+  background: var(--card); border-radius: var(--radius); padding: 40px; text-align: center;
+  max-width: 400px; box-shadow: var(--shadow-lg); animation: fadeIn 0.3s ease;
+}
+.timeout-card h2 { color: var(--danger); font-size: 1.4rem; margin-bottom: 8px; }
+.timeout-card p { color: var(--text-light); font-size: 0.95rem; }
+
+.results-card { text-align: center; }
+.score-circle {
+  width: 170px; height: 170px; border-radius: 50%; margin: 20px auto;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: 700;
+  transition: transform 0.5s ease;
+}
+.score-circle:hover { transform: scale(1.05); }
+.score-circle .score-pct { font-size: 2.8rem; line-height: 1; }
+.score-circle .score-label { font-size: 0.85rem; margin-top: 4px; }
+.score-pass { background: linear-gradient(135deg, #eafaf1, #d5f5e3); color: #1e8449; border: 4px solid var(--accent); }
+.score-fail { background: linear-gradient(135deg, #fdedec, #fadbd8); color: #922b21; border: 4px solid var(--danger); }
+
+.score-detail { font-size: 1.1rem; color: var(--text); margin-bottom: 8px; }
+.score-msg { font-size: 0.95rem; color: var(--text-light); margin-bottom: 24px; }
+
+.results-meta {
+  background: var(--card-hover); border-radius: var(--radius-sm); padding: 14px 18px; margin-bottom: 20px;
+  font-size: 0.85rem; color: var(--text-light); text-align: left; border: 1px solid var(--border);
+}
+.results-meta div { margin-bottom: 4px; }
+.results-meta strong { color: var(--text); }
+
+.submit-notice {
+  background: #eafaf1; border: 2px solid var(--accent); border-radius: var(--radius-sm);
+  padding: 16px; margin-bottom: 20px; color: #1e8449; font-weight: 600; font-size: 0.9rem;
+}
+[data-theme="dark"] .submit-notice { background: rgba(39,174,96,0.1); color: var(--accent-light); }
+
+.review-section { text-align: left; margin-top: 20px; }
+.review-section h3 {
+  font-size: 0.95rem; color: var(--primary); margin-bottom: 12px;
+  padding-bottom: 8px; border-bottom: 2px solid var(--border);
+}
+.review-item {
+  padding: 14px 16px; border-radius: var(--radius-sm); margin-bottom: 10px;
+  font-size: 0.85rem; line-height: 1.7; transition: transform var(--transition);
+}
+.review-item:hover { transform: translateX(4px); }
+.review-correct { background: #eafaf1; border-left: 4px solid var(--accent); }
+.review-wrong { background: #fdedec; border-left: 4px solid var(--danger); }
+.review-unanswered { background: #fef9e7; border-left: 4px solid var(--warning); }
+[data-theme="dark"] .review-correct { background: rgba(39,174,96,0.1); }
+[data-theme="dark"] .review-wrong { background: rgba(192,57,43,0.1); }
+[data-theme="dark"] .review-unanswered { background: rgba(243,156,18,0.1); }
+.review-q { font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.review-a { color: var(--text-light); }
+.review-a span { font-weight: 600; }
+.review-a .correct-mark { color: var(--accent); }
+.review-a .wrong-mark { color: var(--danger); }
+
+.results-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.btn-submit {
+  padding: 14px; background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  color: #fff; border: none; border-radius: var(--radius-sm);
+  font-size: 1rem; font-weight: 700; font-family: inherit; cursor: pointer;
+  transition: all var(--transition); box-shadow: 0 4px 15px rgba(39,174,96,0.3);
+}
+.btn-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(39,174,96,0.4); }
+.btn-submit:disabled { background: #bdc3c7; cursor: default; transform: none; box-shadow: none; }
+.btn-submit:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.btn-retry {
+  padding: 14px; background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: #fff; border: none; border-radius: var(--radius-sm);
+  font-size: 1rem; font-weight: 700; font-family: inherit; cursor: pointer;
+  transition: all var(--transition); box-shadow: 0 4px 15px rgba(26,82,118,0.3);
+}
+.btn-retry:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(26,82,118,0.4); }
+.btn-retry:focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
+
+.notice-box {
+  background: #fef9e7; border: 2px solid var(--warning); border-radius: var(--radius-sm);
+  padding: 14px 18px; margin-bottom: 20px; font-size: 0.85rem; color: #7d6608; text-align: left;
+}
+[data-theme="dark"] .notice-box { background: rgba(243,156,18,0.08); color: var(--warning); }
+
+/* Category stats bar chart */
+.category-stats { text-align: left; margin-bottom: 20px; }
+.category-stats h3 {
+  font-size: 0.95rem; color: var(--primary); margin-bottom: 12px;
+  padding-bottom: 8px; border-bottom: 2px solid var(--border);
+}
+.cat-stat-row {
+  display: flex; align-items: center; padding: 10px 0;
+  border-bottom: 1px solid var(--border); font-size: 0.85rem;
+}
+.cat-stat-row:last-child { border-bottom: none; }
+.cat-stat-name { font-weight: 600; color: var(--text); min-width: 90px; flex-shrink: 0; }
+.cat-stat-bar {
+  flex: 1; margin: 0 14px; height: 20px; background: var(--border);
+  border-radius: 10px; overflow: hidden; position: relative;
+}
+.cat-stat-fill {
+  height: 100%; border-radius: 10px; transition: width 0.8s ease;
+  position: relative;
+}
+.cat-stat-fill.good { background: linear-gradient(90deg, var(--accent), var(--accent-light)); }
+.cat-stat-fill.mid { background: linear-gradient(90deg, var(--warning), var(--warning-light)); }
+.cat-stat-fill.bad { background: linear-gradient(90deg, var(--danger), var(--danger-light)); }
+.cat-stat-pct {
+  position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+  font-size: 0.7rem; font-weight: 700; color: #fff;
+}
+.cat-stat-score { font-weight: 700; min-width: 50px; text-align: right; color: var(--text); }
+
+/* Step dots clickable */
+.step-dot { cursor: pointer; }
+.step-dot.answered { background: var(--primary-light); }
+
+/* Keyboard shortcut hint */
+.keyboard-hint {
+  text-align: center; margin-top: 12px; font-size: 0.75rem; color: var(--text-muted);
+}
+.kbd {
+  display: inline-block; background: var(--bg); border: 1px solid var(--border);
+  border-radius: 4px; padding: 1px 6px; font-family: monospace; font-size: 0.7rem;
+  margin: 0 2px;
+}
+
+/* Prevent text selection on buttons for mobile */
+.option-btn, .nav-btn, .start-btn, .btn-submit, .btn-retry, .theme-toggle, .lang-selector {
+  -webkit-user-select: none; user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Smooth scrolling */
+html { scroll-behavior: smooth; }
+
+/* Safe area for notched phones */
+.app-bg { padding-bottom: max(40px, env(safe-area-inset-bottom)); }
+.app { padding: 16px; padding-top: max(16px, env(safe-area-inset-top)); }
+
+/* Better touch targets - minimum 44px */
+.option-btn { min-height: 48px; }
+.nav-btn { min-height: 48px; }
+.start-btn { min-height: 52px; }
+
+/* Swipe hint */
+.swipe-hint {
+  text-align: center; margin-top: 8px; font-size: 0.72rem; color: var(--text-muted);
+  display: none;
+}
+@media (max-width: 768px) {
+  .swipe-hint { display: block; }
+  .keyboard-hint { display: none; }
+}
+@media (min-width: 769px) {
+  .swipe-hint { display: none; }
+}
+
+/* Improve mobile layout */
+@media (max-width: 480px) {
+  body { font-size: 15px; }
+  .app { padding: 8px; }
+  .card { padding: 16px; border-radius: 12px; }
+  .header h1 { font-size: 1.1rem; }
+  .header .badge { font-size: 0.65rem; }
+  .name-screen-inner h2 { font-size: 1.15rem; }
+  .name-screen-inner p { font-size: 0.85rem; }
+  .name-input { font-size: 16px; padding: 12px 14px; } /* 16px prevents iOS zoom */
+  .option-btn { padding: 14px 12px; font-size: 0.9rem; border-radius: 8px; }
+  .option-btn .option-letter { width: 30px; height: 30px; font-size: 0.8rem; margin-right: 10px; }
+  .nav-buttons { gap: 8px; margin-top: 16px; }
+  .nav-btn { padding: 14px 8px; font-size: 0.85rem; border-radius: 8px; }
+  .question-label { font-size: 0.95rem; margin-bottom: 14px; }
+  .timer-section { padding: 8px 12px; gap: 10px; border-radius: 12px; }
+  .timer-circle-wrap { width: 48px; height: 48px; }
+  .timer-circle-wrap svg { width: 48px; height: 48px; }
+  .timer-display { font-size: 1.2rem; }
+  .timer-label { font-size: 0.7rem; }
+  .score-circle { width: 140px; height: 140px; }
+  .score-circle .score-pct { font-size: 2.2rem; }
+  .score-circle .score-label { font-size: 0.75rem; }
+  .test-info { padding: 12px 14px; font-size: 0.8rem; }
+  .notice-box { padding: 12px 14px; font-size: 0.8rem; }
+  .results-meta { padding: 12px 14px; font-size: 0.8rem; }
+  .review-item { padding: 10px 12px; font-size: 0.8rem; }
+  .category-badge { font-size: 0.68rem; }
+  .question-section-title { font-size: 0.8rem; }
+  .theme-toggle { top: 8px; right: 8px; width: 36px; height: 36px; font-size: 1rem; }
+  .lang-selector { top: 8px; right: 52px; font-size: 0.78rem; padding: 3px 8px; border-radius: 18px; }
+  .btn-submit, .btn-retry { padding: 14px; font-size: 0.95rem; border-radius: 8px; }
+  .cat-stat-name { min-width: 60px; font-size: 0.75rem; }
+  .cat-stat-bar { height: 18px; }
+  .progress-section { margin-bottom: 12px; }
+  .step-dots { display: none; }
+}
+
+/* Extra small phones */
+@media (max-width: 360px) {
+  .app { padding: 6px; }
+  .card { padding: 14px; }
+  .option-btn { padding: 12px 10px; font-size: 0.85rem; }
+  .option-btn .option-letter { width: 26px; height: 26px; font-size: 0.75rem; margin-right: 8px; }
+  .header h1 { font-size: 1rem; }
+  .question-label { font-size: 0.9rem; }
+  .lang-selector { right: 48px; font-size: 0.72rem; padding: 2px 6px; }
+  .theme-toggle { width: 32px; height: 32px; font-size: 0.9rem; }
+}
+
+.fade-in { animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.screen { display: none; }
+.screen.active { display: block; }
+
+/* Print styles */
+@media print {
+  body, .app-bg { background: #fff !important; }
+  .theme-toggle, .lang-selector, .timer-section, .nav-buttons, .results-actions,
+  .submit-notice, .notice-box, .keyboard-hint, .btn-submit, .btn-retry,
+  .timeout-overlay { display: none !important; }
+  .app { max-width: 100%; padding: 0; }
+  .card { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; page-break-inside: avoid; }
+  .header { padding: 10px 0; }
+  .score-circle { border-width: 3px; }
+  .review-item { break-inside: avoid; page-break-inside: avoid; }
+  .category-stats { break-inside: avoid; page-break-inside: avoid; }
+  .cat-stat-fill { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .review-correct, .review-wrong, .review-unanswered {
+    print-color-adjust: exact; -webkit-print-color-adjust: exact;
+  }
+}
+
+/* Skip link for accessibility */
+.skip-link {
+  position: absolute; top: -40px; left: 0; background: var(--primary);
+  color: #fff; padding: 8px 16px; z-index: 100; font-size: 0.85rem;
+  transition: top 0.2s;
+}
+.skip-link:focus { top: 0; }
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link" id="skip-link">本文にスキップ</a>
+<select class="lang-selector" id="lang-selector" aria-label="Language">
+  <option value="ja">JP</option>
+  <option value="en">EN</option>
+  <option value="vi">VI</option>
+  <option value="id">ID</option>
+</select>
+<button class="theme-toggle" id="theme-toggle" aria-label="ダークモード切替" title="ダークモード切替">&#9790;</button>
+
+<div class="app-bg">
+<div class="app" id="main-content" role="main">
+  <div class="header">
+    <h1 id="header-title">養豚基礎用語 理解度テスト</h1>
+    <div class="company" id="header-company">株式会社ヒラノ</div>
+    <div class="badge" id="header-badge">HSS認定制度 筆記試験対策</div>
+  </div>
+
+  <div id="name-screen" class="screen active" role="region" aria-label="受験者情報入力">
+    <div class="card fade-in">
+      <div class="name-screen-inner">
+        <h2 id="welcome-title">ようこそ</h2>
+        <p id="welcome-desc">HSS認定制度の筆記試験対策として、<br>養豚の基礎用語に関する理解度テストを行います。</p>
+        <div class="name-input-group">
+          <label class="name-label" for="player-name" id="name-label">氏名（フルネーム）</label>
+          <input class="name-input" type="text" id="player-name" placeholder="例：山田 太郎" autocomplete="name" aria-required="true" aria-describedby="name-error">
+          <div class="name-error" id="name-error" role="alert">氏名を入力してください</div>
+        </div>
+        <div class="test-info" id="test-info">
+          <div><strong id="ti-testname-label">テスト名：</strong><span id="ti-testname-value">養豚基礎用語 理解度テスト</span></div>
+          <div><strong id="ti-qcount-label">問題数：</strong><span id="ti-qcount-value">全30問からランダムに30問出題</span></div>
+          <div><strong id="ti-format-label">形式：</strong><span id="ti-format-value">四択形式</span></div>
+          <div><strong id="ti-time-label">制限時間：</strong><span id="ti-time-value">30分</span></div>
+          <div><strong id="ti-pass-label">合格基準：</strong><span id="ti-pass-value">正答率70%以上</span></div>
+        </div>
+        <div class="notice-box" id="notice-box">
+          ※ 回答中は正解・不正解の表示はされません。<br>
+          ※ 前の問題に戻って回答を変更できます。<br>
+          ※ 結果は管理者へ送信できます。<br>
+          ※ 制限時間を過ぎると自動的に終了します。
+        </div>
+        <button class="start-btn" id="start-btn">テストを開始する</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="quiz-screen" class="screen" role="region" aria-label="テスト問題" aria-live="polite">
+    <div class="timer-section" id="timer-section" aria-label="残り時間">
+      <div class="timer-circle-wrap">
+        <svg viewBox="0 0 56 56" aria-hidden="true">
+          <circle class="timer-circle-bg" cx="28" cy="28" r="24"></circle>
+          <circle class="timer-circle-fg" id="timer-circle" cx="28" cy="28" r="24"
+            stroke-dasharray="150.796" stroke-dashoffset="0"></circle>
+        </svg>
+        <div class="timer-circle-text" id="timer-circle-text" aria-hidden="true"></div>
+      </div>
+      <div class="timer-right">
+        <div class="timer-label" id="timer-label">残り時間</div>
+        <div class="timer-display" id="timer-display" role="timer" aria-live="off">30:00</div>
+      </div>
+    </div>
+    <div class="progress-section">
+      <div class="step-indicator">
+        <span class="step-info" id="progress-label">養豚基礎用語 理解度テスト</span>
+        <span class="step-current" id="step-current" aria-live="polite"></span>
+      </div>
+      <div class="step-dots" id="step-dots" aria-hidden="true"></div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-bar-el">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card fade-in" id="question-card">
+      <div class="category-badge" id="q-category"></div>
+      <div class="question-section-title" id="q-section-title"></div>
+      <div class="question-label" id="q-label"></div>
+      <div class="options" id="q-options" role="radiogroup" aria-label="選択肢"></div>
+      <div class="nav-buttons" id="nav-buttons">
+        <button class="nav-btn" id="prev-btn" type="button" disabled>前へ</button>
+        <button class="nav-btn primary" id="next-btn" type="button" disabled>次へ</button>
+      </div>
+    </div>
+    <div class="keyboard-hint" aria-hidden="true">
+      <kbd class="kbd">1</kbd>-<kbd class="kbd">4</kbd> 選択肢 &nbsp;
+      <kbd class="kbd">Enter</kbd> 次へ
+    </div>
+    <div class="swipe-hint" id="swipe-hint">← スワイプで前後の問題に移動 →</div>
+  </div>
+
+  <div id="results-screen" class="screen" role="region" aria-label="テスト結果">
+    <div class="card results-card fade-in" id="results-card"></div>
+  </div>
+</div>
+</div>
+
+<div class="timeout-overlay" id="timeout-overlay" role="alertdialog" aria-label="時間切れ">
+  <div class="timeout-card">
+    <h2 id="timeout-title">&#9200; 時間切れ</h2>
+    <p id="timeout-msg">制限時間を超過しました。<br>結果を表示します...</p>
+  </div>
+</div>
+
+<script>
+(function() {
+"use strict";
+
+// ==================== TRANSLATIONS ====================
+var TRANSLATIONS = {
+  ja: {
+    title: "養豚基礎用語 理解度テスト",
+    company: "株式会社ヒラノ",
+    badge: "HSS認定制度 筆記試験対策",
+    welcome: "ようこそ",
+    welcomeDesc: "HSS認定制度の筆記試験対策として、<br>養豚の基礎用語に関する理解度テストを行います。",
+    nameLabel: "氏名（フルネーム）",
+    namePlaceholder: "例：山田 太郎",
+    nameError: "氏名を入力してください",
+    testName: "テスト名：",
+    testNameValue: "養豚基礎用語 理解度テスト",
+    questionCount: "問題数：",
+    questionCountValue: "全30問からランダムに30問出題",
+    format: "形式：",
+    formatValue: "四択形式",
+    timeLimit: "制限時間：",
+    timeLimitValue: "30分",
+    passCriteria: "合格基準：",
+    passCriteriaValue: "正答率70%以上",
+    notice1: "※ 回答中は正解・不正解の表示はされません。",
+    notice2: "※ 前の問題に戻って回答を変更できます。",
+    notice3: "※ 結果は管理者へ送信できます。",
+    notice4: "※ 制限時間を過ぎると自動的に終了します。",
+    startBtn: "テストを開始する",
+    remainingTime: "残り時間",
+    prev: "前へ",
+    next: "次へ",
+    submit: "提出する",
+    question: "問",
+    timeoutTitle: "\u23F0 時間切れ",
+    timeoutMsg: "制限時間を超過しました。<br>結果を表示します...",
+    resultTitle: "養豚基礎用語 理解度テスト｜結果",
+    correctRate: "正答率",
+    scoreDetail: "{total}問中 {score}問正解",
+    pass: "合格です。お疲れさまでした。",
+    fail: "不合格です。復習の上、再度挑戦してください。",
+    perfect: "満点合格です。素晴らしい！",
+    examinee: "受験者：",
+    examDate: "受験日時：",
+    timeLimitLabel: "制限時間：",
+    elapsed: "所要時間：",
+    timedOut: "（時間切れ）",
+    passCriteriaLabel: "合格基準：",
+    passCriteriaDetail: "正答率{rate}%以上",
+    categoryStats: "カテゴリ別成績",
+    reviewTitle: "回答の振り返り",
+    correct: "\u25CB 正解",
+    incorrect: "\u00D7 不正解",
+    unanswered: "未回答",
+    unansweredLabel: "（未回答）",
+    submitNotice: "結果を管理者へ送信できます。",
+    submitBtn: "結果を送信する",
+    retryBtn: "もう一度挑戦する",
+    processing: "処理中...",
+    sent: "送信完了",
+    shared: "結果を共有しました。",
+    sendTo: "送信先：",
+    excelDownloaded: "Excelファイルがダウンロードされました。<br>メールアプリが開きますので、結果を送信してください。",
+    sentProcess: "送信処理を実行しました",
+    skipLink: "本文にスキップ",
+    darkModeToggle: "ダークモード切替",
+    minutes: "分",
+    seconds: "秒",
+    swipeHint: "← スワイプで前後の問題に移動 →"
+  },
+  en: {
+    title: "Swine Basic Terminology Test",
+    company: "Hirano Co., Ltd.",
+    badge: "HSS Certification - Written Exam Prep",
+    welcome: "Welcome",
+    welcomeDesc: "This is a comprehension test on basic swine terminology<br>as preparation for the HSS certification written exam.",
+    nameLabel: "Full Name",
+    namePlaceholder: "e.g. Taro Yamada",
+    nameError: "Please enter your name",
+    testName: "Test Name:",
+    testNameValue: "Swine Basic Terminology Test",
+    questionCount: "Questions:",
+    questionCountValue: "30 questions randomly selected from 30",
+    format: "Format:",
+    formatValue: "Multiple choice (4 options)",
+    timeLimit: "Time Limit:",
+    timeLimitValue: "30 minutes",
+    passCriteria: "Pass Criteria:",
+    passCriteriaValue: "70% or higher correct rate",
+    notice1: "* Correct/incorrect answers are not shown during the test.",
+    notice2: "* You can go back to change your answers.",
+    notice3: "* Results can be sent to the administrator.",
+    notice4: "* The test will end automatically when time is up.",
+    startBtn: "Start Test",
+    remainingTime: "Time Remaining",
+    prev: "Previous",
+    next: "Next",
+    submit: "Submit",
+    question: "Q",
+    timeoutTitle: "\u23F0 Time's Up",
+    timeoutMsg: "Time limit exceeded.<br>Showing results...",
+    resultTitle: "Swine Basic Terminology Test | Results",
+    correctRate: "Score",
+    scoreDetail: "{score} correct out of {total}",
+    pass: "Passed! Well done.",
+    fail: "Not passed. Please review and try again.",
+    perfect: "Perfect score! Excellent!",
+    examinee: "Examinee:",
+    examDate: "Date:",
+    timeLimitLabel: "Time Limit:",
+    elapsed: "Time Taken:",
+    timedOut: "(Timed out)",
+    passCriteriaLabel: "Pass Criteria:",
+    passCriteriaDetail: "{rate}% or higher",
+    categoryStats: "Results by Category",
+    reviewTitle: "Answer Review",
+    correct: "\u25CB Correct",
+    incorrect: "\u00D7 Incorrect",
+    unanswered: "Unanswered",
+    unansweredLabel: "(Unanswered)",
+    submitNotice: "You can send results to the administrator.",
+    submitBtn: "Send Results",
+    retryBtn: "Try Again",
+    processing: "Processing...",
+    sent: "Sent",
+    shared: "Results shared.",
+    sendTo: "Sent to:",
+    excelDownloaded: "Excel file downloaded.<br>Mail app will open - please send the results.",
+    sentProcess: "Send process completed",
+    skipLink: "Skip to content",
+    darkModeToggle: "Toggle dark mode",
+    minutes: "min",
+    seconds: "sec",
+    swipeHint: "← Swipe to navigate questions →"
+  },
+  vi: {
+    title: "Bai kiem tra Thuat ngu Co ban ve Chan nuoi Heo",
+    company: "Cong ty Hirano",
+    badge: "Chung chi HSS - On thi viet",
+    welcome: "Chao mung",
+    welcomeDesc: "Day la bai kiem tra hieu biet ve thuat ngu co ban trong chan nuoi heo<br>de chuan bi cho ky thi viet chung chi HSS.",
+    nameLabel: "Ho va ten",
+    namePlaceholder: "Vi du: Nguyen Van A",
+    nameError: "Vui long nhap ho ten",
+    testName: "Ten bai thi:",
+    testNameValue: "Kiem tra Thuat ngu Co ban Chan nuoi Heo",
+    questionCount: "So cau hoi:",
+    questionCountValue: "30 cau duoc chon ngau nhien tu 30 cau",
+    format: "Hinh thuc:",
+    formatValue: "Trac nghiem 4 dap an",
+    timeLimit: "Thoi gian:",
+    timeLimitValue: "30 phut",
+    passCriteria: "Tieu chuan dat:",
+    passCriteriaValue: "Ty le dung tu 70% tro len",
+    notice1: "\u203B Dap an dung/sai khong hien thi trong khi lam bai.",
+    notice2: "\u203B Ban co the quay lai de thay doi cau tra loi.",
+    notice3: "\u203B Ket qua co the gui cho quan ly.",
+    notice4: "\u203B Bai thi se tu dong ket thuc khi het gio.",
+    startBtn: "Bat dau bai kiem tra",
+    remainingTime: "Thoi gian con lai",
+    prev: "Truoc",
+    next: "Tiep",
+    submit: "Nop bai",
+    question: "Cau",
+    timeoutTitle: "\u23F0 Het gio",
+    timeoutMsg: "Da het thoi gian lam bai.<br>Dang hien thi ket qua...",
+    resultTitle: "Ket qua kiem tra Thuat ngu Chan nuoi Heo",
+    correctRate: "Ty le dung",
+    scoreDetail: "Dung {score}/{total} cau",
+    pass: "Dat! Ban da hoan thanh tot.",
+    fail: "Chua dat. Hay on tap va thu lai.",
+    perfect: "Diem tuyet doi! Xuat sac!",
+    examinee: "Thi sinh:",
+    examDate: "Ngay thi:",
+    timeLimitLabel: "Thoi gian gioi han:",
+    elapsed: "Thoi gian lam bai:",
+    timedOut: "(Het gio)",
+    passCriteriaLabel: "Tieu chuan dat:",
+    passCriteriaDetail: "Tu {rate}% tro len",
+    categoryStats: "Ket qua theo danh muc",
+    reviewTitle: "Xem lai cau tra loi",
+    correct: "\u25CB Dung",
+    incorrect: "\u00D7 Sai",
+    unanswered: "Chua tra loi",
+    unansweredLabel: "(Chua tra loi)",
+    submitNotice: "Ban co the gui ket qua cho quan ly.",
+    submitBtn: "Gui ket qua",
+    retryBtn: "Lam lai",
+    processing: "Dang xu ly...",
+    sent: "Da gui",
+    shared: "Da chia se ket qua.",
+    sendTo: "Gui den:",
+    excelDownloaded: "Tep Excel da tai xuong.<br>Ung dung email se mo - vui long gui ket qua.",
+    sentProcess: "Da thuc hien gui",
+    skipLink: "Chuyen den noi dung",
+    darkModeToggle: "Chuyen che do toi",
+    minutes: "phut",
+    seconds: "giay",
+    swipeHint: "← Vuốt để chuyển câu hỏi →"
+  },
+  id: {
+    title: "Tes Istilah Dasar Peternakan Babi",
+    company: "PT Hirano",
+    badge: "Sertifikasi HSS - Persiapan Ujian Tertulis",
+    welcome: "Selamat Datang",
+    welcomeDesc: "Ini adalah tes pemahaman istilah dasar peternakan babi<br>sebagai persiapan ujian tertulis sertifikasi HSS.",
+    nameLabel: "Nama Lengkap",
+    namePlaceholder: "Contoh: Budi Santoso",
+    nameError: "Silakan masukkan nama Anda",
+    testName: "Nama Tes:",
+    testNameValue: "Tes Istilah Dasar Peternakan Babi",
+    questionCount: "Jumlah Soal:",
+    questionCountValue: "30 soal dipilih acak dari 30 soal",
+    format: "Format:",
+    formatValue: "Pilihan ganda (4 opsi)",
+    timeLimit: "Batas Waktu:",
+    timeLimitValue: "30 menit",
+    passCriteria: "Kriteria Lulus:",
+    passCriteriaValue: "Tingkat benar 70% atau lebih",
+    notice1: "\u203B Jawaban benar/salah tidak ditampilkan selama tes.",
+    notice2: "\u203B Anda dapat kembali untuk mengubah jawaban.",
+    notice3: "\u203B Hasil dapat dikirim ke administrator.",
+    notice4: "\u203B Tes akan berakhir otomatis saat waktu habis.",
+    startBtn: "Mulai Tes",
+    remainingTime: "Sisa Waktu",
+    prev: "Sebelumnya",
+    next: "Berikutnya",
+    submit: "Kirim",
+    question: "Soal",
+    timeoutTitle: "\u23F0 Waktu Habis",
+    timeoutMsg: "Batas waktu terlampaui.<br>Menampilkan hasil...",
+    resultTitle: "Hasil Tes Istilah Dasar Peternakan Babi",
+    correctRate: "Nilai",
+    scoreDetail: "{score} benar dari {total}",
+    pass: "Lulus! Kerja bagus.",
+    fail: "Belum lulus. Silakan pelajari lagi dan coba lagi.",
+    perfect: "Nilai sempurna! Luar biasa!",
+    examinee: "Peserta:",
+    examDate: "Tanggal:",
+    timeLimitLabel: "Batas Waktu:",
+    elapsed: "Waktu Pengerjaan:",
+    timedOut: "(Waktu habis)",
+    passCriteriaLabel: "Kriteria Lulus:",
+    passCriteriaDetail: "{rate}% atau lebih",
+    categoryStats: "Hasil per Kategori",
+    reviewTitle: "Tinjauan Jawaban",
+    correct: "\u25CB Benar",
+    incorrect: "\u00D7 Salah",
+    unanswered: "Belum dijawab",
+    unansweredLabel: "(Belum dijawab)",
+    submitNotice: "Anda dapat mengirim hasil ke administrator.",
+    submitBtn: "Kirim Hasil",
+    retryBtn: "Coba Lagi",
+    processing: "Memproses...",
+    sent: "Terkirim",
+    shared: "Hasil dibagikan.",
+    sendTo: "Dikirim ke:",
+    excelDownloaded: "File Excel terunduh.<br>Aplikasi email akan terbuka - silakan kirim hasil.",
+    sentProcess: "Proses pengiriman selesai",
+    skipLink: "Langsung ke konten",
+    darkModeToggle: "Mode gelap",
+    minutes: "menit",
+    seconds: "detik",
+    swipeHint: "← Geser untuk navigasi soal →"
+  }
+};
+
+var CATEGORY_NAMES = {
+  ja: {"繁殖関連":"繁殖関連","子豚管理":"子豚管理","衛生管理":"衛生管理","飼養管理":"飼養管理","飼育段階":"飼育段階","豚の分類":"豚の分類","施設管理":"施設管理"},
+  en: {"繁殖関連":"Breeding","子豚管理":"Piglet Care","衛生管理":"Hygiene","飼養管理":"Feed Management","飼育段階":"Growth Stage","豚の分類":"Pig Classification","施設管理":"Facility Management"},
+  vi: {"繁殖関連":"Sinh san","子豚管理":"Quan ly heo con","衛生管理":"Ve sinh","飼養管理":"Quan ly thuc an","飼育段階":"Giai doan nuoi","豚の分類":"Phan loai heo","施設管理":"Quan ly chuong trai"},
+  id: {"繁殖関連":"Pembiakan","子豚管理":"Perawatan Anak Babi","衛生管理":"Kebersihan","飼養管理":"Manajemen Pakan","飼育段階":"Tahap Pertumbuhan","豚の分類":"Klasifikasi Babi","施設管理":"Manajemen Fasilitas"}
+};
+
+// ==================== CONFIG ====================
+var ADMIN_EMAIL = "so@oikk.co.jp";
+var TIME_LIMIT = 30;
+var QUESTIONS_PER_TEST = 30;
+var PASS_RATE = 70;
+var TIMER_RADIUS = 24;
+var TIMER_CIRCUMFERENCE = 2 * Math.PI * TIMER_RADIUS;
+
+var CATEGORY_CLASSES = {
+  "繁殖関連": "cat-breeding",
+  "子豚管理": "cat-piglet",
+  "衛生管理": "cat-hygiene",
+  "飼養管理": "cat-feeding",
+  "飼育段階": "cat-stage",
+  "豚の分類": "cat-class",
+  "施設管理": "cat-facility"
+};
+
+// ==================== LANGUAGE ====================
+var currentLang = localStorage.getItem("hss_lang") || "ja";
+
+function t(key) {
+  return (TRANSLATIONS[currentLang] && TRANSLATIONS[currentLang][key]) || TRANSLATIONS.ja[key] || key;
+}
+
+function getCatName(cat) {
+  return (CATEGORY_NAMES[currentLang] && CATEGORY_NAMES[currentLang][cat]) || cat;
+}
+
+function getQ(q, field) {
+  if (currentLang === "ja") return q[field];
+  if (q[currentLang] && q[currentLang][field] !== undefined) return q[currentLang][field];
+  return q[field];
+}
+
+function getQOptions(q) {
+  if (currentLang === "ja") return q.options;
+  if (q[currentLang] && q[currentLang].options) return q[currentLang].options;
+  return q.options;
+}
+
+// ==================== QUESTIONS ====================
+var allQuestions = [
+  {
+    "question": "「去勢（きょせい）」とは何ですか？",
+    "answer": "雄豚の精巣を外科的に除去する処置",
+    "options": ["雄豚の精巣を外科的に除去する処置","豚の尾を短く切る処置","豚の犬歯を切る処置","豚に鉄分を注射する処置"],
+    "category": "子豚管理",
+    "explanation": "去勢は雄豚の精巣を外科的に除去する処置です。主に肉質改善（雄臭の防止）や性格の温順化を目的として、生後早い段階で行われます。",
+    "en": {
+      "question": "What is 'castration' (kyosei)?",
+      "answer": "A surgical procedure to remove the testicles of male pigs",
+      "options": ["A surgical procedure to remove the testicles of male pigs","A procedure to cut a pig's tail short","A procedure to cut a pig's canine teeth","A procedure to inject iron into pigs"],
+      "explanation": "Castration is a surgical procedure to remove the testicles of male pigs. It is performed at an early age mainly to improve meat quality (prevent boar taint) and make the animal more docile."
+    },
+    "vi": {
+      "question": "'Thien' (kyosei) la gi?",
+      "answer": "Thu thuat phau thuat cat bo tinh hoan cua heo duc",
+      "options": ["Thu thuat phau thuat cat bo tinh hoan cua heo duc","Thu thuat cat ngan duoi heo","Thu thuat cat rang nanh cua heo","Thu thuat tiem sat cho heo"],
+      "explanation": "Thien la thu thuat phau thuat cat bo tinh hoan cua heo duc. Duoc thuc hien tu som nham cai thien chat luong thit (ngan mui hoi heo duc) va thuan hoa tinh cach."
+    },
+    "id": {
+      "question": "Apa yang dimaksud dengan 'kastrasi' (kyosei)?",
+      "answer": "Prosedur bedah untuk mengangkat testis babi jantan",
+      "options": ["Prosedur bedah untuk mengangkat testis babi jantan","Prosedur untuk memotong ekor babi","Prosedur untuk memotong gigi taring babi","Prosedur untuk menyuntikkan zat besi ke babi"],
+      "explanation": "Kastrasi adalah prosedur bedah untuk mengangkat testis babi jantan. Dilakukan sejak dini terutama untuk meningkatkan kualitas daging (mencegah bau jantan) dan menjinakkan temperamen."
+    }
+  },
+  {
+    "question": "「離乳（りにゅう）」とは何ですか？",
+    "answer": "子豚を母豚から引き離し、独立して飼料を食べさせるようにすること",
+    "options": ["子豚を母豚から引き離し、独立して飼料を食べさせるようにすること","子豚が初めて固形飼料を食べること","母豚の乳の出が止まること","子豚を他の母豚に預けること"],
+    "category": "繁殖関連",
+    "explanation": "離乳とは子豚を母豚から引き離し、自力で飼料を摂取させるプロセスです。一般的に生後21～28日齢で行われ、母豚の次の繁殖サイクルへの移行と子豚の独立を促します。",
+    "en": {
+      "question": "What is 'weaning' (rinyuu)?",
+      "answer": "Separating piglets from the sow to feed independently",
+      "options": ["Separating piglets from the sow to feed independently","When piglets eat solid feed for the first time","When the sow's milk production stops","Fostering piglets to another sow"],
+      "explanation": "Weaning is the process of separating piglets from the sow to eat feed on their own. Typically done at 21-28 days of age to transition the sow to the next breeding cycle."
+    },
+    "vi": {
+      "question": "'Cai sua' (rinyuu) la gi?",
+      "answer": "Tach heo con khoi heo me de cho an tu lap",
+      "options": ["Tach heo con khoi heo me de cho an tu lap","Khi heo con an thuc an cung lan dau","Khi heo me ngung tiet sua","Gui heo con cho heo me khac nuoi"],
+      "explanation": "Cai sua la qua trinh tach heo con khoi heo me de chung tu an thuc an. Thuong thuc hien o 21-28 ngay tuoi."
+    },
+    "id": {
+      "question": "Apa yang dimaksud dengan 'penyapihan' (rinyuu)?",
+      "answer": "Memisahkan anak babi dari induk untuk makan mandiri",
+      "options": ["Memisahkan anak babi dari induk untuk makan mandiri","Saat anak babi makan pakan padat untuk pertama kali","Saat produksi susu induk berhenti","Menitipkan anak babi ke induk lain"],
+      "explanation": "Penyapihan adalah proses memisahkan anak babi dari induk agar makan pakan sendiri. Biasanya dilakukan pada usia 21-28 hari."
+    }
+  },
+  {
+    "question": "「分娩（ぶんべん）」とは何ですか？",
+    "answer": "母豚が子豚を出産すること",
+    "options": ["母豚が子豚を出産すること","母豚が発情を示すこと","母豚に種付けを行うこと","母豚が妊娠すること"],
+    "category": "繁殖関連",
+    "explanation": "分娩は母豚が子豚を産み出す過程です。通常、妊娠約114日目に起こり、分娩舎（分娩柵）で行われます。分娩には数時間かかり、10頭以上の子豚を産むことも珍しくありません。",
+    "en": {
+      "question": "What is 'farrowing' (bunben)?",
+      "answer": "The process of a sow giving birth to piglets",
+      "options": ["The process of a sow giving birth to piglets","When a sow shows signs of estrus","Performing insemination on a sow","When a sow becomes pregnant"],
+      "explanation": "Farrowing is the process of a sow giving birth to piglets. It usually occurs around day 114 of gestation and takes place in farrowing crates."
+    },
+    "vi": {
+      "question": "'De' (bunben) la gi?",
+      "answer": "Qua trinh heo me sinh heo con",
+      "options": ["Qua trinh heo me sinh heo con","Khi heo me co bieu hien dong duc","Thuc hien phoi giong cho heo me","Khi heo me mang thai"],
+      "explanation": "De la qua trinh heo me sinh ra heo con. Thuong xay ra vao khoang ngay 114 cua thai ky."
+    },
+    "id": {
+      "question": "Apa yang dimaksud dengan 'kelahiran' (bunben)?",
+      "answer": "Proses induk babi melahirkan anak babi",
+      "options": ["Proses induk babi melahirkan anak babi","Saat induk menunjukkan tanda birahi","Melakukan inseminasi pada induk","Saat induk hamil"],
+      "explanation": "Kelahiran (farrowing) adalah proses induk babi melahirkan anak babi. Biasanya terjadi sekitar hari ke-114 kehamilan."
+    }
+  },
+  {
+    "question": "「哺乳（ほにゅう）」とは何ですか？",
+    "answer": "母豚が子豚に母乳を与えて育てること",
+    "options": ["母豚が子豚に母乳を与えて育てること","子豚に人工乳を与えること","子豚が固形飼料を食べ始めること","母豚が出産の準備をすること"],
+    "category": "飼育段階",
+    "explanation": "哺乳は母豚が子豚に母乳を与えて育てる期間・行為です。哺乳期間中の母乳は子豚の成長と免疫獲得に極めて重要で、特に分娩後すぐの初乳には免疫グロブリンが豊富に含まれています。",
+    "en": {
+      "question": "What is 'nursing/lactation' (honyuu)?",
+      "answer": "The sow feeding piglets with her milk",
+      "options": ["The sow feeding piglets with her milk","Feeding piglets with artificial milk","When piglets start eating solid feed","When the sow prepares for farrowing"],
+      "explanation": "Nursing is when the sow feeds piglets with her milk. Colostrum in the first milk is especially important for immune protection."
+    },
+    "vi": {
+      "question": "'Cho bu' (honyuu) la gi?",
+      "answer": "Heo me nuoi heo con bang sua me",
+      "options": ["Heo me nuoi heo con bang sua me","Cho heo con uong sua nhan tao","Khi heo con bat dau an thuc an cung","Khi heo me chuan bi de"],
+      "explanation": "Cho bu la khi heo me nuoi heo con bang sua me. Sua non dac biet quan trong cho mien dich."
+    },
+    "id": {
+      "question": "Apa yang dimaksud dengan 'menyusui' (honyuu)?",
+      "answer": "Induk babi memberi susu kepada anak babi",
+      "options": ["Induk babi memberi susu kepada anak babi","Memberi susu buatan kepada anak babi","Saat anak babi mulai makan pakan padat","Saat induk mempersiapkan kelahiran"],
+      "explanation": "Menyusui adalah saat induk memberi susu kepada anak babi. Kolostrum sangat penting untuk kekebalan."
+    }
+  },
+  {
+    "question": "「発情（はつじょう）」とは何ですか？",
+    "answer": "雌豚が交配可能な状態を示す生理的な現象",
+    "options": ["雌豚が交配可能な状態を示す生理的な現象","母豚が出産間近になった状態","豚が暑さでストレスを感じている状態","豚が病気にかかっている状態"],
+    "category": "繁殖関連",
+    "explanation": "発情は雌豚が交配可能な状態を示す生理現象で、約21日周期で繰り返されます。発情兆候には外陰部の腫れ・赤み、スタンディング反応（背中を押すと立ち止まる）などがあります。",
+    "en": {
+      "question": "What is 'estrus/heat' (hatsujou)?",
+      "answer": "A physiological state indicating a female pig is ready to mate",
+      "options": ["A physiological state indicating a female pig is ready to mate","A state when a sow is about to give birth","A state when a pig is stressed by heat","A state when a pig is sick"],
+      "explanation": "Estrus is a physiological state indicating a female pig is ready for mating, recurring approximately every 21 days. Signs include vulva swelling and standing reflex."
+    },
+    "vi": {
+      "question": "'Dong duc' (hatsujou) la gi?",
+      "answer": "Hien tuong sinh ly cho thay heo cai san sang giao phoi",
+      "options": ["Hien tuong sinh ly cho thay heo cai san sang giao phoi","Trang thai heo me sap de","Trang thai heo bi stress do nong","Trang thai heo bi benh"],
+      "explanation": "Dong duc la hien tuong sinh ly cho thay heo cai san sang giao phoi, lap lai khoang 21 ngay."
+    },
+    "id": {
+      "question": "Apa yang dimaksud dengan 'birahi' (hatsujou)?",
+      "answer": "Kondisi fisiologis yang menunjukkan babi betina siap kawin",
+      "options": ["Kondisi fisiologis yang menunjukkan babi betina siap kawin","Kondisi saat induk akan melahirkan","Kondisi saat babi stres karena panas","Kondisi saat babi sakit"],
+      "explanation": "Birahi adalah kondisi fisiologis yang menunjukkan babi betina siap kawin, berulang setiap sekitar 21 hari."
+    }
+  },
+  {
+    "question": "「種付け（たねつけ）」とは何ですか？",
+    "answer": "発情した雌豚に人工授精または自然交配を行うこと",
+    "options": ["発情した雌豚に人工授精または自然交配を行うこと","子豚にワクチンを接種すること","豚に飼料を与えること","候補豚を選抜すること"],
+    "category": "繁殖関連",
+    "explanation": "種付けは発情した雌豚に精液を注入（人工授精）するか、雄豚と交配させること（自然交配）です。現代の養豚では人工授精（AI）が主流で、発情確認後の適切なタイミングで行われます。",
+    "en": {
+      "question": "What is 'breeding/insemination' (tanetsuke)?",
+      "answer": "Performing AI or natural mating on a sow in estrus",
+      "options": ["Performing AI or natural mating on a sow in estrus","Vaccinating piglets","Feeding pigs","Selecting breeding candidates"],
+      "explanation": "Breeding is inseminating a sow in estrus, either by AI (artificial insemination) or natural mating. AI is predominant in modern swine production."
+    },
+    "vi": {
+      "question": "'Phoi giong' (tanetsuke) la gi?",
+      "answer": "Thuc hien thu tinh nhan tao hoac giao phoi tu nhien cho heo cai dong duc",
+      "options": ["Thuc hien thu tinh nhan tao hoac giao phoi tu nhien cho heo cai dong duc","Tiem vac xin cho heo con","Cho heo an","Chon heo giong ung vien"],
+      "explanation": "Phoi giong la thu tinh cho heo cai dang dong duc, bang thu tinh nhan tao (AI) hoac giao phoi tu nhien."
+    },
+    "id": {
+      "question": "Apa yang dimaksud dengan 'perkawinan' (tanetsuke)?",
+      "answer": "Melakukan inseminasi buatan atau kawin alami pada induk yang birahi",
+      "options": ["Melakukan inseminasi buatan atau kawin alami pada induk yang birahi","Vaksinasi anak babi","Memberi pakan babi","Memilih calon induk"],
+      "explanation": "Perkawinan adalah menginseminasi induk yang sedang birahi, baik dengan IB (inseminasi buatan) maupun kawin alami."
+    }
+  },
+  {
+    "question": "「妊娠鑑定（にんしんかんてい）」とは何ですか？",
+    "answer": "種付け後に母豚が妊娠しているかどうかを確認する検査",
+    "options": ["種付け後に母豚が妊娠しているかどうかを確認する検査","母豚の出産予定日を計算すること","母豚の体重を測定すること","母豚の健康状態を調べる定期検診"],
+    "category": "繁殖関連",
+    "explanation": "妊娠鑑定は種付け後に母豚の妊娠の有無を確認する検査です。超音波検査器（エコー）を用いる方法が一般的で、種付け後約25～30日で判定可能です。不受胎の早期発見により、再種付けを迅速に行えます。",
+    "en": {
+      "question": "What is 'pregnancy diagnosis' (ninshin kantei)?",
+      "answer": "An examination to confirm whether a sow is pregnant after breeding",
+      "options": ["An examination to confirm whether a sow is pregnant after breeding","Calculating the sow's due date","Weighing the sow","A regular health check for the sow"],
+      "explanation": "Pregnancy diagnosis confirms whether a sow is pregnant after breeding. Ultrasound is commonly used, with results available about 25-30 days after breeding."
+    },
+    "vi": {
+      "question": "'Chan doan thai' (ninshin kantei) la gi?",
+      "answer": "Kiem tra xem heo me co mang thai sau khi phoi giong khong",
+      "options": ["Kiem tra xem heo me co mang thai sau khi phoi giong khong","Tinh ngay du sinh cua heo me","Can heo me","Kiem tra suc khoe dinh ky cho heo me"],
+      "explanation": "Chan doan thai xac nhan heo me co mang thai sau phoi giong. Sieu am duoc su dung pho bien, ket qua co sau 25-30 ngay."
+    },
+    "id": {
+      "question": "Apa yang dimaksud dengan 'diagnosis kehamilan' (ninshin kantei)?",
+      "answer": "Pemeriksaan untuk memastikan apakah induk hamil setelah dikawinkan",
+      "options": ["Pemeriksaan untuk memastikan apakah induk hamil setelah dikawinkan","Menghitung tanggal lahir perkiraan induk","Menimbang induk","Pemeriksaan kesehatan rutin induk"],
+      "explanation": "Diagnosis kehamilan memastikan apakah induk hamil setelah dikawinkan. USG umum digunakan, hasil tersedia sekitar 25-30 hari setelah kawin."
+    }
+  },
+  {
+    "question": "「断尾（だんび）」とは何ですか？",
+    "answer": "子豚の尾を短く切除する処置（尾かじり防止のため）",
+    "options": ["子豚の尾を短く切除する処置（尾かじり防止のため）","子豚の犬歯を切る処置","子豚の精巣を除去する処置","子豚の耳に標識をつける処置"],
+    "category": "子豚管理",
+    "explanation": "断尾は子豚の尾を生後間もなく短く切除する処置です。群飼い環境での尾かじり（カニバリズム）を防止する目的で行われ、感染症のリスク軽減にもつながります。",
+    "en": {
+      "question": "What is 'tail docking' (danbi)?",
+      "answer": "Cutting piglets' tails short to prevent tail biting",
+      "options": ["Cutting piglets' tails short to prevent tail biting","Cutting piglets' canine teeth","Removing piglets' testicles","Putting ear tags on piglets"],
+      "explanation": "Tail docking is cutting piglets' tails short shortly after birth to prevent tail biting (cannibalism) in group housing."
+    },
+    "vi": {
+      "question": "'Cat duoi' (danbi) la gi?",
+      "answer": "Cat ngan duoi heo con de phong can duoi",
+      "options": ["Cat ngan duoi heo con de phong can duoi","Cat rang nanh heo con","Cat bo tinh hoan heo con","Danh dau tai heo con"],
+      "explanation": "Cat duoi la cat ngan duoi heo con ngay sau sinh de phong tat can duoi trong chuong nuoi nhom."
+    },
+    "id": {
+      "question": "Apa yang dimaksud dengan 'pemotongan ekor' (danbi)?",
+      "answer": "Memotong pendek ekor anak babi untuk mencegah gigitan ekor",
+      "options": ["Memotong pendek ekor anak babi untuk mencegah gigitan ekor","Memotong gigi taring anak babi","Mengangkat testis anak babi","Memasang tanda telinga pada anak babi"],
+      "explanation": "Pemotongan ekor dilakukan segera setelah lahir untuk mencegah kebiasaan menggigit ekor dalam kandang kelompok."
+    }
+  },
+  {
+    "question": "「鉄剤投与（てつざいとうよ）」を子豚に行う理由は何ですか？",
+    "answer": "母乳だけでは鉄分が不足し、貧血を予防するため",
+    "options": ["母乳だけでは鉄分が不足し、貧血を予防するため","子豚の骨を丈夫にするため","子豚の食欲を増進させるため","子豚の感染症を予防するため"],
+    "category": "子豚管理",
+    "explanation": "豚の母乳には鉄分がほとんど含まれておらず、生後数日で子豚は鉄欠乏性貧血になるリスクがあります。そのため、生後1～3日齢で鉄剤（デキストラン鉄など）を筋肉注射して貧血を予防します。",
+    "en": {
+      "question": "Why is iron supplementation given to piglets?",
+      "answer": "Because sow's milk lacks sufficient iron, to prevent anemia",
+      "options": ["Because sow's milk lacks sufficient iron, to prevent anemia","To strengthen piglets' bones","To increase piglets' appetite","To prevent infections in piglets"],
+      "explanation": "Sow's milk contains very little iron, and piglets risk iron deficiency anemia within days. Iron dextran is injected at 1-3 days of age."
+    },
+    "vi": {
+      "question": "Tai sao can bo sung sat cho heo con?",
+      "answer": "Vi sua me khong du sat, de phong thieu mau",
+      "options": ["Vi sua me khong du sat, de phong thieu mau","De xuong heo con chac khoe","De tang cam giac them an cho heo con","De phong benh nhiem trung cho heo con"],
+      "explanation": "Sua heo me chua rat it sat, heo con co nguy co thieu mau do thieu sat. Tiem sat dextran vao 1-3 ngay tuoi."
+    },
+    "id": {
+      "question": "Mengapa suplemen zat besi diberikan kepada anak babi?",
+      "answer": "Karena susu induk kekurangan zat besi, untuk mencegah anemia",
+      "options": ["Karena susu induk kekurangan zat besi, untuk mencegah anemia","Untuk memperkuat tulang anak babi","Untuk meningkatkan nafsu makan anak babi","Untuk mencegah infeksi pada anak babi"],
+      "explanation": "Susu induk mengandung sangat sedikit zat besi, dan anak babi berisiko anemia. Suntikan iron dextran diberikan pada usia 1-3 hari."
+    }
+  },
+  {
+    "question": "「オールイン・オールアウト」とはどのような飼養方式ですか？",
+    "answer": "豚舎に同時期に一斉に導入し、同時期に一斉に搬出する方式",
+    "options": ["豚舎に同時期に一斉に導入し、同時期に一斉に搬出する方式","豚を1頭ずつ順番に出荷していく方式","母豚と子豚を同じ豚舎で飼う方式","豚舎を24時間開放して自由に出入りさせる方式"],
+    "category": "衛生管理",
+    "explanation": "オールイン・オールアウトは、同じ豚舎（部屋）に同時期の豚を一斉に入れ、出荷も一斉に行う方式です。空舎期間に徹底的な洗浄・消毒ができるため、疾病の蔓延防止に非常に効果的です。",
+    "en": {
+      "question": "What is the 'all-in/all-out' system?",
+      "answer": "A system where pigs are moved into and out of a barn all at once",
+      "options": ["A system where pigs are moved into and out of a barn all at once","A system where pigs are shipped one by one","A system where sows and piglets are kept together","A system where barns are open 24 hours"],
+      "explanation": "All-in/all-out is a system where all pigs enter and leave a barn at the same time, allowing thorough cleaning and disinfection between groups."
+    },
+    "vi": {
+      "question": "He thong 'cung vao/cung ra' (All-in/All-out) la gi?",
+      "answer": "He thong dua heo vao va ra chuong dong loat",
+      "options": ["He thong dua heo vao va ra chuong dong loat","He thong xuat heo tung con mot","He thong nuoi heo me va heo con cung nhau","He thong mo chuong 24 gio"],
+      "explanation": "Cung vao/cung ra la he thong tat ca heo vao va ra chuong cung luc, cho phep ve sinh ky giua cac dot."
+    },
+    "id": {
+      "question": "Apa yang dimaksud dengan sistem 'all-in/all-out'?",
+      "answer": "Sistem di mana babi dimasukkan dan dikeluarkan dari kandang secara bersamaan",
+      "options": ["Sistem di mana babi dimasukkan dan dikeluarkan dari kandang secara bersamaan","Sistem pengiriman babi satu per satu","Sistem memelihara induk dan anak bersama","Sistem kandang terbuka 24 jam"],
+      "explanation": "All-in/all-out adalah sistem di mana semua babi masuk dan keluar kandang bersamaan, memungkinkan pembersihan menyeluruh."
+    }
+  },
+  {
+    "question": "「肥育（ひいく）」とはどのような飼育段階ですか？",
+    "answer": "離乳後の豚を出荷体重まで太らせる飼育段階",
+    "options": ["離乳後の豚を出荷体重まで太らせる飼育段階","母豚に子豚を育てさせる期間","生まれたばかりの子豚を保温する期間","繁殖用の豚を選抜・育成する期間"],
+    "category": "飼育段階",
+    "explanation": "肥育は離乳後の豚を出荷体重（約110～120kg）まで効率よく成長させる段階です。適切な飼料管理と環境管理により、増体量と飼料効率を最大化することが重要です。",
+    "en": {
+      "question": "What is 'fattening/finishing' (hiiku)?",
+      "answer": "The stage of raising weaned pigs to market weight",
+      "options": ["The stage of raising weaned pigs to market weight","The period of sow nursing piglets","The period of keeping newborn piglets warm","The period of selecting and raising breeding stock"],
+      "explanation": "Finishing is the stage of raising pigs from weaning to market weight (about 110-120 kg), typically over about 6 months."
+    },
+    "vi": {
+      "question": "'Vo beo' (hiiku) la giai doan nuoi gi?",
+      "answer": "Giai doan nuoi heo sau cai sua den trong luong xuat chuong",
+      "options": ["Giai doan nuoi heo sau cai sua den trong luong xuat chuong","Giai doan heo me nuoi con","Giai doan giu am heo so sinh","Giai doan chon va nuoi heo giong"],
+      "explanation": "Vo beo la giai doan nuoi heo tu cai sua den trong luong xuat chuong (khoang 110-120 kg)."
+    },
+    "id": {
+      "question": "Apa yang dimaksud dengan 'penggemukan' (hiiku)?",
+      "answer": "Tahap pemeliharaan babi setelah disapih hingga berat jual",
+      "options": ["Tahap pemeliharaan babi setelah disapih hingga berat jual","Periode induk menyusui anak","Periode menghangatkan anak babi baru lahir","Periode seleksi dan pemeliharaan bibit"],
+      "explanation": "Penggemukan adalah tahap membesarkan babi dari penyapihan hingga berat jual (sekitar 110-120 kg)."
+    }
+  },
+  {
+    "question": "「候補豚（こうほとん）」とは何ですか？",
+    "answer": "将来の繁殖豚として選抜・育成されている若い豚",
+    "options": ["将来の繁殖豚として選抜・育成されている若い豚","出荷が近い肥育豚のこと","病気から回復した豚のこと","体重が基準に達していない豚のこと"],
+    "category": "豚の分類",
+    "explanation": "候補豚（後継豚）は、将来の繁殖母豚や種雄豚として選ばれた若い豚です。体型、肢蹄、乳頭数、血統などを基準に選抜され、初回種付けまで特別な管理下で育成されます。",
+    "en": {
+      "question": "What is a 'gilt/replacement pig' (kouhoton)?",
+      "answer": "A young pig selected and raised as a future breeding pig",
+      "options": ["A young pig selected and raised as a future breeding pig","A finishing pig near market weight","A pig recovered from illness","A pig below standard weight"],
+      "explanation": "A gilt or replacement pig is selected based on conformation, feet/legs, teat count, and genetics to become a future breeding animal."
+    },
+    "vi": {
+      "question": "'Heo hau bi' (kouhoton) la gi?",
+      "answer": "Heo non duoc chon va nuoi lam heo giong tuong lai",
+      "options": ["Heo non duoc chon va nuoi lam heo giong tuong lai","Heo thit sap xuat chuong","Heo da hoi phuc sau benh","Heo chua dat trong luong tieu chuan"],
+      "explanation": "Heo hau bi duoc chon dua tren the hinh, chan mong, so vu va huyet thong de tro thanh heo giong."
+    },
+    "id": {
+      "question": "Apa yang dimaksud dengan 'babi calon induk' (kouhoton)?",
+      "answer": "Babi muda yang dipilih dan dipelihara sebagai calon induk",
+      "options": ["Babi muda yang dipilih dan dipelihara sebagai calon induk","Babi potong mendekati berat jual","Babi yang pulih dari penyakit","Babi di bawah berat standar"],
+      "explanation": "Babi calon induk dipilih berdasarkan bentuk tubuh, kaki, jumlah puting, dan genetik."
+    }
+  },
+  {
+    "question": "「廃用（はいよう）」とは養豚においてどのような意味ですか？",
+    "answer": "繁殖成績不良や疾病、高産歴などの理由で繁殖群から除外すること",
+    "options": ["繁殖成績不良や疾病、高産歴などの理由で繁殖群から除外すること","豚を出荷体重まで育てること","新しい豚を導入すること","豚舎を消毒すること"],
+    "category": "飼養管理",
+    "explanation": "廃用は繁殖成績の低下、高齢、疾病、肢蹄障害などの理由で繁殖群から除外・淘汰することです。廃用率は農場の繁殖効率に影響するため、適切な更新計画が必要です。",
+    "en": {
+      "question": "What does 'culling' (haiyou) mean in swine production?",
+      "answer": "Removing a pig from the breeding herd due to poor performance, disease, or age",
+      "options": ["Removing a pig from the breeding herd due to poor performance, disease, or age","Raising pigs to market weight","Introducing new pigs","Disinfecting the barn"],
+      "explanation": "Culling is removing sows or boars from the breeding herd due to poor reproductive performance, age, disease, or leg problems."
+    },
+    "vi": {
+      "question": "'Loai thai' (haiyou) co nghia gi trong chan nuoi heo?",
+      "answer": "Loai heo ra khoi dan giong do nang suat kem, benh hoac gia",
+      "options": ["Loai heo ra khoi dan giong do nang suat kem, benh hoac gia","Nuoi heo den trong luong xuat chuong","Nhap heo moi","Khu trung chuong"],
+      "explanation": "Loai thai la loai heo nai hoac duc giong ra khoi dan do nang suat sinh san kem, tuoi cao, benh hoac van de chan."
+    },
+    "id": {
+      "question": "Apa arti 'afkir' (haiyou) dalam peternakan babi?",
+      "answer": "Mengeluarkan babi dari kawanan induk karena performa buruk, penyakit, atau usia",
+      "options": ["Mengeluarkan babi dari kawanan induk karena performa buruk, penyakit, atau usia","Memelihara babi hingga berat jual","Memperkenalkan babi baru","Mendisinfeksi kandang"],
+      "explanation": "Afkir adalah mengeluarkan induk dari kawanan karena performa reproduksi buruk, usia, penyakit, atau masalah kaki."
+    }
+  },
+  {
+    "question": "「初産（しょさん）」とは何ですか？",
+    "answer": "母豚が初めて子豚を出産すること、またはその母豚",
+    "options": ["母豚が初めて子豚を出産すること、またはその母豚","その年の最初に生まれた子豚のこと","母豚が1頭だけ子豚を産むこと","初めて発情した雌豚のこと"],
+    "category": "繁殖関連",
+    "explanation": "初産は母豚が初めて分娩すること、またはその母豚（初産豚）を指します。初産豚は経産豚と比べて産子数がやや少なく、哺乳能力も発達途上のため、特に注意深い管理が求められます。",
+    "en": {
+      "question": "What is 'first parity' (shosan)?",
+      "answer": "A sow giving birth for the first time, or such a sow",
+      "options": ["A sow giving birth for the first time, or such a sow","The first piglet born that year","A sow giving birth to only one piglet","A gilt showing first estrus"],
+      "explanation": "First parity refers to a sow's first farrowing or the sow itself (gilt). First-parity sows typically have smaller litters."
+    },
+    "vi": {
+      "question": "'Lua dau' (shosan) la gi?",
+      "answer": "Heo me de lan dau tien, hoac con heo do",
+      "options": ["Heo me de lan dau tien, hoac con heo do","Heo con dau tien sinh ra trong nam","Heo me chi de mot con","Heo cai dong duc lan dau"],
+      "explanation": "Lua dau chi lan de dau tien cua heo me. Heo de lua dau thuong co so con it hon."
+    },
+    "id": {
+      "question": "Apa yang dimaksud dengan 'kelahiran pertama' (shosan)?",
+      "answer": "Induk babi melahirkan untuk pertama kali, atau induk tersebut",
+      "options": ["Induk babi melahirkan untuk pertama kali, atau induk tersebut","Anak babi pertama yang lahir tahun itu","Induk yang hanya melahirkan satu anak","Babi betina yang pertama kali birahi"],
+      "explanation": "Kelahiran pertama mengacu pada kelahiran pertama induk. Induk paritas pertama biasanya memiliki jumlah anak lebih sedikit."
+    }
+  },
+  {
+    "question": "「ボディコンディションスコア（BCS）」とは何ですか？",
+    "answer": "豚の体の肉付き・脂肪の状態を点数で評価する指標",
+    "options": ["豚の体の肉付き・脂肪の状態を点数で評価する指標","豚の健康状態を血液検査で測定する数値","豚舎内の温度と湿度を示す指標","豚の1日あたりの増体量を示す指標"],
+    "category": "飼養管理",
+    "explanation": "BCS（ボディコンディションスコア）は、豚の背脂肪や筋肉の付き具合を視覚・触診で5段階（1=痩せ～5=肥満）で評価する指標です。母豚の適正なBCS管理は繁殖成績に直結します。",
+    "en": {
+      "question": "What is the 'Body Condition Score (BCS)'?",
+      "answer": "An index that evaluates a pig's body fat/muscle condition on a point scale",
+      "options": ["An index that evaluates a pig's body fat/muscle condition on a point scale","A blood test measurement of a pig's health","An index showing temperature and humidity in the barn","An index showing a pig's daily weight gain"],
+      "explanation": "BCS evaluates body fat and muscle on a 1-5 scale (1=thin, 5=obese) by visual/tactile assessment. Proper BCS management is crucial for reproductive performance."
+    },
+    "vi": {
+      "question": "'Diem the trang (BCS)' la gi?",
+      "answer": "Chi so danh gia tinh trang mo/co cua heo bang thang diem",
+      "options": ["Chi so danh gia tinh trang mo/co cua heo bang thang diem","Chi so xet nghiem mau danh gia suc khoe heo","Chi so nhiet do va do am chuong","Chi so tang trong hang ngay"],
+      "explanation": "BCS danh gia mo va co tren thang 1-5 (1=gay, 5=beo phi). Quan ly BCS dung rat quan trong cho sinh san."
+    },
+    "id": {
+      "question": "Apa itu 'Body Condition Score (BCS)'?",
+      "answer": "Indeks yang menilai kondisi lemak/otot babi dengan skala poin",
+      "options": ["Indeks yang menilai kondisi lemak/otot babi dengan skala poin","Pengukuran tes darah kesehatan babi","Indeks suhu dan kelembaban kandang","Indeks pertambahan berat harian babi"],
+      "explanation": "BCS menilai lemak dan otot pada skala 1-5 (1=kurus, 5=obesitas). Manajemen BCS yang tepat krusial untuk performa reproduksi."
+    }
+  },
+  {
+    "question": "「人工授精（じんこうじゅせい）」の略称として一般的に使われるものはどれですか？",
+    "answer": "AI（Artificial Insemination）",
+    "options": ["AI（Artificial Insemination）","PI（Pig Insemination）","SI（Swine Insemination）","NI（Natural Insemination）"],
+    "category": "繁殖関連",
+    "explanation": "人工授精はAI（Artificial Insemination）と略されます。現代の養豚では90%以上が人工授精で行われ、優秀な種雄豚の遺伝的能力を効率よく広めることができます。",
+    "en": {
+      "question": "What abbreviation is commonly used for 'artificial insemination'?",
+      "answer": "AI (Artificial Insemination)",
+      "options": ["AI (Artificial Insemination)","PI (Pig Insemination)","SI (Swine Insemination)","NI (Natural Insemination)"],
+      "explanation": "Artificial insemination is abbreviated as AI. Over 90% of modern swine breeding uses AI."
+    },
+    "vi": {
+      "question": "Viet tat thuong dung cho 'thu tinh nhan tao' la gi?",
+      "answer": "AI (Artificial Insemination)",
+      "options": ["AI (Artificial Insemination)","PI (Pig Insemination)","SI (Swine Insemination)","NI (Natural Insemination)"],
+      "explanation": "Thu tinh nhan tao viet tat la AI. Hon 90% chan nuoi heo hien dai su dung AI."
+    },
+    "id": {
+      "question": "Singkatan apa yang umum digunakan untuk 'inseminasi buatan'?",
+      "answer": "AI (Artificial Insemination)",
+      "options": ["AI (Artificial Insemination)","PI (Pig Insemination)","SI (Swine Insemination)","NI (Natural Insemination)"],
+      "explanation": "Inseminasi buatan disingkat AI. Lebih dari 90% peternakan babi modern menggunakan AI."
+    }
+  },
+  {
+    "question": "「妊娠期（にんしんき）」とはどのような期間ですか？",
+    "answer": "母豚が子宮内に子豚を宿している期間",
+    "options": ["離乳から肥育開始までの子豚の成長期間","母豚が子宮内に子豚を宿している期間","子豚が母乳を飲んでいる期間","出荷前の最後の仕上げ期間"],
+    "category": "飼育段階",
+    "explanation": "妊娠期は種付け後から分娩までの期間で、豚の場合は約114日間（3ヶ月3週間3日）です。この間、胎子の成長に応じた適切な栄養管理とストレスの少ない環境が重要です。",
+    "en": {
+      "question": "What is the 'gestation period' (ninshinki)?",
+      "answer": "The period during which a sow carries piglets in her uterus",
+      "options": ["The period from weaning to start of fattening","The period during which a sow carries piglets in her uterus","The period during which piglets nurse","The final finishing period before market"],
+      "explanation": "The gestation period is about 114 days (3 months, 3 weeks, 3 days) from breeding to farrowing."
+    },
+    "vi": {
+      "question": "'Ky mang thai' (ninshinki) la gi?",
+      "answer": "Giai doan heo me mang heo con trong tu cung",
+      "options": ["Giai doan tu cai sua den bat dau vo beo","Giai doan heo me mang heo con trong tu cung","Giai doan heo con bu me","Giai doan vo beo cuoi truoc khi xuat chuong"],
+      "explanation": "Ky mang thai khoang 114 ngay (3 thang, 3 tuan, 3 ngay)."
+    },
+    "id": {
+      "question": "Apa yang dimaksud dengan 'masa kehamilan' (ninshinki)?",
+      "answer": "Periode induk mengandung anak babi dalam rahim",
+      "options": ["Periode dari penyapihan hingga penggemukan","Periode induk mengandung anak babi dalam rahim","Periode anak babi menyusu","Periode finishing terakhir sebelum jual"],
+      "explanation": "Masa kehamilan sekitar 114 hari (3 bulan, 3 minggu, 3 hari)."
+    }
+  },
+  {
+    "question": "「繁殖豚（はんしょくとん）」とは何ですか？",
+    "answer": "子豚を生産するために飼育される種雄豚や母豚の総称",
+    "options": ["子豚を生産するために飼育される種雄豚や母豚の総称","食肉用に肥育される豚の総称","生まれたばかりの子豚の総称","出荷された豚の総称"],
+    "category": "豚の分類",
+    "explanation": "繁殖豚は子豚を生産することを目的に飼育される豚の総称で、種雄豚（ボア）と母豚（ソウ）が含まれます。繁殖豚の管理は養豚経営の根幹をなす重要な業務です。",
+    "en": {
+      "question": "What is a 'breeding pig' (hanshokuton)?",
+      "answer": "A general term for boars and sows kept for piglet production",
+      "options": ["A general term for boars and sows kept for piglet production","A general term for pigs fattened for meat","A general term for newborn piglets","A general term for shipped pigs"],
+      "explanation": "Breeding pigs include boars and sows kept for producing piglets. Their management is fundamental to swine farm operations."
+    },
+    "vi": {
+      "question": "'Heo giong' (hanshokuton) la gi?",
+      "answer": "Ten chung cho duc giong va nai duoc nuoi de san xuat heo con",
+      "options": ["Ten chung cho duc giong va nai duoc nuoi de san xuat heo con","Ten chung cho heo nuoi thit","Ten chung cho heo so sinh","Ten chung cho heo da xuat chuong"],
+      "explanation": "Heo giong bao gom duc giong va nai de san xuat heo con. Quan ly heo giong la nen tang cua trai."
+    },
+    "id": {
+      "question": "Apa yang dimaksud dengan 'babi induk' (hanshokuton)?",
+      "answer": "Istilah umum untuk pejantan dan induk yang dipelihara untuk produksi anak babi",
+      "options": ["Istilah umum untuk pejantan dan induk yang dipelihara untuk produksi anak babi","Istilah umum untuk babi yang digemukkan","Istilah umum untuk anak babi baru lahir","Istilah umum untuk babi yang dijual"],
+      "explanation": "Babi induk mencakup pejantan dan induk untuk produksi anak babi."
+    }
+  },
+  {
+    "question": "「肉豚（にくとん）」とは何ですか？",
+    "answer": "食肉を目的として肥育・出荷される豚",
+    "options": ["食肉を目的として肥育・出荷される豚","肉付きの良い繁殖母豚のこと","特定のブランド豚のこと","筋肉量の多い種雄豚のこと"],
+    "category": "豚の分類",
+    "explanation": "肉豚は食肉生産を目的として肥育・出荷される豚です。一般的に約6ヶ月齢、体重110～120kgで出荷されます。繁殖豚とは区別され、農場の主要な収入源となります。",
+    "en": {
+      "question": "What is a 'market pig' (nikuton)?",
+      "answer": "A pig raised and shipped for meat production",
+      "options": ["A pig raised and shipped for meat production","A well-built breeding sow","A specific brand of pig","A boar with high muscle mass"],
+      "explanation": "Market pigs are raised for meat production, typically shipped at about 6 months and 110-120 kg."
+    },
+    "vi": {
+      "question": "'Heo thit' (nikuton) la gi?",
+      "answer": "Heo duoc nuoi va xuat chuong de san xuat thit",
+      "options": ["Heo duoc nuoi va xuat chuong de san xuat thit","Heo nai co the trang tot","Heo thuong hieu dac biet","Duc giong co nhieu co"],
+      "explanation": "Heo thit duoc nuoi de san xuat thit, thuong xuat chuong luc 6 thang, 110-120 kg."
+    },
+    "id": {
+      "question": "Apa yang dimaksud dengan 'babi potong' (nikuton)?",
+      "answer": "Babi yang dipelihara dan dijual untuk produksi daging",
+      "options": ["Babi yang dipelihara dan dijual untuk produksi daging","Induk dengan kondisi tubuh baik","Babi merek khusus","Pejantan dengan massa otot tinggi"],
+      "explanation": "Babi potong dipelihara untuk produksi daging, biasanya dijual pada usia 6 bulan dan 110-120 kg."
+    }
+  },
+  {
+    "question": "豚の妊娠期間は約何日ですか？",
+    "answer": "約114日（3ヶ月3週間3日）",
+    "options": ["約114日（3ヶ月3週間3日）","約90日（3ヶ月）","約150日（5ヶ月）","約280日（約9ヶ月）"],
+    "category": "繁殖関連",
+    "explanation": "豚の妊娠期間は約114日で、「3ヶ月3週間3日」と覚えるのが一般的です。この数字は養豚の基本知識として非常に重要で、分娩予定日の計算に使われます。",
+    "en": {
+      "question": "How long is the gestation period of pigs?",
+      "answer": "About 114 days (3 months, 3 weeks, 3 days)",
+      "options": ["About 114 days (3 months, 3 weeks, 3 days)","About 90 days (3 months)","About 150 days (5 months)","About 280 days (about 9 months)"],
+      "explanation": "The pig gestation period is about 114 days, commonly remembered as '3 months, 3 weeks, 3 days.' This is essential knowledge for calculating due dates."
+    },
+    "vi": {
+      "question": "Thoi gian mang thai cua heo la bao lau?",
+      "answer": "Khoang 114 ngay (3 thang 3 tuan 3 ngay)",
+      "options": ["Khoang 114 ngay (3 thang 3 tuan 3 ngay)","Khoang 90 ngay (3 thang)","Khoang 150 ngay (5 thang)","Khoang 280 ngay (khoang 9 thang)"],
+      "explanation": "Thoi gian mang thai khoang 114 ngay, thuong nho la '3 thang 3 tuan 3 ngay'."
+    },
+    "id": {
+      "question": "Berapa lama masa kehamilan babi?",
+      "answer": "Sekitar 114 hari (3 bulan, 3 minggu, 3 hari)",
+      "options": ["Sekitar 114 hari (3 bulan, 3 minggu, 3 hari)","Sekitar 90 hari (3 bulan)","Sekitar 150 hari (5 bulan)","Sekitar 280 hari (sekitar 9 bulan)"],
+      "explanation": "Masa kehamilan babi sekitar 114 hari, diingat sebagai '3 bulan, 3 minggu, 3 hari'."
+    }
+  },
+  {
+    "question": "「クロスフォスタリング（里子付け）」とは何ですか？",
+    "answer": "産子数が多い母豚の子豚を、余裕のある他の母豚に預けること",
+    "options": ["産子数が多い母豚の子豚を、余裕のある他の母豚に預けること","異なる品種の豚を交配させること","複数の豚舎で豚をローテーションさせること","子豚に別の母豚の母乳を人工的に与えること"],
+    "category": "子豚管理",
+    "explanation": "クロスフォスタリング（里子付け）は、産子数が母豚の乳頭数を超える場合などに、余裕のある他の母豚に子豚を預ける管理技術です。子豚の均一な発育と生存率向上を目的とします。",
+    "en": {
+      "question": "What is 'cross-fostering'?",
+      "answer": "Transferring piglets from a large litter to another sow with fewer piglets",
+      "options": ["Transferring piglets from a large litter to another sow with fewer piglets","Crossbreeding different pig breeds","Rotating pigs between barns","Artificially feeding piglets with another sow's milk"],
+      "explanation": "Cross-fostering transfers excess piglets to another sow with available teats to ensure uniform growth and survival."
+    },
+    "vi": {
+      "question": "'Gui con' (Cross-fostering) la gi?",
+      "answer": "Chuyen heo con tu dan dong sang heo me khac it con hon",
+      "options": ["Chuyen heo con tu dan dong sang heo me khac it con hon","Lai tao giong heo khac nhau","Luan chuyen heo giua cac chuong","Cho heo con bu sua nhan tao tu heo me khac"],
+      "explanation": "Gui con chuyen heo con du sang heo me khac co du vu de dam bao phat trien dong deu."
+    },
+    "id": {
+      "question": "Apa yang dimaksud dengan 'cross-fostering' (induk asuh)?",
+      "answer": "Memindahkan anak babi dari litter besar ke induk lain yang anaknya lebih sedikit",
+      "options": ["Memindahkan anak babi dari litter besar ke induk lain yang anaknya lebih sedikit","Menyilangkan ras babi berbeda","Merotasi babi antar kandang","Memberi susu buatan dari induk lain"],
+      "explanation": "Cross-fostering memindahkan anak babi berlebih ke induk lain untuk pertumbuhan merata."
+    }
+  },
+  {
+    "question": "「総産子数（そうさんしすう）」とは何ですか？",
+    "answer": "1回の分娩で母豚が産む子豚の総数",
+    "options": ["1回の分娩で母豚が産む子豚の総数","母豚が一生のうちに産む子豚の合計数","豚舎内にいる子豚の総数","1年間に農場全体で生まれる子豚の数"],
+    "category": "繁殖関連",
+    "explanation": "総産子数は1回の分娩で母豚が産む子豚の総数で、生存産子数（活力のある子豚）、死産、ミイラを含みます。繁殖成績を評価する重要な指標の一つです。",
+    "en": {
+      "question": "What is 'total born' (sousanshisuu)?",
+      "answer": "The total number of piglets born in one farrowing",
+      "options": ["The total number of piglets born in one farrowing","The total number of piglets a sow produces in her lifetime","The total number of piglets in the barn","The annual total of piglets born on the farm"],
+      "explanation": "Total born includes live births, stillborns, and mummies in one farrowing. It is a key reproductive performance indicator."
+    },
+    "vi": {
+      "question": "'Tong so con sinh ra' (sousanshisuu) la gi?",
+      "answer": "Tong so heo con sinh ra trong mot lan de",
+      "options": ["Tong so heo con sinh ra trong mot lan de","Tong so heo con ma heo me sinh ra trong doi","Tong so heo con trong chuong","So heo con sinh ra ca nam tren trai"],
+      "explanation": "Tong so con sinh ra bao gom con song, chet non va thai kho trong mot lan de."
+    },
+    "id": {
+      "question": "Apa yang dimaksud dengan 'total lahir' (sousanshisuu)?",
+      "answer": "Jumlah total anak babi yang lahir dalam satu kelahiran",
+      "options": ["Jumlah total anak babi yang lahir dalam satu kelahiran","Total anak babi yang dihasilkan induk seumur hidup","Total anak babi di kandang","Total tahunan anak babi lahir di peternakan"],
+      "explanation": "Total lahir mencakup lahir hidup, lahir mati, dan mumi dalam satu kelahiran."
+    }
+  },
+  {
+    "question": "「白子（しろこ）」とは何ですか？",
+    "answer": "分娩中または分娩直後に死亡した、外見上は正常な白い個体",
+    "options": ["分娩中または分娩直後に死亡した、外見上は正常な白い個体","生後1週間以内に死亡した子豚","離乳前に死亡した子豚すべて","病気で淘汰された豚のこと"],
+    "category": "子豚管理",
+    "explanation": "白子（死産子豚）は分娩中に臍帯の断裂や難産などの原因で死亡した、外見上は正常に発育した白い個体です。ミイラ変性胎子とは異なり、体表に変性がなく、白い外観を呈します。",
+    "en": {
+      "question": "What is 'stillborn' (shiroko)?",
+      "answer": "A normally developed piglet that died during or immediately after birth",
+      "options": ["A normally developed piglet that died during or immediately after birth","A piglet that died within one week of birth","All piglets that died before weaning","A pig culled due to disease"],
+      "explanation": "Stillborn piglets died during birth due to umbilical cord rupture or dystocia, appearing white and normally developed unlike mummified fetuses."
+    },
+    "vi": {
+      "question": "'Heo chet non' (shiroko) la gi?",
+      "answer": "Heo con phat trien binh thuong nhung chet trong hoac ngay sau khi sinh",
+      "options": ["Heo con phat trien binh thuong nhung chet trong hoac ngay sau khi sinh","Heo con chet trong vong 1 tuan sau sinh","Tat ca heo con chet truoc cai sua","Heo bi loai do benh"],
+      "explanation": "Heo chet non chet trong qua trinh sinh, co ve ngoai trang va phat trien binh thuong, khac voi thai kho."
+    },
+    "id": {
+      "question": "Apa yang dimaksud dengan 'lahir mati' (shiroko)?",
+      "answer": "Anak babi berkembang normal yang mati saat atau segera setelah lahir",
+      "options": ["Anak babi berkembang normal yang mati saat atau segera setelah lahir","Anak babi yang mati dalam satu minggu kelahiran","Semua anak babi yang mati sebelum disapih","Babi yang diafkir karena penyakit"],
+      "explanation": "Anak babi lahir mati meninggal saat proses kelahiran, tampak putih dan berkembang normal."
+    }
+  },
+  {
+    "question": "「ミイラ（ミイラ変性胎子）」とは何ですか？",
+    "answer": "妊娠中に子宮内で死亡し、乾燥して変性した胎子",
+    "options": ["妊娠中に子宮内で死亡し、乾燥して変性した胎子","出生後すぐに衰弱して死亡した子豚","極端に体が小さい子豚のこと","脱水症状を起こした子豚のこと"],
+    "category": "繁殖関連",
+    "explanation": "ミイラ変性胎子は妊娠中に子宮内で死亡し、体液が吸収されて乾燥・変性した胎子です。PRRS、パルボウイルスなどの感染症や、子宮内環境の問題が原因となることがあります。",
+    "en": {
+      "question": "What is a 'mummy/mummified fetus'?",
+      "answer": "A fetus that died in the uterus during pregnancy and became dehydrated/desiccated",
+      "options": ["A fetus that died in the uterus during pregnancy and became dehydrated/desiccated","A piglet that died shortly after birth","An extremely small piglet","A dehydrated piglet"],
+      "explanation": "Mummified fetuses died in the uterus during pregnancy, with body fluids absorbed, becoming desiccated. Causes include PRRS, parvovirus."
+    },
+    "vi": {
+      "question": "'Thai kho' (Mummy) la gi?",
+      "answer": "Thai chet trong tu cung khi mang thai va bi kho",
+      "options": ["Thai chet trong tu cung khi mang thai va bi kho","Heo con chet ngay sau sinh","Heo con cuc nho","Heo con bi mat nuoc"],
+      "explanation": "Thai kho chet trong tu cung, dich co the bi hap thu, tro nen kho. Nguyen nhan bao gom PRRS, parvovirus."
+    },
+    "id": {
+      "question": "Apa yang dimaksud dengan 'fetus mumi'?",
+      "answer": "Janin yang mati di dalam rahim selama kehamilan dan mengalami dehidrasi",
+      "options": ["Janin yang mati di dalam rahim selama kehamilan dan mengalami dehidrasi","Anak babi yang mati segera setelah lahir","Anak babi yang sangat kecil","Anak babi yang mengalami dehidrasi"],
+      "explanation": "Fetus mumi mati di dalam rahim, cairan tubuh diserap, menjadi kering. Penyebabnya termasuk PRRS, parvovirus."
+    }
+  },
+  {
+    "question": "「消毒（しょうどく）」を豚舎で行う主な目的は何ですか？",
+    "answer": "病原体を死滅させ、豚への感染症の発生・蔓延を防ぐため",
+    "options": ["病原体を死滅させ、豚への感染症の発生・蔓延を防ぐため","精液の品質を保つため","害獣を駆除するため","飼料の品質を保つため"],
+    "category": "衛生管理",
+    "explanation": "豚舎の消毒は病原性微生物（細菌、ウイルスなど）を死滅・不活化させ、感染症の発生と蔓延を防止するために行います。洗浄後の消毒が基本で、オールイン・オールアウトと組み合わせると効果的です。",
+    "en": {
+      "question": "What is the main purpose of disinfection in pig barns?",
+      "answer": "To kill pathogens and prevent the occurrence/spread of infectious diseases",
+      "options": ["To kill pathogens and prevent the occurrence/spread of infectious diseases","To maintain semen quality","To control pests","To maintain feed quality"],
+      "explanation": "Barn disinfection kills pathogenic microorganisms to prevent and control infectious diseases. Combined with all-in/all-out, it is highly effective."
+    },
+    "vi": {
+      "question": "Muc dich chinh cua khu trung chuong heo la gi?",
+      "answer": "Tieu diet mam benh va ngan ngua phat sinh/lay lan benh truyen nhiem",
+      "options": ["Tieu diet mam benh va ngan ngua phat sinh/lay lan benh truyen nhiem","Bao quan chat luong tinh dich","Diet dong vat gay hai","Bao quan chat luong thuc an"],
+      "explanation": "Khu trung chuong tieu diet vi sinh vat gay benh. Ket hop voi cung vao/cung ra rat hieu qua."
+    },
+    "id": {
+      "question": "Apa tujuan utama disinfeksi di kandang babi?",
+      "answer": "Membunuh patogen dan mencegah terjadinya/penyebaran penyakit menular",
+      "options": ["Membunuh patogen dan mencegah terjadinya/penyebaran penyakit menular","Menjaga kualitas semen","Mengendalikan hama","Menjaga kualitas pakan"],
+      "explanation": "Disinfeksi kandang membunuh mikroorganisme patogen. Dikombinasikan dengan all-in/all-out sangat efektif."
+    }
+  },
+  {
+    "question": "「ワクチン接種」を豚に行う目的は何ですか？",
+    "answer": "特定の感染症に対する免疫をつけ、病気を予防するため",
+    "options": ["特定の感染症に対する免疫をつけ、病気を予防するため","豚の成長を促進するため","豚の肉質を良くするため","豚の繁殖能力を高めるため"],
+    "category": "衛生管理",
+    "explanation": "ワクチン接種は病原体の弱毒化・不活化したものを投与し、豚の免疫系を刺激して特定の感染症に対する抵抗力をつけるものです。各農場の疾病状況に応じたワクチンプログラムの策定が重要です。",
+    "en": {
+      "question": "What is the purpose of vaccination in pigs?",
+      "answer": "To build immunity against specific infectious diseases for prevention",
+      "options": ["To build immunity against specific infectious diseases for prevention","To promote pig growth","To improve meat quality","To enhance reproductive ability"],
+      "explanation": "Vaccination stimulates the immune system using weakened/inactivated pathogens to build resistance against specific diseases."
+    },
+    "vi": {
+      "question": "Muc dich tiem vac xin cho heo la gi?",
+      "answer": "Tao mien dich chong cac benh truyen nhiem cu the de phong benh",
+      "options": ["Tao mien dich chong cac benh truyen nhiem cu the de phong benh","Thuc day tang truong cua heo","Cai thien chat luong thit","Nang cao kha nang sinh san"],
+      "explanation": "Tiem vac xin kich thich he mien dich bang mam benh yeu/bat hoat de tao suc de khang."
+    },
+    "id": {
+      "question": "Apa tujuan vaksinasi pada babi?",
+      "answer": "Membangun kekebalan terhadap penyakit menular tertentu untuk pencegahan",
+      "options": ["Membangun kekebalan terhadap penyakit menular tertentu untuk pencegahan","Mempercepat pertumbuhan babi","Meningkatkan kualitas daging","Meningkatkan kemampuan reproduksi"],
+      "explanation": "Vaksinasi merangsang sistem kekebalan menggunakan patogen yang dilemahkan/diinaktivasi."
+    }
+  },
+  {
+    "question": "「圧死（あっし）」とは養豚においてどのような事故ですか？",
+    "answer": "母豚が寝返りなどで子豚を押しつぶして死亡させる事故",
+    "options": ["母豚が寝返りなどで子豚を押しつぶして死亡させる事故","豚が密集しすぎて窒息する事故","豚舎の設備が倒れて豚が潰される事故","豚が暑さで倒れる事故"],
+    "category": "子豚管理",
+    "explanation": "圧死は母豚が横臥（横になる）際に子豚を押しつぶしてしまう事故で、哺乳期の子豚死亡原因の中で最も多いものの一つです。分娩柵の使用や保温エリアの設置で予防します。",
+    "en": {
+      "question": "What is 'crushing/overlaying' (asshi) in swine production?",
+      "answer": "An accident where a sow crushes piglets by lying on them",
+      "options": ["An accident where a sow crushes piglets by lying on them","An accident where pigs suffocate from overcrowding","An accident where barn equipment falls on pigs","An accident where pigs collapse from heat"],
+      "explanation": "Crushing occurs when a sow lies down on piglets, one of the most common causes of piglet death during lactation. Farrowing crates and creep areas help prevent it."
+    },
+    "vi": {
+      "question": "'De chet' (asshi) la tai nan gi?",
+      "answer": "Tai nan heo me de chet heo con khi nam xuong",
+      "options": ["Tai nan heo me de chet heo con khi nam xuong","Tai nan heo ngat tho do chen chuc","Tai nan thiet bi chuong do len heo","Tai nan heo nga do nong"],
+      "explanation": "De chet xay ra khi heo me nam de len heo con, la nguyen nhan tu vong pho bien nhat o heo con bu me."
+    },
+    "id": {
+      "question": "Apa yang dimaksud dengan 'crushing' (asshi)?",
+      "answer": "Kecelakaan di mana induk menindih anak babi saat berbaring",
+      "options": ["Kecelakaan di mana induk menindih anak babi saat berbaring","Kecelakaan babi mati lemas karena kepadatan","Kecelakaan peralatan kandang jatuh menimpa babi","Kecelakaan babi pingsan karena panas"],
+      "explanation": "Crushing terjadi saat induk berbaring di atas anak babi, salah satu penyebab kematian anak babi terbanyak."
+    }
+  },
+  {
+    "question": "「分娩柵（ぶんべんさく）」の主な目的は何ですか？",
+    "answer": "母豚の動きを制限して子豚の圧死を防止すること",
+    "options": ["母豚の動きを制限して子豚の圧死を防止すること","子豚が逃げないようにすること","母豚を他の豚から隔離すること","母豚の体重を測定しやすくすること"],
+    "category": "繁殖関連",
+    "explanation": "分娩柵（ファロークレート）は母豚の動きを適度に制限し、子豚が母豚に押しつぶされる圧死事故を防ぐための設備です。子豚が安全に母乳を飲めるスペースを確保する構造になっています。",
+    "en": {
+      "question": "What is the main purpose of a 'farrowing crate' (bunbensaku)?",
+      "answer": "To restrict sow movement and prevent crushing of piglets",
+      "options": ["To restrict sow movement and prevent crushing of piglets","To keep piglets from escaping","To isolate the sow from other pigs","To make weighing the sow easier"],
+      "explanation": "Farrowing crates moderately restrict the sow's movement to prevent crushing accidents, while providing safe space for piglets to nurse."
+    },
+    "vi": {
+      "question": "Muc dich chinh cua 'chuong de' (bunbensaku) la gi?",
+      "answer": "Han che van dong cua heo me de phong de chet heo con",
+      "options": ["Han che van dong cua heo me de phong de chet heo con","Ngan heo con chay thoat","Cach ly heo me khoi heo khac","De can heo me"],
+      "explanation": "Chuong de han che van dong heo me vua phai de phong tai nan de chet, tao khong gian an toan cho heo con bu."
+    },
+    "id": {
+      "question": "Apa tujuan utama 'farrowing crate' (bunbensaku)?",
+      "answer": "Membatasi gerakan induk dan mencegah anak babi tertindih",
+      "options": ["Membatasi gerakan induk dan mencegah anak babi tertindih","Menjaga anak babi agar tidak kabur","Mengisolasi induk dari babi lain","Memudahkan penimbangan induk"],
+      "explanation": "Farrowing crate membatasi gerakan induk secara moderat untuk mencegah kecelakaan crushing."
+    }
+  },
+  {
+    "question": "「増体量（ぞうたいりょう）」とは何ですか？",
+    "answer": "一定期間内に豚の体重が増加した量（日増体量＝1日あたりの増加量）",
+    "options": ["一定期間内に豚の体重が増加した量（日増体量＝1日あたりの増加量）","豚に与えた飼料の総量","豚が1日に食べる飼料の量","豚の出荷時の体重"],
+    "category": "飼養管理",
+    "explanation": "増体量は一定期間における豚の体重増加量です。特に日増体量（DG: Daily Gain）は1日あたりの増加量を表し、肥育効率を評価する重要な指標です。肥育豚では700～900g/日が一般的な目標です。",
+    "en": {
+      "question": "What is 'daily weight gain' (zoutairyou)?",
+      "answer": "The amount of weight a pig gains over a period (daily gain = weight gained per day)",
+      "options": ["The amount of weight a pig gains over a period (daily gain = weight gained per day)","The total amount of feed given to a pig","The amount of feed a pig eats per day","The weight of a pig at market"],
+      "explanation": "Daily gain (DG) measures weight increase per day. Target for finishing pigs is typically 700-900 g/day."
+    },
+    "vi": {
+      "question": "'Tang trong' (zoutairyou) la gi?",
+      "answer": "Luong tang can cua heo trong mot khoang thoi gian (tang trong ngay = tang can moi ngay)",
+      "options": ["Luong tang can cua heo trong mot khoang thoi gian (tang trong ngay = tang can moi ngay)","Tong luong thuc an cho heo","Luong thuc an heo an moi ngay","Trong luong heo khi xuat chuong"],
+      "explanation": "Tang trong ngay (ADG) do luong tang can moi ngay. Muc tieu cho heo thit thuong la 700-900 g/ngay."
+    },
+    "id": {
+      "question": "Apa yang dimaksud dengan 'pertambahan berat' (zoutairyou)?",
+      "answer": "Jumlah berat badan yang bertambah dalam periode tertentu (pertambahan harian = berat per hari)",
+      "options": ["Jumlah berat badan yang bertambah dalam periode tertentu (pertambahan harian = berat per hari)","Total pakan yang diberikan ke babi","Jumlah pakan yang dimakan babi per hari","Berat babi saat dijual"],
+      "explanation": "Pertambahan berat harian (ADG) mengukur kenaikan berat per hari. Target babi potong biasanya 700-900 g/hari."
+    }
+  },
+  {
+    "question": "「飼料要求率（しりょうようきゅうりつ）」とは何ですか？",
+    "answer": "体重を1kg増やすのに必要な飼料の量を示す指標",
+    "options": ["体重を1kg増やすのに必要な飼料の量を示す指標","豚が1日に食べる飼料の割合","飼料に含まれるタンパク質の割合","飼料費が出荷価格に占める割合"],
+    "category": "飼養管理",
+    "explanation": "飼料要求率（FCR: Feed Conversion Ratio）は体重1kgの増加に必要な飼料量を示す指標です。値が小さいほど飼料効率が良いことを意味し、肥育豚では2.5～3.5が一般的な範囲です。養豚経営のコスト管理において極めて重要な指標です。",
+    "en": {
+      "question": "What is 'feed conversion ratio' (shiryou youkyuuritsu)?",
+      "answer": "An index showing the amount of feed needed to gain 1 kg of body weight",
+      "options": ["An index showing the amount of feed needed to gain 1 kg of body weight","The percentage of feed a pig eats per day","The protein content ratio in feed","The ratio of feed cost to market price"],
+      "explanation": "FCR (Feed Conversion Ratio) shows how much feed is needed per 1 kg weight gain. Lower is more efficient; typical range for finishing pigs is 2.5-3.5."
+    },
+    "vi": {
+      "question": "'He so chuyen doi thuc an' (shiryou youkyuuritsu) la gi?",
+      "answer": "Chi so cho biet luong thuc an can de tang 1 kg the trong",
+      "options": ["Chi so cho biet luong thuc an can de tang 1 kg the trong","Ty le thuc an heo an moi ngay","Ty le protein trong thuc an","Ty le chi phi thuc an so voi gia ban"],
+      "explanation": "FCR cho biet luong thuc an can cho 1 kg tang trong. Gia tri cang thap cang hieu qua; pham vi cho heo thit la 2,5-3,5."
+    },
+    "id": {
+      "question": "Apa yang dimaksud dengan 'rasio konversi pakan' (shiryou youkyuuritsu)?",
+      "answer": "Indeks yang menunjukkan jumlah pakan yang dibutuhkan untuk menambah 1 kg berat badan",
+      "options": ["Indeks yang menunjukkan jumlah pakan yang dibutuhkan untuk menambah 1 kg berat badan","Persentase pakan yang dimakan babi per hari","Rasio kandungan protein dalam pakan","Rasio biaya pakan terhadap harga jual"],
+      "explanation": "FCR menunjukkan berapa banyak pakan dibutuhkan per 1 kg kenaikan berat. Semakin rendah semakin efisien; kisaran untuk babi potong 2,5-3,5."
+    }
+  }
+];
+
+// ==================== STATE ====================
+var playerName = "";
+var currentQuestion = 0;
+var score = 0;
+var answers = [];
+var selectedQuestions = [];
+var userAnswers = [];
+var shuffledOptions = [];
+var timerInterval = null;
+var timeRemaining = 0;
+var totalTime = 0;
+var startTime = null;
+var quizLocked = false;
+
+// Track current screen for language switching
+var currentScreenId = "name-screen";
+
+// ==================== THEME ====================
+function initTheme() {
+  var saved = localStorage.getItem("hss_theme");
+  if (saved === "dark") {
+    document.documentElement.setAttribute("data-theme", "dark");
+    document.getElementById("theme-toggle").textContent = "\u2600";
+  }
+}
+document.getElementById("theme-toggle").addEventListener("click", function() {
+  var isDark = document.documentElement.getAttribute("data-theme") === "dark";
+  if (isDark) {
+    document.documentElement.removeAttribute("data-theme");
+    this.textContent = "\u263E";
+    localStorage.setItem("hss_theme", "light");
+  } else {
+    document.documentElement.setAttribute("data-theme", "dark");
+    this.textContent = "\u2600";
+    localStorage.setItem("hss_theme", "dark");
+  }
+});
+initTheme();
+
+// ==================== LANGUAGE INIT ====================
+function initLang() {
+  var sel = document.getElementById("lang-selector");
+  sel.value = currentLang;
+  updateUILanguage();
+}
+
+document.getElementById("lang-selector").addEventListener("change", function() {
+  currentLang = this.value;
+  localStorage.setItem("hss_lang", currentLang);
+  document.documentElement.setAttribute("lang", currentLang === "ja" ? "ja" : currentLang);
+  updateUILanguage();
+
+  // Re-render current screen content
+  if (currentScreenId === "quiz-screen" && selectedQuestions.length > 0) {
+    renderQuestion();
+  } else if (currentScreenId === "results-screen") {
+    finishQuiz();
+  }
+});
+
+function updateUILanguage() {
+  // Header
+  document.getElementById("header-title").textContent = t("title");
+  document.getElementById("header-company").textContent = t("company");
+  document.getElementById("header-badge").textContent = t("badge");
+
+  // Skip link
+  document.getElementById("skip-link").textContent = t("skipLink");
+
+  // Theme toggle
+  var themeBtn = document.getElementById("theme-toggle");
+  themeBtn.setAttribute("aria-label", t("darkModeToggle"));
+  themeBtn.setAttribute("title", t("darkModeToggle"));
+
+  // Name screen
+  document.getElementById("welcome-title").textContent = t("welcome");
+  document.getElementById("welcome-desc").innerHTML = t("welcomeDesc");
+  document.getElementById("name-label").textContent = t("nameLabel");
+  document.getElementById("player-name").setAttribute("placeholder", t("namePlaceholder"));
+  document.getElementById("name-error").textContent = t("nameError");
+
+  // Test info
+  document.getElementById("ti-testname-label").textContent = t("testName");
+  document.getElementById("ti-testname-value").textContent = t("testNameValue");
+  document.getElementById("ti-qcount-label").textContent = t("questionCount");
+  document.getElementById("ti-qcount-value").textContent = t("questionCountValue");
+  document.getElementById("ti-format-label").textContent = t("format");
+  document.getElementById("ti-format-value").textContent = t("formatValue");
+  document.getElementById("ti-time-label").textContent = t("timeLimit");
+  document.getElementById("ti-time-value").textContent = t("timeLimitValue");
+  document.getElementById("ti-pass-label").textContent = t("passCriteria");
+  document.getElementById("ti-pass-value").textContent = t("passCriteriaValue");
+
+  // Notice box
+  document.getElementById("notice-box").innerHTML =
+    t("notice1") + "<br>" + t("notice2") + "<br>" + t("notice3") + "<br>" + t("notice4");
+
+  // Start button
+  document.getElementById("start-btn").textContent = t("startBtn");
+
+  // Timer label
+  document.getElementById("timer-label").textContent = t("remainingTime");
+
+  // Progress label
+  document.getElementById("progress-label").textContent = t("testNameValue");
+
+  // Nav buttons
+  document.getElementById("prev-btn").textContent = t("prev");
+  var nextBtn = document.getElementById("next-btn");
+  if (selectedQuestions.length > 0 && currentQuestion === selectedQuestions.length - 1) {
+    nextBtn.textContent = t("submit");
+  } else {
+    nextBtn.textContent = t("next");
+  }
+
+  // Swipe hint
+  var swipeHintEl = document.getElementById("swipe-hint");
+  if (swipeHintEl) swipeHintEl.textContent = t("swipeHint");
+
+  // Timeout overlay
+  document.getElementById("timeout-title").innerHTML = t("timeoutTitle");
+  document.getElementById("timeout-msg").innerHTML = t("timeoutMsg");
+}
+
+initLang();
+
+// ==================== SCREENS ====================
+function showScreen(id) {
+  currentScreenId = id;
+  document.querySelectorAll(".screen").forEach(function(s) { s.classList.remove("active"); });
+  document.getElementById(id).classList.add("active");
+}
+
+function submitName() {
+  var input = document.getElementById("player-name");
+  var name = input.value.trim();
+  if (!name) { input.classList.add("error"); document.getElementById("name-error").classList.add("show"); input.focus(); return; }
+  input.classList.remove("error"); document.getElementById("name-error").classList.remove("show");
+  playerName = name; startQuiz();
+}
+
+document.getElementById("player-name").addEventListener("keydown", function(e) {
+  if (e.key === "Enter") submitName();
+  this.classList.remove("error"); document.getElementById("name-error").classList.remove("show");
+});
+document.getElementById("start-btn").addEventListener("click", function() { submitName(); });
+
+function startQuiz() {
+  currentQuestion = 0; score = 0; answers = []; quizLocked = false;
+  selectedQuestions = shuffle(allQuestions.slice()).slice(0, QUESTIONS_PER_TEST);
+  userAnswers = new Array(selectedQuestions.length).fill(null);
+  // For multilingual: store shuffled indices instead of text values
+  shuffledOptions = selectedQuestions.map(function(q) {
+    var opts = getQOptions(q);
+    return shuffle(opts);
+  });
+  totalTime = TIME_LIMIT * 60; timeRemaining = totalTime; startTime = new Date();
+  buildStepDots();
+  showScreen("quiz-screen"); renderQuestion(); startTimer();
+}
+
+function buildStepDots() {
+  var dots = document.getElementById("step-dots");
+  var html = "";
+  for (var i = 0; i < selectedQuestions.length; i++) {
+    html += '<div class="step-dot" id="dot-' + i + '" data-index="' + i + '"></div>';
+  }
+  dots.innerHTML = html;
+  document.querySelectorAll(".step-dot").forEach(function(dot) {
+    dot.addEventListener("click", function() {
+      if (quizLocked) return;
+      currentQuestion = parseInt(this.getAttribute("data-index"));
+      renderQuestion();
+    });
+  });
+}
+
+function updateStepDots() {
+  for (var i = 0; i < selectedQuestions.length; i++) {
+    var dot = document.getElementById("dot-" + i);
+    if (!dot) continue;
+    dot.className = "step-dot";
+    if (userAnswers[i] !== null) {
+      dot.classList.add("answered");
+    }
+    if (i === currentQuestion) {
+      dot.classList.add("current");
+    }
+  }
+}
+
+function startTimer() {
+  clearInterval(timerInterval); updateTimerDisplay();
+  timerInterval = setInterval(function() { timeRemaining--; updateTimerDisplay(); if (timeRemaining <= 0) { clearInterval(timerInterval); onTimeout(); } }, 1000);
+}
+
+function updateTimerDisplay() {
+  var mins = Math.floor(Math.max(0, timeRemaining) / 60);
+  var secs = Math.max(0, timeRemaining) % 60;
+  var display = document.getElementById("timer-display");
+  var circle = document.getElementById("timer-circle");
+  var circleText = document.getElementById("timer-circle-text");
+
+  var timeStr = String(mins).padStart(2, "0") + ":" + String(secs).padStart(2, "0");
+  display.textContent = timeStr;
+  circleText.textContent = mins + "m";
+
+  var progress = timeRemaining / totalTime;
+  var offset = TIMER_CIRCUMFERENCE * (1 - progress);
+  circle.style.strokeDashoffset = offset;
+
+  display.className = "timer-display";
+  circle.setAttribute("class", "timer-circle-fg");
+  circleText.className = "timer-circle-text";
+  if (timeRemaining <= 60) {
+    display.classList.add("danger"); circle.classList.add("danger"); circleText.classList.add("danger");
+  } else if (timeRemaining <= totalTime * 0.25) {
+    display.classList.add("warning"); circle.classList.add("warning"); circleText.classList.add("warning");
+  }
+}
+
+function onTimeout() {
+  quizLocked = true;
+  document.querySelectorAll(".option-btn").forEach(function(b) { b.disabled = true; });
+  document.getElementById("timeout-overlay").classList.add("show");
+  setTimeout(function() { document.getElementById("timeout-overlay").classList.remove("show"); submitQuiz(); }, 2500);
+}
+
+function shuffle(arr) {
+  var a = arr.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a;
+}
+
+function getCategoryClass(cat) {
+  return CATEGORY_CLASSES[cat] || "cat-breeding";
+}
+
+function renderQuestion() {
+  var q = selectedQuestions[currentQuestion]; var total = selectedQuestions.length;
+  document.getElementById("step-current").textContent = (currentQuestion + 1) + " / " + total;
+  var answeredCount = userAnswers.filter(function(a) { return a !== null; }).length;
+  document.getElementById("progress-fill").style.width = (answeredCount / total) * 100 + "%";
+  var pb = document.getElementById("progress-bar-el");
+  pb.setAttribute("aria-valuenow", Math.round((answeredCount / total) * 100));
+  updateStepDots();
+
+  var badge = document.getElementById("q-category");
+  badge.textContent = getCatName(q.category);
+  badge.className = "category-badge " + getCategoryClass(q.category);
+
+  document.getElementById("q-section-title").textContent = t("question") + (currentQuestion + 1);
+  document.getElementById("q-label").textContent = getQ(q, "question");
+
+  // Re-shuffle options in current language
+  var opts = getQOptions(q);
+  // We need stable shuffling per question - use shuffledOptions mapped to original options
+  // Since options might differ per language, we re-shuffle based on stored indices
+  // Actually for simplicity, let's shuffle once on start and keep indices
+  // But language change means options text changes. We keep original shuffle order by index.
+  // Re-create shuffledOptions for this question based on current language
+  var origOpts = q.options;
+  var curOpts = getQOptions(q);
+  // Map from original option index to shuffled order
+  if (!shuffledOptions[currentQuestion]._indices) {
+    // First time or need to build index map
+    var indices = [];
+    for (var oi = 0; oi < origOpts.length; oi++) {
+      var found = shuffledOptions[currentQuestion].indexOf(origOpts[oi]);
+      if (found === -1) found = oi;
+      indices.push(oi);
+    }
+    // Actually, let's just rebuild: map shuffledOptions back to indices of original
+    indices = [];
+    for (var si = 0; si < shuffledOptions[currentQuestion].length; si++) {
+      var idx = origOpts.indexOf(shuffledOptions[currentQuestion][si]);
+      indices.push(idx >= 0 ? idx : si);
+    }
+    shuffledOptions[currentQuestion]._indices = indices;
+  }
+  var displayOpts = shuffledOptions[currentQuestion]._indices.map(function(idx) {
+    return curOpts[idx];
+  });
+
+  var letters = ["A", "B", "C", "D"];
+  var optHTML = "";
+  var currentAnswer = userAnswers[currentQuestion];
+  displayOpts.forEach(function(opt, i) {
+    var sel = (currentAnswer !== null && currentAnswer === shuffledOptions[currentQuestion]._indices[i]) ? " selected" : "";
+    var checked = (currentAnswer !== null && currentAnswer === shuffledOptions[currentQuestion]._indices[i]) ? "true" : "false";
+    optHTML += '<button class="option-btn' + sel + '" data-answer-idx="' + shuffledOptions[currentQuestion]._indices[i] + '" role="radio" aria-checked="' + checked + '" tabindex="0">' +
+      '<span class="option-letter">' + letters[i] + '</span><span>' + opt + '</span></button>';
+  });
+  document.getElementById("q-options").innerHTML = optHTML;
+  document.querySelectorAll(".option-btn").forEach(function(btn) {
+    btn.addEventListener("click", function() { selectAnswer(this, parseInt(this.getAttribute("data-answer-idx"))); });
+  });
+  var card = document.getElementById("question-card"); card.classList.remove("fade-in"); void card.offsetWidth; card.classList.add("fade-in");
+  updateNavButtons();
+}
+
+function selectAnswer(btn, answerIdx) {
+  if (quizLocked) return;
+  userAnswers[currentQuestion] = answerIdx;
+  document.querySelectorAll(".option-btn").forEach(function(b) {
+    b.classList.remove("selected");
+    b.setAttribute("aria-checked", "false");
+  });
+  btn.classList.add("selected");
+  btn.setAttribute("aria-checked", "true");
+  updateStepDots();
+  var answeredCount = userAnswers.filter(function(a) { return a !== null; }).length;
+  document.getElementById("progress-fill").style.width = (answeredCount / selectedQuestions.length) * 100 + "%";
+  updateNavButtons();
+}
+
+function updateNavButtons() {
+  var prevBtn = document.getElementById("prev-btn");
+  var nextBtn = document.getElementById("next-btn");
+  prevBtn.textContent = t("prev");
+  prevBtn.disabled = (currentQuestion === 0);
+  var isLast = (currentQuestion === selectedQuestions.length - 1);
+  if (isLast) {
+    nextBtn.textContent = t("submit");
+    nextBtn.className = "nav-btn primary";
+    nextBtn.disabled = false;
+  } else {
+    nextBtn.textContent = t("next");
+    nextBtn.className = "nav-btn primary";
+    nextBtn.disabled = (userAnswers[currentQuestion] === null);
+  }
+  // Remove old listeners by cloning
+  var parent = prevBtn.parentNode;
+  var newPrev = prevBtn.cloneNode(true);
+  var newNext = nextBtn.cloneNode(true);
+  parent.replaceChild(newPrev, prevBtn);
+  parent.replaceChild(newNext, parent.lastElementChild);
+  newPrev.addEventListener("click", function() { goPrev(); });
+  newNext.addEventListener("click", function() {
+    if (currentQuestion === selectedQuestions.length - 1) { submitQuiz(); }
+    else { goNext(); }
+  });
+}
+
+function goNext() {
+  if (currentQuestion < selectedQuestions.length - 1) {
+    currentQuestion++;
+    renderQuestion();
+  }
+}
+
+function goPrev() {
+  if (currentQuestion > 0) {
+    currentQuestion--;
+    renderQuestion();
+  }
+}
+
+function submitQuiz() {
+  quizLocked = true;
+  clearInterval(timerInterval);
+  score = 0;
+  answers = [];
+  for (var i = 0; i < selectedQuestions.length; i++) {
+    var q = selectedQuestions[i];
+    var ua = userAnswers[i];
+    // ua is now an index into options array
+    var userAnswerText = (ua !== null) ? q.options[ua] : null;
+    var isCorrect = (userAnswerText === q.answer);
+    if (isCorrect) score++;
+
+    // Get display texts in current language
+    var userAnswerDisplay = (ua !== null) ? getQOptions(q)[ua] : t("unansweredLabel");
+    var correctAnswerDisplay = getQ(q, "answer");
+
+    answers.push({
+      userAnswer: userAnswerDisplay,
+      userAnswerJa: userAnswerText || "\uff08\u672a\u56de\u7b54\uff09",
+      correctAnswer: correctAnswerDisplay,
+      correctAnswerJa: q.answer,
+      question: getQ(q, "question"),
+      questionJa: q.question,
+      category: q.category,
+      correct: ua !== null ? isCorrect : false,
+      explanation: getQ(q, "explanation"),
+      answerIdx: ua
+    });
+  }
+  finishQuiz();
+}
+
+// Keyboard navigation
+document.addEventListener("keydown", function(e) {
+  if (!document.getElementById("quiz-screen").classList.contains("active")) return;
+  if (quizLocked) return;
+  var btns = document.querySelectorAll(".option-btn");
+  if (btns.length === 0) return;
+  var key = e.key;
+  if (key === "1" || key === "2" || key === "3" || key === "4") {
+    var idx = parseInt(key) - 1;
+    if (idx < btns.length) { btns[idx].click(); e.preventDefault(); }
+  }
+});
+
+function finishQuiz() {
+  showScreen("results-screen");
+  var total = selectedQuestions.length; var pct = Math.round((score / total) * 100);
+  var endTime = new Date(); var elapsed = Math.round((endTime - startTime) / 1000);
+  var elapsedMin = Math.floor(elapsed / 60); var elapsedSec = elapsed % 60;
+  var timedOut = timeRemaining <= 0; var passed = pct >= PASS_RATE;
+  var circleClass = passed ? "score-pass" : "score-fail";
+  var msg = passed ? t("pass") : t("fail");
+  if (pct === 100) msg = t("perfect");
+
+  var scoreDetailText = t("scoreDetail").replace("{total}", total).replace("{score}", score);
+
+  var html = '<div class="question-section-title">' + t("resultTitle") + '</div>' +
+    '<div class="score-circle ' + circleClass + '"><div class="score-pct">' + pct + '%</div><div class="score-label">' + t("correctRate") + '</div></div>' +
+    '<div class="score-detail">' + scoreDetailText + '</div>' +
+    '<div class="score-msg">' + msg + '</div>';
+
+  var passCriteriaText = t("passCriteriaDetail").replace("{rate}", PASS_RATE);
+
+  html += '<div class="results-meta">' +
+    '<div><strong>' + t("examinee") + '</strong>' + escHtml(playerName) + '</div>' +
+    '<div><strong>' + t("examDate") + '</strong>' + formatDate(startTime) + '</div>' +
+    '<div><strong>' + t("timeLimitLabel") + '</strong>' + TIME_LIMIT + t("minutes") + '</div>' +
+    '<div><strong>' + t("elapsed") + '</strong>' + elapsedMin + t("minutes") + String(elapsedSec).padStart(2, "0") + t("seconds") +
+    (timedOut ? ' <span style="color:var(--danger);font-weight:700;">' + t("timedOut") + '</span>' : '') + '</div>' +
+    '<div><strong>' + t("passCriteriaLabel") + '</strong>' + passCriteriaText + '</div></div>';
+
+  // Category stats with bar chart
+  var catStats = {};
+  answers.forEach(function(a) { if (!catStats[a.category]) catStats[a.category] = { correct: 0, total: 0 }; catStats[a.category].total++; if (a.correct) catStats[a.category].correct++; });
+  html += '<div class="category-stats"><h3>' + t("categoryStats") + '</h3>';
+  Object.keys(catStats).forEach(function(cat) {
+    var s = catStats[cat]; var catPct = Math.round((s.correct / s.total) * 100);
+    var fillClass = catPct >= 70 ? "good" : (catPct >= 50 ? "mid" : "bad");
+    html += '<div class="cat-stat-row"><span class="cat-stat-name">' + escHtml(getCatName(cat)) + '</span><div class="cat-stat-bar"><div class="cat-stat-fill ' + fillClass + '" style="width:' + catPct + '%"><span class="cat-stat-pct">' + catPct + '%</span></div></div><span class="cat-stat-score">' + s.correct + '/' + s.total + '</span></div>';
+  });
+  html += '</div>';
+
+  // Review section
+  html += '<div class="review-section"><h3>' + t("reviewTitle") + '</h3>';
+  answers.forEach(function(a, i) {
+    var itemClass = "review-correct"; var mark = '<span class="correct-mark">' + t("correct") + '</span>';
+    if (a.answerIdx === null) { itemClass = "review-unanswered"; mark = '<span class="wrong-mark">' + t("unanswered") + '</span>'; }
+    else if (!a.correct) { itemClass = "review-wrong"; mark = '<span class="wrong-mark">' + t("incorrect") + '</span>'; }
+    html += '<div class="review-item ' + itemClass + '"><div class="review-q">' + t("question") + (i + 1) + '(' + escHtml(getCatName(a.category)) + ')' + '：' + escHtml(a.question) + '</div><div class="review-a">' + mark + '</div></div>';
+  });
+  html += '</div>';
+
+  html += '<div class="submit-notice" id="submit-notice">' + t("submitNotice") + '</div>';
+  html += '<div class="results-actions"><button class="btn-submit" id="submit-btn">' + t("submitBtn") + '</button><button class="btn-retry" id="retry-btn">' + t("retryBtn") + '</button></div>';
+  var card = document.getElementById("results-card"); card.innerHTML = html; card.classList.remove("fade-in"); void card.offsetWidth; card.classList.add("fade-in");
+  document.getElementById("submit-btn").addEventListener("click", function() { submitResults(); });
+  document.getElementById("retry-btn").addEventListener("click", function() { showScreen("name-screen"); updateUILanguage(); });
+  if (timedOut) setTimeout(function() { submitResults(); }, 500);
+}
+
+function isIOS() { return /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1); }
+
+var xlsxLoaded = false;
+function loadXLSX(callback) {
+  if (xlsxLoaded && typeof XLSX !== "undefined") { callback(true); return; }
+  var s = document.createElement("script"); s.src = "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js";
+  s.onload = function() { xlsxLoaded = true; callback(true); }; s.onerror = function() { callback(false); }; document.head.appendChild(s);
+}
+
+function submitResults() {
+  var btn = document.getElementById("submit-btn"); if (btn.disabled) return; btn.disabled = true; btn.textContent = t("processing");
+  var total = selectedQuestions.length; var pct = Math.round((score / total) * 100);
+  var endTime = new Date(); var elapsed = Math.round((endTime - startTime) / 1000);
+  var elapsedMin = Math.floor(elapsed / 60); var elapsedSec = elapsed % 60;
+  var timedOut = timeRemaining <= 0; var dateStr = formatDate(startTime);
+  var passOrFail = pct >= PASS_RATE ? "\u5408\u683c" : "\u4e0d\u5408\u683c";
+  var fileName = "HSS_\u57fa\u790e\u7528\u8a9e\u30c6\u30b9\u30c8_" + playerName + "_" + startTime.getFullYear() + String(startTime.getMonth()+1).padStart(2,"0") + String(startTime.getDate()).padStart(2,"0") + ".xlsx";
+  var subject = "\u3010HSS\u57fa\u790e\u7528\u8a9e\u30c6\u30b9\u30c8\u3011" + playerName + " - " + passOrFail + " - " + dateStr;
+
+  // Always use Japanese for email/excel output for admin
+  var body = "\u990a\u8c5a\u57fa\u790e\u7528\u8a9e \u7406\u89e3\u5ea6\u30c6\u30b9\u30c8 \u7d50\u679c\u5831\u544a\nHSS\u8a8d\u5b9a\u5236\u5ea6 \u7b46\u8a18\u8a66\u9a13\u5bfe\u7b56\n================================\n\n\u53d7\u9a13\u8005\u540d\uff1a" + playerName + "\n\u53d7\u9a13\u65e5\u6642\uff1a" + dateStr + "\n\u6240\u8981\u6642\u9593\uff1a" + elapsedMin + "\u5206" + String(elapsedSec).padStart(2,"0") + "\u79d2" + (timedOut ? "\uff08\u6642\u9593\u5207\u308c\uff09" : "") + "\n\n\u5f97\u70b9\uff1a" + score + " / " + total + "\uff08" + pct + "%\uff09\n\u5408\u5426\uff1a" + passOrFail + "\uff08\u5408\u683c\u57fa\u6e96\uff1a" + PASS_RATE + "%\u4ee5\u4e0a\uff09\n\n--- \u56de\u7b54\u8a73\u7d30 ---\n";
+  answers.forEach(function(a, i) { var r = a.userAnswerJa === "\uff08\u672a\u56de\u7b54\uff09" ? "[\u672a\u56de\u7b54]" : (a.correct ? "[\u25cb]" : "[\u00d7]"); body += r + " \u554f" + (i+1) + "\uff08" + a.category + "\uff09\uff1a\u300c" + a.userAnswerJa + "\u300d\u6b63\u89e3\u300c" + a.correctAnswerJa + "\u300d\n"; });
+  body += "================================\n";
+  loadXLSX(function(loaded) {
+    var excelBlob = null; var excelFile = null;
+    if (loaded && typeof XLSX !== "undefined") {
+      try {
+        var wb = XLSX.utils.book_new();
+        var s1 = [["\u990a\u8c5a\u57fa\u790e\u7528\u8a9e \u7406\u89e3\u5ea6\u30c6\u30b9\u30c8 \u7d50\u679c\u5831\u544a\u66f8"],["HSS\u8a8d\u5b9a\u5236\u5ea6 \u7b46\u8a18\u8a66\u9a13\u5bfe\u7b56"],[],["\u53d7\u9a13\u8005\u540d",playerName],["\u53d7\u9a13\u65e5\u6642",dateStr],["\u5236\u9650\u6642\u9593",TIME_LIMIT+"\u5206"],["\u6240\u8981\u6642\u9593",elapsedMin+"\u5206"+String(elapsedSec).padStart(2,"0")+"\u79d2"],["\u6642\u9593\u5207\u308c",timedOut?"\u306f\u3044":"\u3044\u3044\u3048"],[],["\u5f97\u70b9",score+" / "+total],["\u6b63\u7b54\u7387",pct+"%"],["\u5408\u683c\u57fa\u6e96",PASS_RATE+"%\u4ee5\u4e0a"],["\u5408\u5426",passOrFail]];
+        var ws1 = XLSX.utils.aoa_to_sheet(s1); ws1["!cols"] = [{wch:18},{wch:40}]; XLSX.utils.book_append_sheet(wb, ws1, "\u7d50\u679c\u6982\u8981");
+        var s2 = [["\u554f\u756a\u53f7","\u30ab\u30c6\u30b4\u30ea","\u554f\u984c","\u53d7\u9a13\u8005\u306e\u56de\u7b54","\u6b63\u89e3","\u6b63\u8aa4"]];
+        answers.forEach(function(a,i) { var r = a.userAnswerJa === "\uff08\u672a\u56de\u7b54\uff09" ? "\u672a\u56de\u7b54" : (a.correct ? "\u25cb" : "\u00d7"); s2.push([i+1,a.category,a.questionJa,a.userAnswerJa,a.correctAnswerJa,r]); });
+        var ws2 = XLSX.utils.aoa_to_sheet(s2); ws2["!cols"] = [{wch:8},{wch:12},{wch:40},{wch:35},{wch:35},{wch:8}]; XLSX.utils.book_append_sheet(wb, ws2, "\u56de\u7b54\u8a73\u7d30");
+        var s3 = [["\u30ab\u30c6\u30b4\u30ea","\u6b63\u89e3\u6570","\u51fa\u984c\u6570","\u6b63\u7b54\u7387"]];
+        var cs = {}; answers.forEach(function(a) { if (!cs[a.category]) cs[a.category] = {c:0,t:0}; cs[a.category].t++; if (a.correct) cs[a.category].c++; });
+        Object.keys(cs).forEach(function(c) { s3.push([c,cs[c].c,cs[c].t,Math.round((cs[c].c/cs[c].t)*100)+"%"]); });
+        var ws3 = XLSX.utils.aoa_to_sheet(s3); ws3["!cols"] = [{wch:15},{wch:10},{wch:10},{wch:10}]; XLSX.utils.book_append_sheet(wb, ws3, "\u30ab\u30c6\u30b4\u30ea\u5225");
+        var wbOut = XLSX.write(wb, {bookType:"xlsx",type:"array"});
+        excelBlob = new Blob([wbOut], {type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+        excelFile = new File([excelBlob], fileName, {type:excelBlob.type});
+      } catch(e) { console.error("Excel error:",e); }
+    }
+    if (navigator.share && excelFile) {
+      navigator.share({title:subject,text:body,files:[excelFile]}).then(function() {
+        btn.textContent = t("sent"); document.getElementById("submit-notice").innerHTML = t("shared") + "<br>" + t("sendTo") + ADMIN_EMAIL;
+      }).catch(function(err) { fallbackMailto(subject,body,excelBlob,fileName,btn); });
+    } else { fallbackMailto(subject,body,excelBlob,fileName,btn); }
+  });
+}
+
+function fallbackMailto(subject,body,excelBlob,fileName,btn) {
+  if (excelBlob) {
+    try {
+      if (isIOS()) { var r = new FileReader(); r.onload = function() { var l = document.createElement("a"); l.href = r.result; l.download = fileName; l.style.display = "none"; document.body.appendChild(l); l.click(); setTimeout(function() { document.body.removeChild(l); }, 1000); }; r.readAsDataURL(excelBlob); }
+      else { var u = URL.createObjectURL(excelBlob); var l = document.createElement("a"); l.href = u; l.download = fileName; l.style.display = "none"; document.body.appendChild(l); l.click(); setTimeout(function() { document.body.removeChild(l); URL.revokeObjectURL(u); }, 1000); }
+    } catch(e) { console.error("Download error:",e); }
+  }
+  setTimeout(function() { window.location.href = "mailto:" + ADMIN_EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body); }, 800);
+  btn.disabled = true; btn.textContent = t("sentProcess");
+  document.getElementById("submit-notice").innerHTML = t("excelDownloaded") + "<br>" + t("sendTo") + ADMIN_EMAIL;
+}
+
+function escHtml(s) { var d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
+function formatDate(d) { return d.getFullYear() + "/" + String(d.getMonth()+1).padStart(2,"0") + "/" + String(d.getDate()).padStart(2,"0") + " " + String(d.getHours()).padStart(2,"0") + ":" + String(d.getMinutes()).padStart(2,"0"); }
+
+// Swipe navigation for mobile
+(function() {
+  var touchStartX = 0;
+  var touchStartY = 0;
+  var touchEndX = 0;
+  var touchEndY = 0;
+  var minSwipeDistance = 50;
+  var maxVerticalDistance = 100;
+
+  var quizScreen = document.getElementById("quiz-screen");
+
+  quizScreen.addEventListener("touchstart", function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+  }, { passive: true });
+
+  quizScreen.addEventListener("touchend", function(e) {
+    touchEndX = e.changedTouches[0].screenX;
+    touchEndY = e.changedTouches[0].screenY;
+    handleSwipe();
+  }, { passive: true });
+
+  function handleSwipe() {
+    var diffX = touchEndX - touchStartX;
+    var diffY = Math.abs(touchEndY - touchStartY);
+
+    // Only trigger if horizontal swipe is dominant
+    if (Math.abs(diffX) < minSwipeDistance || diffY > maxVerticalDistance) return;
+    if (quizLocked) return;
+    if (!quizScreen.classList.contains("active")) return;
+
+    if (diffX < 0) {
+      // Swipe left -> next question
+      if (currentQuestion < selectedQuestions.length - 1 && userAnswers[currentQuestion] !== null) {
+        goNext();
+      }
+    } else {
+      // Swipe right -> previous question
+      if (currentQuestion > 0) {
+        goPrev();
+      }
+    }
+  }
+})();
+
+})();
+</script>
+</body>
+</html>

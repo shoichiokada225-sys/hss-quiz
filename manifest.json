@@ -1,12 +1,12 @@
 {
   "name": "HSS認定制度 養豚基礎理解度テスト",
   "short_name": "HSS テスト",
-  "description": "HSS認定制度の筆記試験対策 養豚基礎用語テスト",
+  "description": "HSS認定制度の筆記試験対策 養豚基礎用語テスト（多言語対応）",
   "start_url": "./index.html",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#f0f4f8",
-  "theme_color": "#1a5276",
+  "background_color": "#667eea",
+  "theme_color": "#667eea",
   "lang": "ja",
   "icons": [
     {

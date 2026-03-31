@@ -2,28 +2,25 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#1a5276">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#667eea">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="HSS テスト">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
-<title>養豚基礎 理解度テスト｜HSS認定制度</title>
+<title>HSS認定制度 テスト一覧</title>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
   --primary: #1a5276;
   --primary-light: #2980b9;
-  --primary-dark: #0e2f44;
   --accent: #27ae60;
-  --accent-light: #2ecc71;
   --danger: #c0392b;
-  --danger-light: #e74c3c;
-  --warning: #f39c12;
-  --warning-light: #f1c40f;
   --bg: #f0f4f8;
   --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   --card: #ffffff;
@@ -39,13 +36,6 @@
   --radius-sm: 10px;
   --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --font: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif;
-  --cat-breeding: #e74c3c;
-  --cat-piglet: #3498db;
-  --cat-hygiene: #2ecc71;
-  --cat-feeding: #f39c12;
-  --cat-stage: #9b59b6;
-  --cat-class: #1abc9c;
-  --cat-facility: #e67e22;
 }
 
 [data-theme="dark"] {
@@ -62,7 +52,6 @@
   --shadow-sm: 0 2px 8px rgba(0,0,0,0.2);
   --primary: #4a9eda;
   --primary-light: #5dade2;
-  --primary-dark: #2e86c1;
 }
 
 body {
@@ -77,1129 +66,319 @@ body {
 .app-bg {
   min-height: 100vh;
   background: var(--bg-gradient);
-  padding-bottom: 40px;
+  padding-bottom: max(40px, env(safe-area-inset-bottom));
 }
 
-[data-theme="dark"] .app-bg {
-  background: var(--bg-gradient);
+.app {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 16px;
+  padding-top: max(16px, env(safe-area-inset-top));
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.app { max-width: 720px; margin: 0 auto; padding: 16px; min-height: 100vh; }
-
-/* Dark mode toggle */
 .theme-toggle {
-  position: fixed; top: 16px; right: 16px; z-index: 50;
-  width: 48px; height: 48px; border-radius: 50%;
+  position: fixed; top: 12px; right: 12px; z-index: 50;
+  width: 44px; height: 44px; border-radius: 50%;
   background: var(--card); border: 2px solid var(--border);
   box-shadow: var(--shadow-sm); cursor: pointer;
   display: flex; align-items: center; justify-content: center;
-  font-size: 1.3rem; transition: all var(--transition);
+  font-size: 1.2rem; transition: all var(--transition);
+  -webkit-tap-highlight-color: transparent;
 }
 .theme-toggle:hover { transform: scale(1.1); box-shadow: var(--shadow); }
-.theme-toggle:focus-visible { outline: 3px solid var(--primary-light); outline-offset: 2px; }
 
-.header { text-align: center; padding: 24px 0 16px; }
-.header h1 { font-size: 1.2rem; color: var(--primary); font-weight: 700; letter-spacing: 0.05em; }
-.header .company { font-size: 0.85rem; color: var(--text-light); margin-top: 4px; }
-.header .badge {
-  display: inline-block; background: var(--primary); color: #fff; font-size: 0.7rem;
-  padding: 3px 14px; border-radius: 20px; margin-top: 8px; letter-spacing: 0.08em;
-}
-.header .badge-hard {
-  display: inline-block; background: var(--danger); color: #fff; font-size: 0.7rem;
-  padding: 3px 14px; border-radius: 20px; margin-top: 4px; letter-spacing: 0.08em;
+.lang-selector {
+  position: fixed; top: 12px; right: 64px; z-index: 50;
+  background: var(--card); border: 2px solid var(--border);
+  border-radius: 22px; padding: 4px 10px;
+  font-size: 0.82rem; color: var(--text);
+  box-shadow: var(--shadow-sm); cursor: pointer;
+  font-family: inherit; transition: all var(--transition);
+  -webkit-tap-highlight-color: transparent;
+  appearance: none; -webkit-appearance: none;
+  height: 44px; line-height: 36px;
 }
 
-.card {
-  background: var(--card); border-radius: var(--radius);
-  box-shadow: var(--shadow); padding: 28px; margin-bottom: 16px;
-  transition: background var(--transition), box-shadow var(--transition);
+.header {
+  text-align: center;
+  padding: 0 0 24px;
 }
-.card:hover { box-shadow: var(--shadow-lg); }
+.header .logo {
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+}
+.header h1 {
+  font-size: 1.3rem;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.header .subtitle {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.8);
+  margin-top: 4px;
+}
 
-.name-screen-inner { text-align: center; max-width: 400px; margin: 0 auto; }
-.name-screen-inner h2 { font-size: 1.3rem; color: var(--primary); margin-bottom: 8px; }
-.name-screen-inner p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 24px; }
+.quiz-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  margin-bottom: 14px;
+  transition: all var(--transition);
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+.quiz-card:hover, .quiz-card:active {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+.quiz-card:active {
+  transform: translateY(0) scale(0.98);
+}
 
-.name-input-group { margin-bottom: 24px; text-align: left; }
-.name-label { display: block; font-size: 0.85rem; font-weight: 700; color: var(--text); margin-bottom: 6px; }
-.name-input {
-  width: 100%; padding: 14px 16px; border: 2px solid var(--border); border-radius: var(--radius-sm);
-  font-size: 1.1rem; font-family: inherit; color: var(--text); background: var(--card);
-  transition: border-color var(--transition), box-shadow var(--transition);
-}
-.name-input:focus { outline: none; border-color: var(--primary-light); box-shadow: 0 0 0 3px rgba(41,128,185,0.2); }
-.name-input.error { border-color: var(--danger); }
-.name-error { color: var(--danger); font-size: 0.8rem; margin-top: 4px; display: none; }
-.name-error.show { display: block; }
-
-.start-btn {
-  width: 100%; padding: 16px; background: linear-gradient(135deg, var(--primary), var(--primary-light));
-  color: #fff; border: none; border-radius: var(--radius-sm); font-size: 1.1rem; font-weight: 700;
-  font-family: inherit; cursor: pointer; transition: all var(--transition);
-  box-shadow: 0 4px 15px rgba(26,82,118,0.3);
-}
-.start-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(26,82,118,0.4); }
-.start-btn:active { transform: translateY(0); }
-.start-btn:focus-visible { outline: 3px solid var(--primary-light); outline-offset: 2px; }
-
-.test-info {
-  background: var(--card-hover); border-radius: var(--radius-sm); padding: 16px 18px;
-  margin-bottom: 24px; font-size: 0.85rem; color: var(--text-light); text-align: left;
-  border: 1px solid var(--border);
-}
-.test-info div { margin-bottom: 4px; }
-.test-info strong { color: var(--text); }
-
-/* Circular Timer */
-.timer-section {
-  display: flex; align-items: center; gap: 16px; margin-bottom: 16px;
-  background: var(--card); border-radius: var(--radius); padding: 12px 20px;
-  box-shadow: var(--shadow-sm); transition: background var(--transition);
-}
-.timer-circle-wrap {
-  position: relative; width: 56px; height: 56px; flex-shrink: 0;
-}
-.timer-circle-wrap svg { transform: rotate(-90deg); width: 56px; height: 56px; }
-.timer-circle-bg { fill: none; stroke: var(--border); stroke-width: 4; }
-.timer-circle-fg {
-  fill: none; stroke: var(--accent); stroke-width: 4;
-  stroke-linecap: round; transition: stroke-dashoffset 1s linear, stroke 0.3s;
-}
-.timer-circle-fg.warning { stroke: var(--warning); }
-.timer-circle-fg.danger { stroke: var(--danger); animation: pulse 1s infinite; }
-@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
-.timer-circle-text {
-  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-  font-size: 0.7rem; font-weight: 700; color: var(--text);
-}
-.timer-circle-text.warning { color: var(--warning); }
-.timer-circle-text.danger { color: var(--danger); }
-.timer-right { flex: 1; }
-.timer-label { font-size: 0.75rem; color: var(--text-light); margin-bottom: 2px; }
-.timer-display { font-size: 1.4rem; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; }
-.timer-display.warning { color: var(--warning); }
-.timer-display.danger { color: var(--danger); }
-
-/* Step indicator / Progress */
-.progress-section { margin-bottom: 20px; }
-.step-indicator {
-  display: flex; align-items: center; justify-content: space-between;
+.quiz-card .card-badge {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 3px 12px;
+  border-radius: 20px;
+  letter-spacing: 0.03em;
   margin-bottom: 10px;
 }
-.step-info { font-size: 0.85rem; color: var(--text-light); font-weight: 600; }
-.step-current { color: var(--primary); font-size: 1.1rem; font-weight: 700; }
-.step-dots {
-  display: flex; gap: 4px; flex-wrap: wrap; justify-content: center; max-width: 400px;
-}
-.step-dot {
-  width: 10px; height: 10px; border-radius: 50%; background: var(--border);
-  transition: all var(--transition); flex-shrink: 0;
-}
-.step-dot.done { background: var(--accent); }
-.step-dot.current { background: var(--primary-light); transform: scale(1.3); box-shadow: 0 0 6px rgba(41,128,185,0.4); }
-.step-dot.wrong { background: var(--danger); }
-.progress-bar-wrap { margin-top: 8px; }
-.progress-bar { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
-.progress-fill {
-  height: 100%; background: linear-gradient(90deg, var(--primary-light), var(--primary));
-  border-radius: 3px; transition: width 0.4s ease;
+.badge-basic { background: rgba(41,128,185,0.12); color: var(--primary-light); }
+.badge-advanced { background: rgba(192,57,43,0.12); color: var(--danger); }
+
+.quiz-card h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
 }
 
-/* Category badges with colors */
-.category-badge {
-  display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 3px 12px;
-  border-radius: 20px; margin-bottom: 12px; letter-spacing: 0.03em;
+.quiz-card .card-desc {
+  font-size: 0.82rem;
+  color: var(--text-light);
+  margin-bottom: 12px;
+  line-height: 1.6;
 }
-.cat-breeding { background: rgba(231,76,60,0.12); color: var(--cat-breeding); }
-.cat-piglet { background: rgba(52,152,219,0.12); color: var(--cat-piglet); }
-.cat-hygiene { background: rgba(46,204,113,0.12); color: var(--cat-hygiene); }
-.cat-feeding { background: rgba(243,156,18,0.12); color: var(--cat-feeding); }
-.cat-stage { background: rgba(155,89,182,0.12); color: var(--cat-stage); }
-.cat-class { background: rgba(26,188,156,0.12); color: var(--cat-class); }
-.cat-facility { background: rgba(230,126,34,0.12); color: var(--cat-facility); }
 
-.question-section-title { font-size: 0.85rem; color: var(--primary-light); font-weight: 700; margin-bottom: 12px; }
-.question-label { font-weight: 700; font-size: 1.05rem; margin-bottom: 18px; color: var(--text); line-height: 1.8; }
-
-.options { display: flex; flex-direction: column; gap: 10px; }
-.option-btn {
-  display: flex; align-items: center; width: 100%; background: var(--card);
-  border: 2px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px;
-  font-size: 0.95rem; font-family: inherit; cursor: pointer; transition: all var(--transition);
-  text-align: left; color: var(--text); line-height: 1.5;
+.quiz-card .card-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
 }
-.option-btn:hover:not(:disabled) { border-color: var(--primary-light); background: var(--card-hover); transform: translateX(4px); }
-.option-btn:active:not(:disabled) { transform: scale(0.99); }
-.option-btn:focus-visible { outline: 3px solid var(--primary-light); outline-offset: 2px; }
-.option-btn .option-letter {
-  flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%; background: var(--bg);
-  display: flex; align-items: center; justify-content: center; font-weight: 700;
-  font-size: 0.85rem; margin-right: 14px; color: var(--primary);
+.quiz-card .card-meta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.quiz-card .card-arrow {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  color: var(--text-muted);
   transition: all var(--transition);
 }
-.option-btn.selected { border-color: var(--primary-light); background: rgba(41,128,185,0.08); }
-.option-btn.selected .option-letter { background: var(--primary-light); color: #fff; }
-.option-btn:disabled { cursor: default; opacity: 0.6; }
-
-/* Nav buttons */
-.nav-buttons { display: flex; gap: 10px; margin-top: 20px; }
-.nav-btn {
-  flex: 1; padding: 12px; border: 2px solid var(--border); border-radius: var(--radius-sm);
-  font-size: 0.9rem; font-weight: 600; font-family: inherit; cursor: pointer;
-  background: var(--card); color: var(--text); transition: all var(--transition);
-}
-.nav-btn:hover:not(:disabled) { border-color: var(--primary-light); background: var(--card-hover); }
-.nav-btn:disabled { opacity: 0.4; cursor: default; }
-.nav-btn.primary { background: var(--primary); color: #fff; border-color: var(--primary); }
-.nav-btn.primary:hover:not(:disabled) { background: var(--primary-dark); }
-.nav-btn:focus-visible { outline: 3px solid var(--primary-light); outline-offset: 2px; }
-
-.timeout-overlay {
-  display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0,0,0,0.7); z-index: 100; justify-content: center; align-items: center;
-}
-.timeout-overlay.show { display: flex; }
-.timeout-card {
-  background: var(--card); border-radius: var(--radius); padding: 40px; text-align: center;
-  max-width: 400px; box-shadow: var(--shadow-lg); animation: fadeIn 0.3s ease;
-}
-.timeout-card h2 { color: var(--danger); font-size: 1.4rem; margin-bottom: 8px; }
-.timeout-card p { color: var(--text-light); font-size: 0.95rem; }
-
-.results-card { text-align: center; }
-.score-circle {
-  width: 170px; height: 170px; border-radius: 50%; margin: 20px auto;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: 700;
-  transition: transform 0.5s ease;
-}
-.score-circle:hover { transform: scale(1.05); }
-.score-circle .score-pct { font-size: 2.8rem; line-height: 1; }
-.score-circle .score-label { font-size: 0.85rem; margin-top: 4px; }
-.score-pass { background: linear-gradient(135deg, #eafaf1, #d5f5e3); color: #1e8449; border: 4px solid var(--accent); }
-.score-fail { background: linear-gradient(135deg, #fdedec, #fadbd8); color: #922b21; border: 4px solid var(--danger); }
-
-.score-detail { font-size: 1.1rem; color: var(--text); margin-bottom: 8px; }
-.score-msg { font-size: 0.95rem; color: var(--text-light); margin-bottom: 24px; }
-
-.results-meta {
-  background: var(--card-hover); border-radius: var(--radius-sm); padding: 14px 18px; margin-bottom: 20px;
-  font-size: 0.85rem; color: var(--text-light); text-align: left; border: 1px solid var(--border);
-}
-.results-meta div { margin-bottom: 4px; }
-.results-meta strong { color: var(--text); }
-
-.submit-notice {
-  background: #eafaf1; border: 2px solid var(--accent); border-radius: var(--radius-sm);
-  padding: 16px; margin-bottom: 20px; color: #1e8449; font-weight: 600; font-size: 0.9rem;
-}
-[data-theme="dark"] .submit-notice { background: rgba(39,174,96,0.1); color: var(--accent-light); }
-
-.review-section { text-align: left; margin-top: 20px; }
-.review-section h3 {
-  font-size: 0.95rem; color: var(--primary); margin-bottom: 12px;
-  padding-bottom: 8px; border-bottom: 2px solid var(--border);
-}
-.review-item {
-  padding: 14px 16px; border-radius: var(--radius-sm); margin-bottom: 10px;
-  font-size: 0.85rem; line-height: 1.7; transition: transform var(--transition);
-}
-.review-item:hover { transform: translateX(4px); }
-.review-correct { background: #eafaf1; border-left: 4px solid var(--accent); }
-.review-wrong { background: #fdedec; border-left: 4px solid var(--danger); }
-.review-unanswered { background: #fef9e7; border-left: 4px solid var(--warning); }
-[data-theme="dark"] .review-correct { background: rgba(39,174,96,0.1); }
-[data-theme="dark"] .review-wrong { background: rgba(192,57,43,0.1); }
-[data-theme="dark"] .review-unanswered { background: rgba(243,156,18,0.1); }
-.review-q { font-weight: 700; color: var(--text); margin-bottom: 4px; }
-.review-a { color: var(--text-light); }
-.review-a span { font-weight: 600; }
-.review-a .correct-mark { color: var(--accent); }
-.review-a .wrong-mark { color: var(--danger); }
-
-.results-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
-.btn-submit {
-  padding: 14px; background: linear-gradient(135deg, var(--accent), var(--accent-light));
-  color: #fff; border: none; border-radius: var(--radius-sm);
-  font-size: 1rem; font-weight: 700; font-family: inherit; cursor: pointer;
-  transition: all var(--transition); box-shadow: 0 4px 15px rgba(39,174,96,0.3);
-}
-.btn-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(39,174,96,0.4); }
-.btn-submit:disabled { background: #bdc3c7; cursor: default; transform: none; box-shadow: none; }
-.btn-submit:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-.btn-retry {
-  padding: 14px; background: linear-gradient(135deg, var(--primary), var(--primary-light));
-  color: #fff; border: none; border-radius: var(--radius-sm);
-  font-size: 1rem; font-weight: 700; font-family: inherit; cursor: pointer;
-  transition: all var(--transition); box-shadow: 0 4px 15px rgba(26,82,118,0.3);
-}
-.btn-retry:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(26,82,118,0.4); }
-.btn-retry:focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
-
-.notice-box {
-  background: #fef9e7; border: 2px solid var(--warning); border-radius: var(--radius-sm);
-  padding: 14px 18px; margin-bottom: 20px; font-size: 0.85rem; color: #7d6608; text-align: left;
-}
-[data-theme="dark"] .notice-box { background: rgba(243,156,18,0.08); color: var(--warning); }
-
-/* Category stats bar chart */
-.category-stats { text-align: left; margin-bottom: 20px; }
-.category-stats h3 {
-  font-size: 0.95rem; color: var(--primary); margin-bottom: 12px;
-  padding-bottom: 8px; border-bottom: 2px solid var(--border);
-}
-.cat-stat-row {
-  display: flex; align-items: center; padding: 10px 0;
-  border-bottom: 1px solid var(--border); font-size: 0.85rem;
-}
-.cat-stat-row:last-child { border-bottom: none; }
-.cat-stat-name { font-weight: 600; color: var(--text); min-width: 90px; flex-shrink: 0; }
-.cat-stat-bar {
-  flex: 1; margin: 0 14px; height: 20px; background: var(--border);
-  border-radius: 10px; overflow: hidden; position: relative;
-}
-.cat-stat-fill {
-  height: 100%; border-radius: 10px; transition: width 0.8s ease;
-  position: relative;
-}
-.cat-stat-fill.good { background: linear-gradient(90deg, var(--accent), var(--accent-light)); }
-.cat-stat-fill.mid { background: linear-gradient(90deg, var(--warning), var(--warning-light)); }
-.cat-stat-fill.bad { background: linear-gradient(90deg, var(--danger), var(--danger-light)); }
-.cat-stat-pct {
-  position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
-  font-size: 0.7rem; font-weight: 700; color: #fff;
-}
-.cat-stat-score { font-weight: 700; min-width: 50px; text-align: right; color: var(--text); }
-
-/* Step dots clickable */
-.step-dot { cursor: pointer; }
-.step-dot.answered { background: var(--primary-light); }
-
-/* Keyboard shortcut hint */
-.keyboard-hint {
-  text-align: center; margin-top: 12px; font-size: 0.75rem; color: var(--text-muted);
-}
-.kbd {
-  display: inline-block; background: var(--bg); border: 1px solid var(--border);
-  border-radius: 4px; padding: 1px 6px; font-family: monospace; font-size: 0.7rem;
-  margin: 0 2px;
+.quiz-card:hover .card-arrow {
+  color: var(--primary-light);
+  transform: translateY(-50%) translateX(4px);
 }
 
-@media (max-width: 600px) {
-  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-  body { padding-bottom: env(safe-area-inset-bottom); }
-  .app { padding: 10px; padding-top: max(10px, env(safe-area-inset-top)); }
-  .card { padding: 20px 16px; margin-bottom: 12px; }
-  .header { padding: 16px 0 12px; }
-  .header h1 { font-size: 1.05rem; }
-  .header .badge { font-size: 0.65rem; padding: 3px 12px; }
-  .option-btn {
-    padding: 16px 14px; font-size: 0.95rem;
-    min-height: 48px;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .option-btn:active:not(:disabled) { transform: scale(0.98); background: var(--card-hover); }
-  .option-btn .option-letter { width: 30px; height: 30px; font-size: 0.8rem; margin-right: 12px; }
-  .nav-buttons { gap: 8px; margin-top: 16px; }
-  .nav-btn {
-    padding: 14px 10px; font-size: 0.95rem;
-    min-height: 48px;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .start-btn { padding: 18px; font-size: 1.1rem; min-height: 52px; }
-  .btn-submit, .btn-retry { min-height: 52px; font-size: 1rem; }
-  .name-input {
-    font-size: 16px !important; /* Prevents iOS zoom on focus */
-    padding: 14px 16px;
-    min-height: 48px;
-  }
-  .test-info { padding: 14px; font-size: 0.82rem; }
-  .notice-box { padding: 12px 14px; font-size: 0.82rem; }
-  .step-dots { display: none; }
-  .timer-section {
-    padding: 10px 14px; gap: 12px;
-    position: sticky; top: 0; z-index: 10;
-    border-radius: 0; margin: 0 -10px 16px; width: calc(100% + 20px);
-  }
-  .timer-display { font-size: 1.2rem; }
-  .progress-section { margin-bottom: 14px; }
-  .question-label { font-size: 1rem; margin-bottom: 14px; }
-  .cat-stat-name { min-width: 70px; font-size: 0.78rem; }
-  .cat-stat-bar { margin: 0 8px; }
-  .theme-toggle { top: 10px; right: 10px; width: 44px; height: 44px; font-size: 1.1rem; }
-  .keyboard-hint { display: none; }
-  .results-actions { gap: 8px; }
-  .results-actions > button { width: 100%; }
-  .score-circle { width: 140px; height: 140px; }
-  .score-circle .score-pct { font-size: 2.2rem; }
-  .review-item { padding: 12px 14px; font-size: 0.82rem; }
+.footer {
+  text-align: center;
+  padding: 20px 0 0;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.5);
 }
 
-.fade-in { animation: fadeIn 0.3s ease; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-
-.screen { display: none; }
-.screen.active { display: block; }
-
-/* Print styles */
-@media print {
-  body, .app-bg { background: #fff !important; }
-  .theme-toggle, .timer-section, .nav-buttons, .results-actions,
-  .submit-notice, .notice-box, .keyboard-hint, .btn-submit, .btn-retry,
-  .timeout-overlay { display: none !important; }
-  .app { max-width: 100%; padding: 0; }
-  .card { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; page-break-inside: avoid; }
-  .header { padding: 10px 0; }
-  .score-circle { border-width: 3px; }
-  .review-item { break-inside: avoid; page-break-inside: avoid; }
-  .category-stats { break-inside: avoid; page-break-inside: avoid; }
-  .cat-stat-fill { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-  .review-correct, .review-wrong, .review-unanswered {
-    print-color-adjust: exact; -webkit-print-color-adjust: exact;
-  }
+.lang-note {
+  text-align: center;
+  margin-top: 8px;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 8px 12px;
 }
 
-/* Skip link for accessibility */
-.skip-link {
-  position: absolute; top: -40px; left: 0; background: var(--primary);
-  color: #fff; padding: 8px 16px; z-index: 100; font-size: 0.85rem;
-  transition: top 0.2s;
+@media (max-width: 480px) {
+  .app { padding: 12px; }
+  .quiz-card { padding: 18px; }
+  .quiz-card h2 { font-size: 1rem; }
+  .header h1 { font-size: 1.15rem; }
+  .header .logo { font-size: 2rem; }
+  .lang-selector { right: 60px; font-size: 0.78rem; padding: 3px 8px; height: 40px; line-height: 32px; }
+  .theme-toggle { width: 40px; height: 40px; font-size: 1.1rem; }
 }
-.skip-link:focus { top: 0; }
+
+@media (max-width: 360px) {
+  .quiz-card { padding: 14px; }
+  .quiz-card h2 { font-size: 0.95rem; }
+  .lang-selector { right: 54px; font-size: 0.72rem; }
+  .theme-toggle { width: 36px; height: 36px; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fadeIn 0.4s ease; }
+.fade-in-delay { animation: fadeIn 0.4s ease 0.15s both; }
+.fade-in-delay2 { animation: fadeIn 0.4s ease 0.3s both; }
 </style>
 </head>
 <body>
-<a href="#main-content" class="skip-link">本文にスキップ</a>
-<button class="theme-toggle" id="theme-toggle" aria-label="ダークモード切替" title="ダークモード切替">&#9790;</button>
+<button class="theme-toggle" id="theme-toggle" aria-label="Dark mode">&#9790;</button>
+<select class="lang-selector" id="lang-selector" aria-label="Language">
+  <option value="ja">🇯🇵 日本語</option>
+  <option value="en">🇺🇸 English</option>
+  <option value="vi">🇻🇳 Tiếng Việt</option>
+  <option value="id">🇮🇩 Bahasa</option>
+</select>
 
 <div class="app-bg">
-<div class="app" id="main-content" role="main">
-  <div class="header">
-    <h1>養豚基礎用語 理解度テスト</h1>
-    <div class="company">株式会社ヒラノ</div>
-    <div class="badge">HSS認定制度 筆記試験対策</div>
+<div class="app">
+  <div class="header fade-in">
+    <div class="logo">🐷</div>
+    <h1 id="page-title">HSS認定制度 テスト一覧</h1>
+    <div class="subtitle" id="page-subtitle">株式会社ヒラノ</div>
   </div>
 
-  <div id="name-screen" class="screen active" role="region" aria-label="受験者情報入力">
-    <div class="card fade-in">
-      <div class="name-screen-inner">
-        <h2>ようこそ</h2>
-        <p>HSS認定制度の筆記試験対策として、<br>養豚の基礎用語に関する理解度テストを行います。</p>
-        <div class="name-input-group">
-          <label class="name-label" for="player-name">氏名（フルネーム）</label>
-          <input class="name-input" type="text" id="player-name" placeholder="例：山田 太郎" autocomplete="name" aria-required="true" aria-describedby="name-error">
-          <div class="name-error" id="name-error" role="alert">氏名を入力してください</div>
-        </div>
-        <div class="test-info">
-          <div><strong>テスト名：</strong>養豚基礎 理解度テスト</div>
-          <div><strong>問題数：</strong>全50問からランダムに50問出題</div>
-          <div><strong>形式：</strong>四択形式</div>
-          <div><strong>制限時間：</strong>50分</div>
-          <div><strong>合格基準：</strong>正答率70%以上</div>
-        </div>
-        <div class="notice-box">
-          ※ 回答中は正解・不正解の表示はされません。<br>
-          ※ 前の問題に戻って回答を変更できます。<br>
-          ※ 結果は管理者へ送信できます。<br>
-          ※ 制限時間を過ぎると自動的に終了します。<br>
-        </div>
-        <button class="start-btn" id="start-btn">テストを開始する</button>
-      </div>
+  <a href="quiz30.html" class="quiz-card fade-in-delay" id="card-30">
+    <span class="card-badge badge-basic" id="badge-30">基礎レベル</span>
+    <h2 id="card-title-30">養豚基礎用語 理解度テスト</h2>
+    <div class="card-desc" id="card-desc-30">養豚の基本用語を問う初級テスト。まずはこちらから挑戦してください。</div>
+    <div class="card-meta">
+      <span id="meta-q-30">📝 30問</span>
+      <span id="meta-t-30">⏱ 30分</span>
+      <span id="meta-p-30">🎯 70%合格</span>
     </div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <a href="quiz50.html" class="quiz-card fade-in-delay2" id="card-50">
+    <span class="card-badge badge-advanced" id="badge-50">強化レベル</span>
+    <h2 id="card-title-50">養豚基礎 理解度テスト（強化版）</h2>
+    <div class="card-desc" id="card-desc-50">より正確な知識を問う強化版テスト。紛らわしい選択肢で実力を試します。</div>
+    <div class="card-meta">
+      <span id="meta-q-50">📝 50問</span>
+      <span id="meta-t-50">⏱ 50分</span>
+      <span id="meta-p-50">🎯 70%合格</span>
+    </div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <div class="lang-note fade-in-delay2" id="lang-note">
+    🌐 日本語・English・Tiếng Việt・Bahasa Indonesia 対応
   </div>
 
-  <div id="quiz-screen" class="screen" role="region" aria-label="テスト問題" aria-live="polite">
-    <div class="timer-section" id="timer-section" aria-label="残り時間">
-      <div class="timer-circle-wrap">
-        <svg viewBox="0 0 56 56" aria-hidden="true">
-          <circle class="timer-circle-bg" cx="28" cy="28" r="24"></circle>
-          <circle class="timer-circle-fg" id="timer-circle" cx="28" cy="28" r="24"
-            stroke-dasharray="150.796" stroke-dashoffset="0"></circle>
-        </svg>
-        <div class="timer-circle-text" id="timer-circle-text" aria-hidden="true"></div>
-      </div>
-      <div class="timer-right">
-        <div class="timer-label">残り時間</div>
-        <div class="timer-display" id="timer-display" role="timer" aria-live="off">50:00</div>
-      </div>
-    </div>
-    <div class="progress-section">
-      <div class="step-indicator">
-        <span class="step-info" id="progress-label">養豚基礎 理解度テスト</span>
-        <span class="step-current" id="step-current" aria-live="polite"></span>
-      </div>
-      <div class="step-dots" id="step-dots" aria-hidden="true"></div>
-      <div class="progress-bar-wrap">
-        <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-bar-el">
-          <div class="progress-fill" id="progress-fill"></div>
-        </div>
-      </div>
-    </div>
-    <div class="card fade-in" id="question-card">
-      <div class="category-badge" id="q-category"></div>
-      <div class="question-section-title" id="q-section-title"></div>
-      <div class="question-label" id="q-label"></div>
-      <div class="options" id="q-options" role="radiogroup" aria-label="選択肢"></div>
-      <div class="nav-buttons" id="nav-buttons">
-        <button class="nav-btn" id="prev-btn" type="button" disabled>前へ</button>
-        <button class="nav-btn primary" id="next-btn" type="button" disabled>次へ</button>
-      </div>
-    </div>
-    <div class="keyboard-hint" aria-hidden="true">
-      <kbd class="kbd">1</kbd>-<kbd class="kbd">4</kbd> 選択肢 &nbsp;
-      <kbd class="kbd">Enter</kbd> 次へ
-    </div>
-  </div>
-
-  <div id="results-screen" class="screen" role="region" aria-label="テスト結果">
-    <div class="card results-card fade-in" id="results-card"></div>
-  </div>
+  <div class="footer">© 株式会社ヒラノ HSS認定制度</div>
 </div>
-</div>
-
-<div class="timeout-overlay" id="timeout-overlay" role="alertdialog" aria-label="時間切れ">
-  <div class="timeout-card">
-    <h2>&#9200; 時間切れ</h2>
-    <p>制限時間を超過しました。<br>結果を表示します...</p>
-  </div>
 </div>
 
 <script>
 (function() {
 "use strict";
 
-var ADMIN_EMAIL = "so@oikk.co.jp";
-var TIME_LIMIT = 50;
-var QUESTIONS_PER_TEST = 50;
-var PASS_RATE = 70;
-var TIMER_RADIUS = 24;
-var TIMER_CIRCUMFERENCE = 2 * Math.PI * TIMER_RADIUS;
-
-var CATEGORY_CLASSES = {
-  "繁殖関連": "cat-breeding",
-  "子豚管理": "cat-piglet",
-  "衛生管理": "cat-hygiene",
-  "飼養管理": "cat-feeding",
-  "飼育段階": "cat-stage",
-  "豚の分類": "cat-class",
-  "施設管理": "cat-facility"
+var TRANSLATIONS = {
+  ja: {
+    pageTitle: "HSS認定制度 テスト一覧",
+    pageSubtitle: "株式会社ヒラノ",
+    badge30: "基礎レベル",
+    badge50: "強化レベル",
+    cardTitle30: "養豚基礎用語 理解度テスト",
+    cardDesc30: "養豚の基本用語を問う初級テスト。まずはこちらから挑戦してください。",
+    cardTitle50: "養豚基礎 理解度テスト（強化版）",
+    cardDesc50: "より正確な知識を問う強化版テスト。紛らわしい選択肢で実力を試します。",
+    metaQ30: "📝 30問", metaT30: "⏱ 30分", metaP30: "🎯 70%合格",
+    metaQ50: "📝 50問", metaT50: "⏱ 50分", metaP50: "🎯 70%合格",
+    langNote: "🌐 日本語・English・Tiếng Việt・Bahasa Indonesia 対応"
+  },
+  en: {
+    pageTitle: "HSS Certification Tests",
+    pageSubtitle: "Hirano Co., Ltd.",
+    badge30: "Basic Level",
+    badge50: "Advanced Level",
+    cardTitle30: "Swine Basic Terminology Test",
+    cardDesc30: "A beginner-level test on basic swine terminology. Start here first.",
+    cardTitle50: "Swine Basics Comprehension Test (Enhanced)",
+    cardDesc50: "An enhanced test with tricky options to challenge your knowledge.",
+    metaQ30: "📝 30 Questions", metaT30: "⏱ 30 min", metaP30: "🎯 70% to pass",
+    metaQ50: "📝 50 Questions", metaT50: "⏱ 50 min", metaP50: "🎯 70% to pass",
+    langNote: "🌐 Available in Japanese, English, Vietnamese & Indonesian"
+  },
+  vi: {
+    pageTitle: "Danh sách Bài thi HSS",
+    pageSubtitle: "Công ty Hirano",
+    badge30: "Cơ bản",
+    badge50: "Nâng cao",
+    cardTitle30: "Kiểm tra Thuật ngữ Cơ bản Chăn nuôi Heo",
+    cardDesc30: "Bài kiểm tra cơ bản về thuật ngữ chăn nuôi heo. Hãy bắt đầu từ đây.",
+    cardTitle50: "Kiểm tra Kiến thức Chăn nuôi Heo (Nâng cao)",
+    cardDesc50: "Bài kiểm tra nâng cao với các đáp án dễ nhầm lẫn để thử thách kiến thức.",
+    metaQ30: "📝 30 câu", metaT30: "⏱ 30 phút", metaP30: "🎯 Đạt 70%",
+    metaQ50: "📝 50 câu", metaT50: "⏱ 50 phút", metaP50: "🎯 Đạt 70%",
+    langNote: "🌐 Hỗ trợ Tiếng Nhật, Tiếng Anh, Tiếng Việt & Tiếng Indonesia"
+  },
+  id: {
+    pageTitle: "Daftar Tes Sertifikasi HSS",
+    pageSubtitle: "PT Hirano",
+    badge30: "Tingkat Dasar",
+    badge50: "Tingkat Lanjut",
+    cardTitle30: "Tes Istilah Dasar Peternakan Babi",
+    cardDesc30: "Tes tingkat pemula tentang istilah dasar peternakan babi. Mulai dari sini.",
+    cardTitle50: "Tes Pemahaman Dasar Peternakan Babi (Lanjutan)",
+    cardDesc50: "Tes lanjutan dengan opsi rumit untuk menguji pengetahuan Anda.",
+    metaQ30: "📝 30 soal", metaT30: "⏱ 30 menit", metaP30: "🎯 Lulus 70%",
+    metaQ50: "📝 50 soal", metaT50: "⏱ 50 menit", metaP50: "🎯 Lulus 70%",
+    langNote: "🌐 Tersedia dalam Bahasa Jepang, Inggris, Vietnam & Indonesia"
+  }
 };
 
-var allQuestions = [
-  {
-    "question": "「去勢（きょせい）」の説明として最も正確なものはどれですか？",
-    "answer": "雄豚の精巣を外科的に除去する処置",
-    "options": [
-      "雄豚の精巣を外科的に除去する処置",
-      "雄豚の精巣の機能を薬剤で抑制する処置",
-      "雄豚・雌豚の生殖器を外科的に除去する処置",
-      "雄豚の卵管を切断して不妊にする処置"
-    ],
-    "category": "子豚管理",
-    "explanation": "去勢は雄豚の精巣を外科的に除去する処置です。薬剤による抑制や精管切断（パイプカット）とは異なり、精巣そのものを除去します。また、雌豚には行いません。"
-  },
-  {
-    "question": "「離乳（りにゅう）」の説明として最も正確なものはどれですか？",
-    "answer": "子豚を母豚から引き離し、独立して飼料を食べさせるようにすること",
-    "options": [
-      "子豚を母豚から引き離し、独立して飼料を食べさせるようにすること",
-      "子豚が自発的に母乳を飲まなくなり、固形飼料のみを摂取し始めること",
-      "母豚の泌乳が自然に停止し、子豚が離れていくこと",
-      "子豚を母豚から引き離し、えつけで育てるようにすること"
-    ],
-    "category": "繁殖関連",
-    "explanation": "離乳とは人為的に子豚を母豚から引き離すプロセスです。子豚が自発的にやめるのではなく、管理者が意図的に行います。また、人工乳のみではなく飼料を食べさせます。"
-  },
-  {
-    "question": "「分娩（ぶんべん）」の説明として最も正確なものはどれですか？",
-    "answer": "母豚が子豚を出産すること",
-    "options": [
-      "母豚が子豚を出産すること",
-      "母豚が陣痛を開始すること",
-      "母豚が子豚を出産し、初乳を与えるまでの一連の過程",
-      "母豚が分娩柵に移動してから出産までの準備期間を含む過程"
-    ],
-    "category": "繁殖関連",
-    "explanation": "分娩は母豚が子豚を産み出すことを指します。胎盤排出や初乳授乳、分娩柵への移動は関連する行為ですが、「分娩」そのものの定義には含まれません。"
-  },
-  {
-    "question": "「哺乳（ほにゅう）」の説明として最も正確なものはどれですか？",
-    "answer": "母豚が子豚に母乳を与えて育てること",
-    "options": [
-      "母豚が子豚に母乳を与えて育てること",
-      "母豚または人が子豚に乳（母乳・人工乳）を与えて育てること",
-      "子豚が人工乳から栄養を摂取する行動",
-      "分娩直後から離乳までの子豚の飼育期間全体"
-    ],
-    "category": "飼育段階",
-    "explanation": "哺乳は「母豚が」子豚に母乳を与えて育てることです。人工哺乳や、子豚側の吸乳行動、飼育期間全体とは区別されます。"
-  },
-  {
-    "question": "「発情（はつじょう）」の説明として最も正確なものはどれですか？",
-    "answer": "雌豚が交配可能な状態を示す生理的な現象",
-    "options": [
-      "雌豚が交配可能な状態を示す生理的な現象",
-      "雌豚の卵巣で授精している状態",
-      "雄豚が雌豚に対して交尾を許容する行動を示すこと",
-      "雌豚の外陰部が充血・腫脹し、粘液を分泌している状態"
-    ],
-    "category": "繁殖関連",
-    "explanation": "発情は交配可能な状態を示す「生理的な現象」全体を指します。排卵は発情期間中の一部の出来事であり、交尾許容行動や外陰部の変化は発情の「兆候」であって発情そのものではありません。"
-  },
-  {
-    "question": "「種付け（たねつけ）」の説明として最も正確なものはどれですか？",
-    "answer": "発情した雌豚に人工授精または自然交配を行うこと",
-    "options": [
-      "発情した雌豚に人工授精または自然交配を行うこと",
-      "雄豚に人工授精を行って受精させること",
-      "発情を確認した雌豚に精液を注入し、その後自然交配を行うこと",
-      "離乳のタイミングに合わせて雌豚に人工授精を行うこと"
-    ],
-    "category": "繁殖関連",
-    "explanation": "種付けは「人工授精または自然交配を行うこと」です。人工授精だけに限定されず、自然交配も含みます。また、妊娠の成否は種付けの定義には含まれません。"
-  },
-  {
-    "question": "「妊娠鑑定（にんしんかんてい）」の説明として最も正確なものはどれですか？",
-    "answer": "種付け後に母豚が妊娠しているかどうかを確認する検査",
-    "options": [
-      "種付け後に母豚が妊娠しているかどうかを確認する検査",
-      "CTを用いて母豚の妊娠を判定する検査",
-      "種付け後21日目に再発情の有無で妊娠を判定すること",
-      "種付け直後に母豚の妊娠状態と胎子数を確認する検査"
-    ],
-    "category": "繁殖関連",
-    "explanation": "妊娠鑑定は妊娠の有無を確認する検査です。エコーは方法の一つに過ぎず、再発情確認も方法の一つです。また、胎子数の確認は必ずしも含まれません。"
-  },
-  {
-    "question": "「断尾（だんび）」の説明として最も正確なものはどれですか？",
-    "answer": "子豚の尾を短く切除する処置（尾かじり防止のため）",
-    "options": [
-      "子豚の尾を短く切除する処置（尾かじり防止のため）",
-      "子豚の尾を根元から完全に切除する処置",
-      "子豚の尾を短く切除する処置（衛生管理のため）",
-      "ストレスで尾かじりが発生した豚の尾を治療的に切除する処置"
-    ],
-    "category": "子豚管理",
-    "explanation": "断尾は尾を「短く」切除する処置であり、根元から完全に除去するわけではありません。主な目的は尾かじり防止であり、衛生管理は副次的な効果です。また、予防的に生後間もなく行われ、治療的処置ではありません。"
-  },
-  {
-    "question": "子豚に「鉄剤投与（てつざいとうよ）」を行う理由として最も正確なものはどれですか？",
-    "answer": "母乳だけでは鉄分が不足し、貧血を予防するため",
-    "options": [
-      "母乳だけでは鉄分が不足し、貧血を予防するため",
-      "子豚は生まれつき鉄分の吸収能力が低く、貧血になりやすいため",
-      "母乳には鉄分が全く含まれておらず、生後すぐに貧血になるため",
-      "離乳後の飼料切り替えに備えて鉄分を蓄積させるため"
-    ],
-    "category": "子豚管理",
-    "explanation": "母乳には鉄分が「ほとんど」含まれていない（全くではない）ため、母乳だけでは不足します。子豚の吸収能力が低いわけではなく、母乳中の鉄分が少ないことが原因です。離乳後の準備ではなく、哺乳期の貧血予防が目的です。"
-  },
-  {
-    "question": "「オールイン・オールアウト」の説明として最も正確なものはどれですか？",
-    "answer": "豚舎に同時期に一斉に導入し、同時期に一斉に搬出する方式",
-    "options": [
-      "豚舎に同時期に一斉に導入し、同時期に一斉に搬出する方式",
-      "豚舎の全頭を一斉に搬出し、消毒後に新たな豚を徐々に導入する方式",
-      "同じ日齢の豚だけを同じ豚舎で飼育し、出荷体重に達した順に搬出する方式",
-      "農場全体の豚を全く同じ日に出荷し、農場ごと空にしてから再開する方式"
-    ],
-    "category": "衛生管理",
-    "explanation": "オールイン・オールアウトは「同時期に一斉導入・一斉搬出」する方式です。消毒はこの方式のメリットですが定義の一部ではありません。出荷体重に達した順ではなく一斉搬出であり、農場全体ではなく豚舎（部屋）単位で行います。"
-  },
-  {
-    "question": "「肥育（ひいく）」の説明として最も正確なものはどれですか？",
-    "answer": "離乳後の豚を出荷体重まで太らせる飼育段階",
-    "options": [
-      "離乳後の豚を出荷体重まで太らせる飼育段階",
-      "200日齢を過ぎた豚に高カロリー飼料を与えて出荷体重にする飼育段階",
-      "生後6ヶ月齢から出荷までの期間に豚を効率的に成長させる飼育段階",
-      "離乳後の豚を繁殖母豚まで育てる過程で、育成期と仕上期を含む飼育段階"
-    ],
-    "category": "飼育段階",
-    "explanation": "肥育は「離乳後の豚を出荷体重まで太らせる」段階です。高カロリー飼料に限定されず、6ヶ月齢からではなく離乳後からです。育成期と仕上期は肥育をさらに細分化したものですが、肥育の定義に含めるのは過剰です。"
-  },
-  {
-    "question": "「候補豚（こうほとん）」の説明として最も正確なものはどれですか？",
-    "answer": "初回種付け前の未経産の雌豚のこと",
-    "options": [
-      "将来の繁殖豚として選抜・育成されている哺乳豚",
-      "繁殖成績が優秀で、次世代の種豚として登録された豚",
-      "初回種付け前の未経産の雌豚のこと",
-      "外部から導入され採精を目的とした若い雄"
-    ],
-    "category": "豚の分類",
-    "explanation": "候補豚は「将来の繁殖豚として選抜・育成されている若い豚」です。すでに登録された種豚ではなく、未経産の雌豚に限らず雄豚も含まれ、自家産も外部導入も両方あり得ます。"
-  },
-  {
-    "question": "養豚において「廃用（はいよう）」とはどのような意味ですか？",
-    "answer": "繁殖成績不良や疾病、高産歴などの理由で繁殖群から除外すること",
-    "options": [
-      "繁殖成績不良や疾病、高産歴などの理由で繁殖群から除外すること",
-      "繁殖能力を失った母豚を殺処分すること",
-      "高齢や疾病により生産性が低下した豚を肥育舎へと出荷すること",
-      "繁殖成績不良の豚を繁殖群から除外し、別農場の母豚と入れ替えること"
-    ],
-    "category": "飼養管理",
-    "explanation": "廃用は繁殖群から「除外すること」を意味し、殺処分とは限りません。食肉出荷は廃用後の処理の一つですが廃用の定義ではありません。候補豚との入れ替え（更新）は関連する管理ですが、廃用そのものの意味ではありません。"
-  },
-  {
-    "question": "「初産（しょさん）」の説明として最も正確なものはどれですか？",
-    "answer": "母豚が初めて子豚を出産すること、またはその母豚",
-    "options": [
-      "母豚が初めて子豚を出産すること、またはその母豚",
-      "母豚が初めて種付けされてから最初の分娩までの期間",
-      "初めて発情を迎えた若い雌豚のこと",
-      "1産目の分娩で生まれた子豚のこと"
-    ],
-    "category": "繁殖関連",
-    "explanation": "初産は「初めて出産すること、またはその母豚」です。種付けから分娩までの期間ではなく、初回発情の雌豚でもなく、生まれた子豚側を指す言葉でもありません。"
-  },
-  {
-    "question": "「ボディコンディションスコア（BCS）」の説明として最も正確なものはどれですか？",
-    "answer": "豚の体の肉付き・脂肪の状態を点数で評価する指標",
-    "options": [
-      "豚の体の肉付き・脂肪の状態を点数で評価する指標",
-      "豚の背脂肪厚を超音波で測定し、数値化した指標",
-      "豚の体重と体長から算出する体格指数",
-      "豚の体脂肪率を血液検査で測定した指標"
-    ],
-    "category": "飼養管理",
-    "explanation": "BCSは視覚・触診で「肉付き・脂肪の状態を点数評価」する指標です。超音波測定は背脂肪厚の測定方法であってBCSとは異なります。体重・体長から算出するものでも、血液検査でもありません。"
-  },
-  {
-    "question": "「人工授精（じんこうじゅせい）」の略称として養豚業界で一般的に使われるものはどれですか？",
-    "answer": "AI（Artificial Insemination）",
-    "options": [
-      "AI（Artificial Insemination）",
-      "AI（Animal Insemination）",
-      "AI（Artificial Intelligence）",
-      "AI（Adaptive Intelligence）"
-    ],
-    "category": "繁殖関連",
-    "explanation": "人工授精の略称はAI（Artificial Insemination）です。AnimalではなくArtificial、BreedingやSemenではなくInseminationが正しい英語表記です。"
-  },
-  {
-    "question": "「妊娠期（にんしんき）」の説明として最も正確なものはどれですか？",
-    "answer": "母豚が子宮内に子豚を宿している期間",
-    "options": [
-      "母豚が子宮内に子豚を宿している期間",
-      "離乳から分娩までの約140日間のこと",
-      "受精卵が着床してから妊娠安定期までの期間",
-      "排卵から着床までの期間"
-    ],
-    "category": "飼育段階",
-    "explanation": "妊娠期は「子宮内に子豚を宿している期間」です。約114日は一般的な日数ですが定義そのものではありません。着床前の期間も妊娠期に含まれ、排卵からではなく受精（種付け）からが起点です。"
-  },
-  {
-    "question": "「繁殖豚（はんしょくとん）」の説明として最も正確なものはどれですか？",
-    "answer": "子豚を生産するために飼育される種雄豚や母豚の総称",
-    "options": [
-      "子豚を生産するために飼育される種雄豚や母豚の総称",
-      "繁殖に使用されている経産の母豚の総称",
-      "子豚を生産するために飼育される母豚（種雌豚）の総称",
-      "種雄豚・母豚・候補豚を含む繁殖に関わる全ての豚の総称"
-    ],
-    "category": "豚の分類",
-    "explanation": "繁殖豚は「種雄豚や母豚の総称」です。母豚だけでなく種雄豚も含まれます。経産豚に限定されず、候補豚はまだ繁殖に供されていないため一般的には含みません。"
-  },
-  {
-    "question": "「肉豚（にくとん）」の説明として最も正確なものはどれですか？",
-    "answer": "食肉を目的として肥育・出荷される豚",
-    "options": [
-      "食肉を目的として肥育・出荷される豚",
-      "食肉を目的として肥育され、約110〜120kgで出荷される豚",
-      "繁殖用以外の全ての豚のこと",
-      "と畜場に出荷された豚の食肉部分のこと"
-    ],
-    "category": "豚の分類",
-    "explanation": "肉豚は「食肉を目的として肥育・出荷される豚」です。体重の数値は一般的な目安であって定義の一部ではありません。子豚や病気の豚は「繁殖用以外」でも肉豚ではなく、食肉部分そのものでもありません。"
-  },
-  {
-    "question": "豚の妊娠期間として最も正確なものはどれですか？",
-    "answer": "約114日（3ヶ月3週間3日）",
-    "options": [
-      "約114日（3ヶ月3週間3日）",
-      "約114日（3ヶ月と3週間）",
-      "約120日（4ヶ月）",
-      "約112日（3ヶ月3週間1日）"
-    ],
-    "category": "繁殖関連",
-    "explanation": "豚の妊娠期間は約114日で、「3ヶ月3週間3日」と覚えます。3ヶ月と3週間（=約111日）や、約120日、約112日はいずれも不正確です。「3・3・3」がキーワードです。"
-  },
-  {
-    "question": "「クロスフォスタリング（里子付け）」の説明として最も正確なものはどれですか？",
-    "answer": "産子数が多い母豚の子豚を、余裕のある他の母豚に預けること",
-    "options": [
-      "産子数が多い母豚の子豚を、余裕のある他の母豚に預けること",
-      "乳量の多い母豚に可能な限り多くの子豚を育てさせること",
-      "発育が良好な豚と不良な豚を、泌乳量の多い母豚のもとに移動させ、平均化を図ること",
-      "異なる腹の子豚を混合して、均一な群を作ること"
-    ],
-    "category": "子豚管理",
-    "explanation": "クロスフォスタリングは「産子数が多い母豚の子豚を余裕のある他の母豚に預ける」ことです。母豚の死亡時の対応は緊急措置で、発育不良の子豚の移動や群の混合とも異なります。"
-  },
-  {
-    "question": "「総産子数（そうさんしすう）」の説明として最も正確なものはどれですか？",
-    "answer": "1回の分娩で母豚が産む子豚の総数（死産・ミイラを含む）",
-    "options": [
-      "1回の分娩で母豚が産む子豚の総数（死産・ミイラを含む）",
-      "1回の分娩で生きて生まれた子豚の数",
-      "1回の分娩で母豚が産む子豚の総数（死産を含むがミイラは除く）",
-      "母豚の生涯を通じて産んだ子豚の累計数"
-    ],
-    "category": "繁殖関連",
-    "explanation": "総産子数は1回の分娩で産む「総数」であり、生存子豚（死産含まない）、ミイラ変性胎子を除いたもの、生涯累計のいずれとも異なります。死産もミイラも含む「総」数です。"
-  },
-  {
-    "question": "養豚における「白子（しろこ）」の説明として最も正確なものはどれですか？",
-    "answer": "分娩中または分娩直後に死亡した、外見上は正常な白い個体",
-    "options": [
-      "分娩中または分娩直後に死亡した、外見上は正常な白い個体",
-      "妊娠後期に子宮内で死亡し、白い外見を保ったまま娩出された個体",
-      "分娩中に死亡した子豚の総称（ミイラ変性胎子を含む）",
-      "生後24時間以内に死亡した、外見上は正常な子豚"
-    ],
-    "category": "子豚管理",
-    "explanation": "白子は「分娩中または分娩直後」に死亡した個体です。子宮内で事前に死亡したものはミイラ変性胎子であり白子とは異なります。ミイラは含まず、生後24時間以内の死亡は「圧死」等の別区分です。"
-  },
-  {
-    "question": "「ミイラ（ミイラ変性胎子）」の説明として最も正確なものはどれですか？",
-    "answer": "妊娠中に子宮内で死亡し、乾燥して変性した胎子",
-    "options": [
-      "妊娠中に子宮内で死亡し、乾燥して変性した胎子",
-      "骨だけとなって娩出された子豚",
-      "分娩時に臍帯断裂により死亡し、乾燥した状態で娩出された胎子",
-      "妊娠初期に死亡して吸収されず、小さいまま娩出された胎子"
-    ],
-    "category": "繁殖関連",
-    "explanation": "ミイラ変性胎子は「乾燥して変性」したものであり、腐敗ではありません。分娩時の臍帯断裂による死亡は白子です。また、体液が吸収されて乾燥するのが特徴で、「小さいまま」という表現は不正確です。"
-  },
-  {
-    "question": "豚舎で「消毒（しょうどく）」を行う主な目的として最も正確なものはどれですか？",
-    "answer": "病原体を死滅させ、豚への感染症の発生・蔓延を防ぐため",
-    "options": [
-      "病原体を死滅させ、豚への感染症の発生・蔓延を防ぐため",
-      "豚舎内の全ての微生物を完全に除去して無菌状態にするため",
-      "病原体を死滅させ、豚の体臭を除去するため",
-      "有害な細菌を除去し、豚の免疫力を高めるため"
-    ],
-    "category": "衛生管理",
-    "explanation": "消毒は「病原体を死滅させて感染症を防ぐ」ことが目的です。全微生物の完全除去（滅菌）とは異なり、悪臭除去は副次的効果であって主目的ではなく、消毒で豚の免疫力は高まりません。"
-  },
-  {
-    "question": "「ワクチン接種」を豚に行う目的として最も正確なものはどれですか？",
-    "answer": "特定の感染症に対する免疫をつけ、病気を予防するため",
-    "options": [
-      "特定の感染症に対する免疫をつけ、病気を予防するため",
-      "あらゆる感染症に対する抵抗力を高め、病気全般を予防するため",
-      "特定の感染症に感染した豚を治療するため",
-      "特定の感染症に対する免疫をつけ、通常以上の成長促進効果を得るため"
-    ],
-    "category": "衛生管理",
-    "explanation": "ワクチンは「特定の」感染症に対する免疫をつけるもので、あらゆる感染症に効くわけではありません。治療目的ではなく予防目的であり、病原体の根絶ではなく発症の予防・軽減が目的です。"
-  },
-  {
-    "question": "養豚における「圧死（あっし）」の説明として最も正確なものはどれですか？",
-    "answer": "母豚が寝返りなどで子豚を押しつぶして死亡させる事故",
-    "options": [
-      "母豚が寝返りなどで子豚を押しつぶして死亡させる事故",
-      "過密飼育により豚同士が押し合い、弱い個体が圧迫されて死亡する事故",
-      "母豚が授乳時に体重をかけて子豚を窒息させる事故",
-      "離乳する際に従業員が子豚を押しつぶしたり、踏みつけたりする事故"
-    ],
-    "category": "子豚管理",
-    "explanation": "圧死は「母豚が寝返りなどで子豚を押しつぶして死亡させる事故」です。過密飼育による事故は別の問題であり、授乳時の窒息とも異なります。踏みつけは圧死とは区別されることが多いです。"
-  },
-  {
-    "question": "「分娩柵（ぶんべんさく）」の主な目的として最も正確なものはどれですか？",
-    "answer": "母豚の動きを制限して子豚の圧死を防止すること",
-    "options": [
-      "母豚の動きを制限して子豚の圧死を防止すること",
-      "分娩時に母豚を固定して安全な出産を補助すること",
-      "母豚と子豚を他の豚から隔離して感染症を防ぐこと",
-      "母豚の動きを制限して授乳を効率的に行わせること"
-    ],
-    "category": "繁殖関連",
-    "explanation": "分娩柵の主な目的は「圧死防止」です。出産補助のための固定ではなく、感染症予防のための隔離でもなく、授乳効率化でもありません。あくまで子豚の安全確保が第一の目的です。"
-  },
-  {
-    "question": "「増体量（ぞうたいりょう）」の説明として最も正確なものはどれですか？",
-    "answer": "一定期間内に豚の体重が増加した量",
-    "options": [
-      "一定期間内に豚の体重が増加した量",
-      "豚の体重が増加するため必要最低限の飼料量",
-      "飼料摂取量に対する豚の体重増加の割合",
-      "出荷時体重から導入時体重を引いた総増加量"
-    ],
-    "category": "飼養管理",
-    "explanation": "増体量は「一定期間内の体重増加量」であり、日増体量はその1日あたりの値です。1日あたりの増加量だけに限定されず、飼料摂取量との割合（飼料要求率）とは異なり、出荷時と導入時の差だけを指すものでもありません。"
-  },
-  {
-    "question": "「飼料要求率（しりょうようきゅうりつ）」の説明として最も正確なものはどれですか？",
-    "answer": "体重を1kg増やすのに必要な飼料の量を示す指標",
-    "options": [
-      "体重を1kg増やすのに必要な飼料の量を示す指標",
-      "飼料1kgあたりの体重増加量を示す指標",
-      "1日に消費する飼料量を体重で割った指標",
-      "飼料コストを出荷額で割った経済効率の指標"
-    ],
-    "category": "飼養管理",
-    "explanation": "飼料要求率は「体重1kg増加に必要な飼料量」です。飼料1kgあたりの増体量は逆数（飼料効率）であり混同しやすいポイントです。1日の消費量÷体重や、経済効率の指標とも異なります。"
-  },
-  {
-    "question": "豚の成豚（せいとん）の正常体温として最も適切な範囲はどれですか？",
-    "answer": "38.5〜39.5℃",
-    "options": [
-      "38.5〜39.5℃",
-      "36.0〜37.0℃",
-      "39.5〜40.5℃",
-      "35.5〜36.5℃"
-    ],
-    "category": "豚の分類",
-    "explanation": "成豚の正常体温は38.5〜39.5℃です。人間（約36.5℃）より高く、37.0〜38.0℃は低すぎ、39.5〜40.5℃は発熱の可能性があります。"
-  },
-  {
-    "question": "豚の発情周期（はつじょうしゅうき）は平均何日ですか？",
-    "answer": "約21日",
-    "options": [
-      "約21日",
-      "約28日",
-      "約14日",
-      "約35日"
-    ],
-    "category": "繁殖関連",
-    "explanation": "豚の発情周期は平均約21日です。牛の約21日と同じですが、28日ではありません。離乳後に発情は再開しますが、周期そのものが7日に短縮されるわけではありません。"
-  },
-  {
-    "question": "豚が暑さに弱い主な理由として最も正確なものはどれですか？",
-    "answer": "汗腺がほぼ機能せず発汗で体温調節できないため",
-    "options": [
-      "汗腺がほぼ機能せず発汗で体温調節できないため",
-      "汗腺が全くないため発汗できないから",
-      "皮下脂肪が厚く体内に熱がこもりやすいため",
-      "被毛が密生しており放熱が困難なため"
-    ],
-    "category": "豚の分類",
-    "explanation": "豚は汗腺が「ほぼ機能しない」のであって「全くない」わけではありません。皮下脂肪が厚いことも影響しますが、最も直接的な理由は汗腺の機能不全です。豚の被毛は密生していません。"
-  },
-  {
-    "question": "豚の五感の中で最も発達しているのはどれですか？",
-    "answer": "嗅覚（きゅうかく）",
-    "options": [
-      "嗅覚（きゅうかく）",
-      "聴覚（ちょうかく）",
-      "味覚（みかく）",
-      "触覚（しょっかく"
-    ],
-    "category": "豚の分類",
-    "explanation": "豚の最も発達した感覚は嗅覚です。トリュフ探しに利用されるほどです。聴覚や味覚、鼻先の触覚も優れていますが、最も発達しているのは嗅覚です。"
-  },
-  {
-    "question": "豚の一般的な出生体重として最も近いものはどれですか？",
-    "answer": "約1.2〜1.5kg",
-    "options": [
-      "約1.2〜1.5kg",
-      "約0.5〜0.8kg",
-      "約2.0〜3.0kg",
-      "約1.5〜2.5kg"
-    ],
-    "category": "豚の分類",
-    "explanation": "豚の平均出生体重は約1.2〜1.5kgです。0.5〜0.8kgは低体重で生存率が下がり、2.0kg以上は大きめの個体です。"
-  },
-  {
-    "question": "日本の一般的な肉豚の出荷体重として最も近いものはどれですか？",
-    "answer": "約110〜120kg",
-    "options": [
-      "約110〜120kg",
-      "約90〜100kg",
-      "約130〜150kg",
-      "約125〜140kg"
-    ],
-    "category": "豚の分類",
-    "explanation": "日本の肉豚の出荷体重は約110〜120kgで、生後約6ヶ月（180日）で到達します。12ヶ月ではなく約6ヶ月です。"
-  },
-  {
-    "question": "ランドレース種の原産国はどこですか？",
-    "answer": "デンマーク",
-    "options": [
-      "デンマーク",
-      "イギリス",
-      "オランダ",
-      "スウェーデン"
-    ],
-    "category": "豚の分類",
-    "explanation": "ランドレース種はデンマーク原産です。イギリスは大ヨークシャー種やバークシャー種の原産国であり、混同しやすいポイントです。"
-  },
-  {
-    "question": "三元交配（さんげんこうはい）LWDの「L」が示す品種はどれですか？",
-    "answer": "ランドレース",
-    "options": [
-      "ランドレース",
-      "ラージホワイト",
-      "ラード",
-      "ラージブラック"
-    ],
-    "category": "繁殖関連",
-    "explanation": "LWDの「L」はランドレースです。「W」が大ヨークシャー（ラージホワイト）、「D」がデュロックです。ラージホワイトは「L」ではなく「W」で表されます。"
-  },
-  {
-    "question": "豚舎の消毒において、正しい手順はどれですか？",
-    "answer": "洗浄→乾燥→消毒",
-    "options": [
-      "洗浄→乾燥→消毒",
-      "消毒→洗浄→乾燥",
-      "洗浄→消毒→乾燥",
-      "乾燥→消毒→洗浄"
-    ],
-    "category": "衛生管理",
-    "explanation": "正しい手順は「洗浄→乾燥→消毒」です。「洗浄→消毒→乾燥」は一見正しそうですが、消毒薬の効果を最大化するには洗浄後に乾燥させてから消毒薬を適用する必要があります。"
-  },
-  {
-    "question": "スノコ床（スラット床）の主な目的として最も正確なものはどれですか？",
-    "answer": "糞尿をスノコの隙間から下に落とし、床面を清潔に保つ",
-    "options": [
-      "糞尿をスノコの隙間から下に落とし、床面を清潔に保つ",
-      "豚の蹄（ひづめ）の伸びすぎを防止し、適度に削る",
-      "床面の温度を上げて保温効果を高める",
-      "糞尿と飼料の食べこぼしを分離して回収する"
-    ],
-    "category": "施設管理",
-    "explanation": "スノコ床の主な目的は糞尿を隙間から落として清潔を保つことです。蹄の管理、保温、飼料回収は主目的ではありません。"
-  },
-  {
-    "question": "クリープフィーダーの用途として最も正確なものはどれですか？",
-    "answer": "母豚が入れない仕切りの中で哺乳子豚に補助飼料を給与する",
-    "options": [
-      "母豚が入れない仕切りの中で哺乳子豚に補助飼料を給与する",
-      "離乳直後の子豚に少量ずつ飼料を自動給餌する装置",
-      "哺乳中の子豚に母乳の代わりとなる人工乳を給与する装置",
-      "母豚の分娩前後に高栄養飼料を給与するための専用設備"
-    ],
-    "category": "施設管理",
-    "explanation": "クリープフィーダーは「母豚が入れない仕切り」の中で「哺乳中の子豚」に補助飼料を与えるものです。離乳後の給餌装置や母乳の代替ではなく、母豚用でもありません。"
-  },
-  {
-    "question": "豚の飼料で最も多く使用されるエネルギー源の穀物はどれですか？",
-    "answer": "トウモロコシ",
-    "options": [
-      "トウモロコシ",
-      "大豆",
-      "小麦",
-      "大麦"
-    ],
-    "category": "飼養管理",
-    "explanation": "エネルギー源として最も多く使用される穀物はトウモロコシです。大豆はタンパク質源（大豆粕）として使用されるもので、エネルギー源ではありません。小麦や大麦も使用されますがトウモロコシほどではありません。"
-  },
-  {
-    "question": "クリープフィードとは何ですか？",
-    "answer": "哺乳中の子豚に与える補助飼料",
-    "options": [
-      "哺乳中の子豚に与える補助飼料",
-      "離乳直後の子豚に与えるスターター飼料",
-      "母豚の泌乳量を増やすために与える高栄養飼料",
-      "哺乳中の子豚に母乳の代わりとして与える人工乳"
-    ],
-    "category": "飼養管理",
-    "explanation": "クリープフィードは「哺乳中の子豚」に与える「補助飼料」です。離乳後のスターター飼料、母豚用の飼料、人工乳とは異なります。母乳の「代わり」ではなく「補助」として与えるものです。"
-  },
-  {
-    "question": "飼料の「CP」とは何の略ですか？",
-    "answer": "粗タンパク質（Crude Protein）",
-    "options": [
-      "粗タンパク質（Crude Protein）",
-      "可消化タンパク質（Convertible Protein）",
-      "粗脂肪（Crude Lipid/CP表記）",
-      "完全タンパク質（Complete Protein）"
-    ],
-    "category": "飼養管理",
-    "explanation": "CPはCrude Protein（粗タンパク質）の略です。Convertible ProteinやComplete Proteinという用語は飼料分析では使われません。粗脂肪はCF（Crude Fat）またはEE（Ether Extract）です。"
-  },
-  {
-    "question": "子豚の歯切りを行う主な目的として最も正確なものはどれですか？",
-    "answer": "母豚の乳頭や他の子豚への咬傷を防止する",
-    "options": [
-      "母豚の乳頭や他の子豚への咬傷を防止する",
-      "子豚の乳歯が永久歯に生え替わるのを促進する",
-      "子豚が飼料をかみ砕きやすくするため歯並びを整える",
-      "乳頭の争奪を減らして哺乳量の均等化を図る"
-    ],
-    "category": "子豚管理",
-    "explanation": "歯切りの目的は鋭い犬歯（針歯）による「咬傷の防止」です。歯の生え替え促進や歯並びの矯正ではありません。哺乳量の均等化は間接的な効果であり、主目的は傷を防ぐことです。"
-  },
-  {
-    "question": "肥育豚の日増体量（DG）の目標値として最も適切なものはどれですか？",
-    "answer": "0.7〜0.9kg/日",
-    "options": [
-      "0.7〜0.9kg/日",
-      "0.3〜0.5kg/日",
-      "1.5〜2.0kg/日",
-      "0.7〜0.9g/日"
-    ],
-    "category": "飼養管理",
-    "explanation": "肥育豚のDGの目標値は0.7〜0.9kg/日です。0.3〜0.5kg/日は低すぎ、1.5〜2.0kg/日は高すぎます。また「g/日」は「kg/日」の1000分の1であり、単位の見間違いに注意が必要です。"
-  },
-  {
-    "question": "「ウィーンピッグ（Weaned pig）」とは何ですか？",
-    "answer": "離乳した子豚のこと",
-    "options": [
-      "離乳した子豚のこと",
-      "オーストリア・ウィーン原産の豚の品種",
-      "離乳前の哺乳中の子豚のこと",
-      "出荷直前の仕上げ期の肥育豚のこと"
-    ],
-    "category": "飼育段階",
-    "explanation": "ウィーンピッグ（Weaned pig）は英語のwean（離乳させる）に由来し、離乳した子豚のことです。都市名のウィーン（Vienna）とは無関係で、哺乳中でも出荷前でもありません。"
-  },
-  {
-    "question": "スタンディング反射（静止反射）とは何ですか？",
-    "answer": "発情中の母豚が背中を押されると静止する反射",
-    "options": [
-      "発情中の母豚が背中を押されると静止する反射",
-      "分娩直前の母豚が立ち上がったまま静止する行動",
-      "発情中の雌豚が雄豚の前で立ち止まって交尾を拒否する行動",
-      "母豚が授乳のために横臥したまま動かなくなる反射"
-    ],
-    "category": "繁殖関連",
-    "explanation": "スタンディング反射は発情中の母豚の背中を押すと「静止する」反射で、交配適期の最も確実な指標です。分娩前の行動や交尾拒否、授乳時の行動とは全く異なります。"
-  },
-  {
-    "question": "PSY（Pigs per Sow per Year）とは何ですか？",
-    "answer": "母豚1頭あたりの年間離乳子豚数",
-    "options": [
-      "母豚1頭あたりの年間離乳子豚数",
-      "母豚1頭あたりの年間総産子数",
-      "母豚1頭あたりの年間出荷肉豚数",
-      "農場全体の年間離乳子豚数を母豚頭数で割った値"
-    ],
-    "category": "繁殖関連",
-    "explanation": "PSYは「母豚1頭あたりの年間離乳子豚数」です。総産子数（死産含む）ではなく「離乳」子豚数であり、出荷頭数でもありません。農場全体÷母豚頭数は計算方法であって定義そのものではありません。"
-  },
-  {
-    "question": "PRRS（ピーアールアールエス）の正式名称として正しいものはどれですか？",
-    "answer": "豚繁殖・呼吸障害症候群",
-    "options": [
-      "豚繁殖・呼吸障害症候群",
-      "豚呼吸器・繁殖障害症候群",
-      "豚繁殖・呼吸器感染症",
-      "豚呼吸器複合感染症"
-    ],
-    "category": "衛生管理",
-    "explanation": "PRRSの正式名称は「豚繁殖・呼吸障害症候群」（Porcine Reproductive and Respiratory Syndrome）です。語順が「繁殖→呼吸」であって「呼吸→繁殖」ではありません。「感染症」でなく「症候群」であり、PRDCは別の疾病概念です。"
-  }
-];
+var currentLang = localStorage.getItem("hss_lang") || "ja";
 
-var playerName = "";
-var currentQuestion = 0;
-var score = 0;
-var answers = [];
-var selectedQuestions = [];
-var userAnswers = [];
-var shuffledOptions = [];
-var timerInterval = null;
-var timeRemaining = 0;
-var totalTime = 0;
-var startTime = null;
-var quizLocked = false;
+function t(key) { return TRANSLATIONS[currentLang][key] || TRANSLATIONS.ja[key] || key; }
+
+function updateUI() {
+  document.getElementById("page-title").textContent = t("pageTitle");
+  document.getElementById("page-subtitle").textContent = t("pageSubtitle");
+  document.getElementById("badge-30").textContent = t("badge30");
+  document.getElementById("badge-50").textContent = t("badge50");
+  document.getElementById("card-title-30").textContent = t("cardTitle30");
+  document.getElementById("card-desc-30").textContent = t("cardDesc30");
+  document.getElementById("card-title-50").textContent = t("cardTitle50");
+  document.getElementById("card-desc-50").textContent = t("cardDesc50");
+  document.getElementById("meta-q-30").textContent = t("metaQ30");
+  document.getElementById("meta-t-30").textContent = t("metaT30");
+  document.getElementById("meta-p-30").textContent = t("metaP30");
+  document.getElementById("meta-q-50").textContent = t("metaQ50");
+  document.getElementById("meta-t-50").textContent = t("metaT50");
+  document.getElementById("meta-p-50").textContent = t("metaP50");
+  document.getElementById("lang-note").textContent = t("langNote");
+}
+
+var langSelect = document.getElementById("lang-selector");
+langSelect.value = currentLang;
+langSelect.addEventListener("change", function() {
+  currentLang = this.value;
+  localStorage.setItem("hss_lang", currentLang);
+  updateUI();
+});
+updateUI();
 
 // Dark mode
 function initTheme() {
@@ -1223,364 +402,12 @@ document.getElementById("theme-toggle").addEventListener("click", function() {
 });
 initTheme();
 
-function showScreen(id) {
-  document.querySelectorAll(".screen").forEach(function(s) { s.classList.remove("active"); });
-  document.getElementById(id).classList.add("active");
+// Register service worker
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js").catch(function() {});
 }
-
-function submitName() {
-  var input = document.getElementById("player-name");
-  var name = input.value.trim();
-  if (!name) { input.classList.add("error"); document.getElementById("name-error").classList.add("show"); input.focus(); return; }
-  input.classList.remove("error"); document.getElementById("name-error").classList.remove("show");
-  playerName = name; startQuiz();
-}
-
-document.getElementById("player-name").addEventListener("keydown", function(e) {
-  if (e.key === "Enter") submitName();
-  this.classList.remove("error"); document.getElementById("name-error").classList.remove("show");
-});
-document.getElementById("start-btn").addEventListener("click", function() { submitName(); });
-
-function startQuiz() {
-  currentQuestion = 0; score = 0; answers = []; quizLocked = false;
-  selectedQuestions = shuffle(allQuestions.slice()).slice(0, QUESTIONS_PER_TEST);
-  userAnswers = new Array(selectedQuestions.length).fill(null);
-  shuffledOptions = selectedQuestions.map(function(q) { return shuffle(q.options); });
-  totalTime = TIME_LIMIT * 60; timeRemaining = totalTime; startTime = new Date();
-  buildStepDots();
-  showScreen("quiz-screen"); renderQuestion(); startTimer();
-}
-
-function buildStepDots() {
-  var dots = document.getElementById("step-dots");
-  var html = "";
-  for (var i = 0; i < selectedQuestions.length; i++) {
-    html += '<div class="step-dot" id="dot-' + i + '" data-index="' + i + '"></div>';
-  }
-  dots.innerHTML = html;
-  document.querySelectorAll(".step-dot").forEach(function(dot) {
-    dot.addEventListener("click", function() {
-      if (quizLocked) return;
-      currentQuestion = parseInt(this.getAttribute("data-index"));
-      renderQuestion();
-    });
-  });
-}
-
-function updateStepDots() {
-  for (var i = 0; i < selectedQuestions.length; i++) {
-    var dot = document.getElementById("dot-" + i);
-    if (!dot) continue;
-    dot.className = "step-dot";
-    if (userAnswers[i] !== null) {
-      dot.classList.add("answered");
-    }
-    if (i === currentQuestion) {
-      dot.classList.add("current");
-    }
-  }
-}
-
-function startTimer() {
-  clearInterval(timerInterval);
-  var timerStartedAt = Date.now();
-  var timerStartRemaining = timeRemaining;
-  updateTimerDisplay();
-  timerInterval = setInterval(function() {
-    var elapsed = Math.floor((Date.now() - timerStartedAt) / 1000);
-    timeRemaining = Math.max(0, timerStartRemaining - elapsed);
-    updateTimerDisplay();
-    if (timeRemaining <= 0) { clearInterval(timerInterval); onTimeout(); }
-  }, 250);
-}
-
-function updateTimerDisplay() {
-  var mins = Math.floor(Math.max(0, timeRemaining) / 60);
-  var secs = Math.max(0, timeRemaining) % 60;
-  var display = document.getElementById("timer-display");
-  var circle = document.getElementById("timer-circle");
-  var circleText = document.getElementById("timer-circle-text");
-
-  var timeStr = String(mins).padStart(2, "0") + ":" + String(secs).padStart(2, "0");
-  display.textContent = timeStr;
-  circleText.textContent = mins + "m";
-
-  var progress = timeRemaining / totalTime;
-  var offset = TIMER_CIRCUMFERENCE * (1 - progress);
-  circle.style.strokeDashoffset = offset;
-
-  display.className = "timer-display";
-  circle.setAttribute("class", "timer-circle-fg");
-  circleText.className = "timer-circle-text";
-  if (timeRemaining <= 60) {
-    display.classList.add("danger"); circle.classList.add("danger"); circleText.classList.add("danger");
-  } else if (timeRemaining <= totalTime * 0.25) {
-    display.classList.add("warning"); circle.classList.add("warning"); circleText.classList.add("warning");
-  }
-}
-
-function onTimeout() {
-  quizLocked = true;
-  document.querySelectorAll(".option-btn").forEach(function(b) { b.disabled = true; });
-  document.getElementById("timeout-overlay").classList.add("show");
-  setTimeout(function() { document.getElementById("timeout-overlay").classList.remove("show"); submitQuiz(); }, 2500);
-}
-
-function shuffle(arr) {
-  var a = arr.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a;
-}
-
-function getCategoryClass(cat) {
-  return CATEGORY_CLASSES[cat] || "cat-breeding";
-}
-
-function renderQuestion() {
-  var q = selectedQuestions[currentQuestion]; var total = selectedQuestions.length;
-  document.getElementById("step-current").textContent = (currentQuestion + 1) + " / " + total;
-  var answeredCount = userAnswers.filter(function(a) { return a !== null; }).length;
-  document.getElementById("progress-fill").style.width = (answeredCount / total) * 100 + "%";
-  var pb = document.getElementById("progress-bar-el");
-  pb.setAttribute("aria-valuenow", Math.round((answeredCount / total) * 100));
-  updateStepDots();
-
-  var badge = document.getElementById("q-category");
-  badge.textContent = q.category;
-  badge.className = "category-badge " + getCategoryClass(q.category);
-
-  document.getElementById("q-section-title").textContent = "\u554f" + (currentQuestion + 1);
-  document.getElementById("q-label").textContent = q.question;
-
-  var opts = shuffledOptions[currentQuestion]; var letters = ["A", "B", "C", "D"];
-  var optHTML = "";
-  var currentAnswer = userAnswers[currentQuestion];
-  opts.forEach(function(opt, i) {
-    var sel = (currentAnswer === opt) ? " selected" : "";
-    var checked = (currentAnswer === opt) ? "true" : "false";
-    optHTML += '<button class="option-btn' + sel + '" data-answer="' + opt.replace(/"/g, '&quot;') + '" role="radio" aria-checked="' + checked + '" tabindex="0">' +
-      '<span class="option-letter">' + letters[i] + '</span><span>' + opt + '</span></button>';
-  });
-  document.getElementById("q-options").innerHTML = optHTML;
-  document.querySelectorAll(".option-btn").forEach(function(btn) {
-    btn.addEventListener("click", function() { selectAnswer(this, this.getAttribute("data-answer")); });
-  });
-  var card = document.getElementById("question-card"); card.classList.remove("fade-in"); void card.offsetWidth; card.classList.add("fade-in");
-  updateNavButtons();
-}
-
-function selectAnswer(btn, selected) {
-  if (quizLocked) return;
-  userAnswers[currentQuestion] = selected;
-  document.querySelectorAll(".option-btn").forEach(function(b) {
-    b.classList.remove("selected");
-    b.setAttribute("aria-checked", "false");
-  });
-  btn.classList.add("selected");
-  btn.setAttribute("aria-checked", "true");
-  updateStepDots();
-  var answeredCount = userAnswers.filter(function(a) { return a !== null; }).length;
-  document.getElementById("progress-fill").style.width = (answeredCount / selectedQuestions.length) * 100 + "%";
-  updateNavButtons();
-}
-
-function updateNavButtons() {
-  var prevBtn = document.getElementById("prev-btn");
-  var nextBtn = document.getElementById("next-btn");
-  prevBtn.disabled = (currentQuestion === 0);
-  var isLast = (currentQuestion === selectedQuestions.length - 1);
-  if (isLast) {
-    nextBtn.textContent = "提出する";
-    nextBtn.className = "nav-btn primary";
-    nextBtn.disabled = false;
-  } else {
-    nextBtn.textContent = "次へ";
-    nextBtn.className = "nav-btn primary";
-    nextBtn.disabled = (userAnswers[currentQuestion] === null);
-  }
-  // Remove old listeners by cloning
-  var parent = prevBtn.parentNode;
-  var newPrev = prevBtn.cloneNode(true);
-  var newNext = nextBtn.cloneNode(true);
-  parent.replaceChild(newPrev, prevBtn);
-  parent.replaceChild(newNext, parent.lastElementChild);
-  newPrev.addEventListener("click", function() { goPrev(); });
-  newNext.addEventListener("click", function() {
-    if (currentQuestion === selectedQuestions.length - 1) { submitQuiz(); }
-    else { goNext(); }
-  });
-}
-
-function goNext() {
-  if (currentQuestion < selectedQuestions.length - 1) {
-    currentQuestion++;
-    renderQuestion();
-  }
-}
-
-function goPrev() {
-  if (currentQuestion > 0) {
-    currentQuestion--;
-    renderQuestion();
-  }
-}
-
-function submitQuiz() {
-  quizLocked = true;
-  clearInterval(timerInterval);
-  score = 0;
-  answers = [];
-  for (var i = 0; i < selectedQuestions.length; i++) {
-    var q = selectedQuestions[i];
-    var ua = userAnswers[i];
-    var isCorrect = (ua === q.answer);
-    if (isCorrect) score++;
-    answers.push({
-      userAnswer: ua || "\uff08\u672a\u56de\u7b54\uff09",
-      correctAnswer: q.answer,
-      question: q.question,
-      category: q.category,
-      correct: ua ? isCorrect : false,
-      explanation: q.explanation
-    });
-  }
-  finishQuiz();
-}
-
-// Keyboard navigation
-document.addEventListener("keydown", function(e) {
-  if (!document.getElementById("quiz-screen").classList.contains("active")) return;
-  if (quizLocked) return;
-  var btns = document.querySelectorAll(".option-btn");
-  if (btns.length === 0) return;
-  var key = e.key;
-  if (key === "1" || key === "2" || key === "3" || key === "4") {
-    var idx = parseInt(key) - 1;
-    if (idx < btns.length) { btns[idx].click(); e.preventDefault(); }
-  }
-});
-
-function finishQuiz() {
-  showScreen("results-screen");
-  var total = selectedQuestions.length; var pct = Math.round((score / total) * 100);
-  var endTime = new Date(); var elapsed = Math.round((endTime - startTime) / 1000);
-  var elapsedMin = Math.floor(elapsed / 60); var elapsedSec = elapsed % 60;
-  var timedOut = timeRemaining <= 0; var passed = pct >= PASS_RATE;
-  var circleClass = passed ? "score-pass" : "score-fail";
-  var msg = passed ? "合格です。お疲れさまでした。" : "不合格です。復習の上、再度挑戦してください。";
-  if (pct === 100) msg = "満点合格です。素晴らしい！";
-
-  var html = '<div class="question-section-title">養豚基礎 理解度テスト｜結果</div>' +
-    '<div class="score-circle ' + circleClass + '"><div class="score-pct">' + pct + '%</div><div class="score-label">正答率</div></div>' +
-    '<div class="score-detail">' + total + '問中 ' + score + '問正解</div>' +
-    '<div class="score-msg">' + msg + '</div>';
-  html += '<div class="results-meta">' +
-    '<div><strong>受験者：</strong>' + escHtml(playerName) + '</div>' +
-    '<div><strong>受験日時：</strong>' + formatDate(startTime) + '</div>' +
-    '<div><strong>制限時間：</strong>' + TIME_LIMIT + '分</div>' +
-    '<div><strong>所要時間：</strong>' + elapsedMin + '分' + String(elapsedSec).padStart(2, "0") + '秒' +
-    (timedOut ? ' <span style="color:var(--danger);font-weight:700;">（時間切れ）</span>' : '') + '</div>' +
-    '<div><strong>合格基準：</strong>正答率' + PASS_RATE + '%以上</div></div>';
-
-  // Category stats with bar chart
-  var catStats = {};
-  answers.forEach(function(a) { if (!catStats[a.category]) catStats[a.category] = { correct: 0, total: 0 }; catStats[a.category].total++; if (a.correct) catStats[a.category].correct++; });
-  html += '<div class="category-stats"><h3>カテゴリ別成績</h3>';
-  Object.keys(catStats).forEach(function(cat) {
-    var s = catStats[cat]; var catPct = Math.round((s.correct / s.total) * 100);
-    var fillClass = catPct >= 70 ? "good" : (catPct >= 50 ? "mid" : "bad");
-    html += '<div class="cat-stat-row"><span class="cat-stat-name">' + escHtml(cat) + '</span><div class="cat-stat-bar"><div class="cat-stat-fill ' + fillClass + '" style="width:' + catPct + '%"><span class="cat-stat-pct">' + catPct + '%</span></div></div><span class="cat-stat-score">' + s.correct + '/' + s.total + '</span></div>';
-  });
-  html += '</div>';
-
-  // Review section
-  html += '<div class="review-section"><h3>回答の振り返り</h3>';
-  answers.forEach(function(a, i) {
-    var itemClass = "review-correct"; var mark = '<span class="correct-mark">○ 正解</span>';
-    if (a.userAnswer === "（未回答）") { itemClass = "review-unanswered"; mark = '<span class="wrong-mark">未回答</span>'; }
-    else if (!a.correct) { itemClass = "review-wrong"; mark = '<span class="wrong-mark">× 不正解</span>'; }
-    html += '<div class="review-item ' + itemClass + '"><div class="review-q">問' + (i + 1) + '（' + escHtml(a.category) + '）：' + escHtml(a.question) + '</div><div class="review-a">' + mark + '</div></div>';
-  });
-  html += '</div>';
-
-  html += '<div class="submit-notice" id="submit-notice">結果を管理者へ送信できます。</div>';
-  html += '<div class="results-actions"><button class="btn-submit" id="submit-btn">結果を送信する</button><button class="btn-retry" id="retry-btn">もう一度挑戦する</button></div>';
-  var card = document.getElementById("results-card"); card.innerHTML = html; card.classList.remove("fade-in"); void card.offsetWidth; card.classList.add("fade-in");
-  document.getElementById("submit-btn").addEventListener("click", function() { submitResults(); });
-  document.getElementById("retry-btn").addEventListener("click", function() { showScreen("name-screen"); });
-  if (timedOut) setTimeout(function() { submitResults(); }, 500);
-}
-
-function isIOS() { return /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1); }
-
-var xlsxLoaded = false;
-function loadXLSX(callback) {
-  if (xlsxLoaded && typeof XLSX !== "undefined") { callback(true); return; }
-  var s = document.createElement("script"); s.src = "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js";
-  s.onload = function() { xlsxLoaded = true; callback(true); }; s.onerror = function() { callback(false); }; document.head.appendChild(s);
-}
-
-function submitResults() {
-  var btn = document.getElementById("submit-btn"); if (btn.disabled) return; btn.disabled = true; btn.textContent = "\u51e6\u7406\u4e2d...";
-  var total = selectedQuestions.length; var pct = Math.round((score / total) * 100);
-  var endTime = new Date(); var elapsed = Math.round((endTime - startTime) / 1000);
-  var elapsedMin = Math.floor(elapsed / 60); var elapsedSec = elapsed % 60;
-  var timedOut = timeRemaining <= 0; var dateStr = formatDate(startTime);
-  var passOrFail = pct >= PASS_RATE ? "\u5408\u683c" : "\u4e0d\u5408\u683c";
-  var fileName = "HSS_\u57fa\u790e\u7528\u8a9e\u30c6\u30b9\u30c8_" + playerName + "_" + startTime.getFullYear() + String(startTime.getMonth()+1).padStart(2,"0") + String(startTime.getDate()).padStart(2,"0") + ".xlsx";
-  var subject = "\u3010HSS\u57fa\u790e\u7528\u8a9e\u30c6\u30b9\u30c8\u3011" + playerName + " - " + passOrFail + " - " + dateStr;
-  var body = "養豚基礎 理解度テスト \u7d50\u679c\u5831\u544a\nHSS\u8a8d\u5b9a\u5236\u5ea6 \u7b46\u8a18\u8a66\u9a13\u5bfe\u7b56\n================================\n\n\u53d7\u9a13\u8005\u540d\uff1a" + playerName + "\n\u53d7\u9a13\u65e5\u6642\uff1a" + dateStr + "\n\u6240\u8981\u6642\u9593\uff1a" + elapsedMin + "\u5206" + String(elapsedSec).padStart(2,"0") + "\u79d2" + (timedOut ? "\uff08\u6642\u9693\u5207\u308c\uff09" : "") + "\n\n\u5f97\u70b9\uff1a" + score + " / " + total + "\uff08" + pct + "%\uff09\n\u5408\u5426\uff1a" + passOrFail + "\uff08\u5408\u683c\u57fa\u6e96\uff1a" + PASS_RATE + "%\u4ee5\u4e0a\uff09\n\n--- \u56de\u7b54\u8a73\u7d30 ---\n";
-  answers.forEach(function(a, i) { var r = a.userAnswer === "\uff08\u672a\u56de\u7b54\uff09" ? "[\u672a\u56de\u7b54]" : (a.correct ? "[\u25cb]" : "[\u00d7]"); body += r + " \u554f" + (i+1) + "\uff08" + a.category + "\uff09\uff1a\u300c" + a.userAnswer + "\u300d\u6b63\u89e3\u300c" + a.correctAnswer + "\u300d\n"; });
-  body += "================================\n";
-  loadXLSX(function(loaded) {
-    var excelBlob = null; var excelFile = null;
-    if (loaded && typeof XLSX !== "undefined") {
-      try {
-        var wb = XLSX.utils.book_new();
-        var s1 = [["養豚基礎 理解度テスト \u7d50\u679c\u5831\u544a\u66f8"],["HSS\u8a8d\u5b9a\u5236\u5ea6 \u7b46\u8a18\u8a66\u9a13\u5bfe\u7b56"],[],["\u53d7\u9a13\u8005\u540d",playerName],["\u53d7\u9a13\u65e5\u6642",dateStr],["\u5236\u9650\u6642\u9593",TIME_LIMIT+"\u5206"],["\u6240\u8981\u6642\u9593",elapsedMin+"\u5206"+String(elapsedSec).padStart(2,"0")+"\u79d2"],["\u6642\u9593\u5207\u308c",timedOut?"\u306f\u3044":"\u3044\u3044\u3048"],[],["\u5f97\u70b9",score+" / "+total],["\u6b63\u7b54\u7387",pct+"%"],["\u5408\u683c\u57fa\u6e96",PASS_RATE+"%\u4ee5\u4e0a"],["\u5408\u5426",passOrFail]];
-        var ws1 = XLSX.utils.aoa_to_sheet(s1); ws1["!cols"] = [{wch:18},{wch:40}]; XLSX.utils.book_append_sheet(wb, ws1, "\u7d50\u679c\u6982\u8981");
-        var s2 = [["\u554f\u756a\u53f7","\u30ab\u30c6\u30b4\u30ea","\u554f\u984c","\u53d7\u9a13\u8005\u306e\u56de\u7b54","\u6b63\u89e3","\u6b63\u8aa4"]];
-        answers.forEach(function(a,i) { var r = a.userAnswer === "\uff08\u672a\u56de\u7b54\uff09" ? "\u672a\u56de\u7b54" : (a.correct ? "\u25cb" : "\u00d7"); s2.push([i+1,a.category,a.question,a.userAnswer,a.correctAnswer,r]); });
-        var ws2 = XLSX.utils.aoa_to_sheet(s2); ws2["!cols"] = [{wch:8},{wch:12},{wch:40},{wch:35},{wch:35},{wch:8}]; XLSX.utils.book_append_sheet(wb, ws2, "\u56de\u7b54\u8a73\u7d30");
-        var s3 = [["\u30ab\u30c6\u30b4\u30ea","\u6b63\u89e3\u6570","\u51fa\u984c\u6570","\u6b63\u7b54\u7387"]];
-        var cs = {}; answers.forEach(function(a) { if (!cs[a.category]) cs[a.category] = {c:0,t:0}; cs[a.category].t++; if (a.correct) cs[a.category].c++; });
-        Object.keys(cs).forEach(function(c) { s3.push([c,cs[c].c,cs[c].t,Math.round((cs[c].c/cs[c].t)*100)+"%"]); });
-        var ws3 = XLSX.utils.aoa_to_sheet(s3); ws3["!cols"] = [{wch:15},{wch:10},{wch:10},{wch:10}]; XLSX.utils.book_append_sheet(wb, ws3, "\u30ab\u30c6\u30b4\u30ea\u5225");
-        var wbOut = XLSX.write(wb, {bookType:"xlsx",type:"array"});
-        excelBlob = new Blob([wbOut], {type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-        excelFile = new File([excelBlob], fileName, {type:excelBlob.type});
-      } catch(e) { console.error("Excel error:",e); }
-    }
-    if (navigator.share && excelFile) {
-      navigator.share({title:subject,text:body,files:[excelFile]}).then(function() {
-        btn.textContent = "\u9001\u4fe1\u5b8c\u4e86"; document.getElementById("submit-notice").innerHTML = "\u7d50\u679c\u3092\u5171\u6709\u3057\u307e\u3057\u305f\u3002<br>\u9001\u4fe1\u5148\uff1a" + ADMIN_EMAIL;
-      }).catch(function(err) { fallbackMailto(subject,body,excelBlob,fileName,btn); });
-    } else { fallbackMailto(subject,body,excelBlob,fileName,btn); }
-  });
-}
-
-function fallbackMailto(subject,body,excelBlob,fileName,btn) {
-  if (excelBlob) {
-    try {
-      if (isIOS()) { var r = new FileReader(); r.onload = function() { var l = document.createElement("a"); l.href = r.result; l.download = fileName; l.style.display = "none"; document.body.appendChild(l); l.click(); setTimeout(function() { document.body.removeChild(l); }, 1000); }; r.readAsDataURL(excelBlob); }
-      else { var u = URL.createObjectURL(excelBlob); var l = document.createElement("a"); l.href = u; l.download = fileName; l.style.display = "none"; document.body.appendChild(l); l.click(); setTimeout(function() { document.body.removeChild(l); URL.revokeObjectURL(u); }, 1000); }
-    } catch(e) { console.error("Download error:",e); }
-  }
-  setTimeout(function() { window.location.href = "mailto:" + ADMIN_EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body); }, 800);
-  btn.disabled = true; btn.textContent = "\u9001\u4fe1\u51e6\u7406\u3092\u5b9f\u884c\u3057\u307e\u3057\u305f";
-  document.getElementById("submit-notice").innerHTML = "Excel\u30d5\u30a1\u30a4\u30eb\u304c\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u3055\u308c\u307e\u3057\u305f\u3002<br>\u30e1\u30fc\u30eb\u30a2\u30d7\u30ea\u304c\u958b\u304d\u307e\u3059\u306e\u3067\u3001\u7d50\u679c\u3092\u9001\u4fe1\u3057\u3066\u304f\u3060\u3055\u3044\u3002<br>\u9001\u4fe1\u5148\uff1a" + ADMIN_EMAIL;
-}
-
-function escHtml(s) { var d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
-function formatDate(d) { return d.getFullYear() + "/" + String(d.getMonth()+1).padStart(2,"0") + "/" + String(d.getDate()).padStart(2,"0") + " " + String(d.getHours()).padStart(2,"0") + ":" + String(d.getMinutes()).padStart(2,"0"); }
 
 })();
-</script>
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('sw.js').catch(function() {});
-  });
-}
 </script>
 </body>
 </html>
